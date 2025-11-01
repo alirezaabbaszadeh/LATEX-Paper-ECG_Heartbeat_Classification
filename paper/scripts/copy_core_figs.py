@@ -6,6 +6,7 @@ CANDIDATES = [
     ('confusion_matrix.png', ['confusion','confmat']),
     ('roc_curves.png', ['roc','auc']),
     ('precision_recall.png', ['precision.*recall','pr','pr_curve']),
+    ('pipeline.png', ['pipeline','diagram','graphical_abstract']),
 ]
 
 def find_best(repo_root: Path, patterns):
