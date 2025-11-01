@@ -1,0 +1,125 @@
+\documentclass[journal]{IEEEtran}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{graphicx}
+\usepackage{booktabs,multirow}
+\usepackage{siunitx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{balance}
+\usepackage{enumitem}
+
+\newcommand{\commitsha}{<<COMMIT_SHA>>}
+
+\begin{document}
+\title{ECG Heartbeat Classification under AAMI 5-Class Mapping with a Compact CNN+Conformer}
+\author{Alireza~Abbaszadeh~and~Armita~Shahlaee%\thanks{Alireza Abbaszadeh, Department of Computer Engineering, Ma.C., Islamic Azad University, Mashhad, Iran (email: alireza.abbaszadeh.research@gmail.com).}%\thanks{Armita Shahlaee, Department of Biological Sciences and Technologies, Faculty of Basic Sciences, Islamic Azad University, Mashhad, Iran (email: Armita.shahlaee@gmail.com).}%}
+\maketitle
+
+\begin{abstract}
+We present a compact time--frequency pipeline for AAMI five-class heartbeat classification on the MIT--BIH Arrhythmia database, implemented end-to-end in an open repository and bound to commit \texttt{\commitsha}. Using beat-centered windows transformed to Morlet CWT scalograms and a CNN+Conformer classifier with class-weighting, we report cross-validation and held-out test performance strictly from repository artifacts. We include per-class metrics and diagnostic plots (confusion, ROC, PR), and we derive additional leaderboard-style and class-wise analyses from existing run reports. All claims are reproducible from the repository snapshot; no external data or retraining are required.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Electrocardiography, AAMI taxonomy, Arrhythmia classification, Conformer, Wavelet scalogram, Inter-patient evaluation.
+\end{IEEEkeywords}
+
+\section{Introduction}
+Automatic heartbeat classification under the AAMI five-class taxonomy (N/S/V/F/Q) is a long-standing benchmark grounded in PhysioNet's MIT--BIH Arrhythmia records \cite{Goldberger2000,Moody2001}. Early rule-based and feature models focused on morphology and RR intervals \cite{Pan1985,deChazal2004,Llamedo2011}, while modern deep networks learn robust representations directly from signals or time--frequency images \cite{Ince2009,Kiranyaz2016,Acharya2017,Oh2018,Yildirim2018,Hannun2019,Ribeiro2020,Luz2016,Zhao2020}. Our goal is to consolidate, within a single reproducible snapshot, a compact CNN+Conformer approach and a transparent evaluation strictly derived from repository artifacts.
+
+Contributions: (i) a pinned, fully reproducible pipeline at commit \texttt{\commitsha}; (ii) a time--frequency front-end using CWT scalograms \cite{Addison2005,Torrence1998,Gao2019CWT}; (iii) a light Conformer classifier \cite{Gulati2020} leveraging attention principles \cite{Vaswani2017}; (iv) evaluation that emphasizes macro/weighted F1 and PR curves for class imbalance \cite{He2009,Chawla2002,Saito2015,Fawcett2006}.
+
+\section{Background and Related Work}
+\subsection{Datasets and Taxonomy}
+We adopt the AAMI 5-class mapping common in MIT--BIH-based studies \cite{deChazal2004,Llamedo2011,Moody2001}. Data access and tooling follow PhysioNet practices \cite{Goldberger2000}.
+
+\subsection{Deep Learning for ECG}
+CNNs, RNNs, and hybrids have demonstrated strong performance in ECG tasks \cite{Ince2009,Kiranyaz2016,Acharya2017,Yildirim2018,Oh2018}. Large-scale end-to-end systems further highlight the potential of deep learning for arrhythmia detection \cite{Hannun2019,Ribeiro2020,Faust2018}. Surveys provide broad coverage of architectures, challenges, and clinical pathways \cite{Luz2016,Zhao2020,Kiranyaz2021Review,Li2021TransformersECG}.
+
+\subsection{Time--Frequency Representations}
+Continuous wavelet transforms (CWT) are widely used for ECG due to multiscale time--frequency localization \cite{Addison2005,Torrence1998}. We follow a Morlet-CWT image approach similar to prior works that combine wavelets with CNNs \cite{Gao2019CWT,Oh2018}.
+
+\subsection{Imbalance and Metrics}
+As minority classes (e.g., S, F) are underrepresented, macro-F1 and PR curves are essential \cite{Saito2015,Fawcett2006}. We mitigate imbalance via class-weighted losses \cite{He2009} without resampling; synthetic strategies such as SMOTE are a complementary alternative \cite{Chawla2002}.
+
+\section{Materials and Methods}
+\subsection{Dataset and Mapping}
+We adopt the AAMI 5-class mapping (N, S, V, F, Q) and inter-patient evaluation split as encoded in the repository configuration (see README; consistent with \cite{deChazal2004,Llamedo2011}). Table~\ref{tab:dataset} summarizes dataset composition from the repository README if available.
+\begin{table}[t]\centering
+\caption{Dataset composition (from README).}
+\label{tab:dataset}
+\input{tables/dataset_composition.tex}
+\end{table}
+
+\subsection{Preprocessing}
+Beat-centered windows are extracted around annotated R-peaks (classical QRS detection \cite{Pan1985}), then transformed into Morlet CWT scalograms \cite{Addison2005,Torrence1998}. Three-beat windows provide short-term temporal context, following common practice in ECG classification \cite{deChazal2004,Llamedo2011}.
+
+\subsection{Model}
+We employ a compact CNN front-end followed by Conformer blocks \cite{Gulati2020}, which augment self-attention \cite{Vaswani2017} with local convolution to capture morphological and contextual patterns in the scalogram domain.
+
+\subsection{Training \& Evaluation}
+Optimization uses Adam/AdamW variants \cite{Kingma2015,Loshchilov2019} and a class-weighted cross-entropy loss to address imbalance \cite{He2009}. Metrics include accuracy, macro/weighted F1, and per-class precision/recall/F1; we also reference ROC and PR curves \cite{Fawcett2006,Saito2015}. Model selection follows validation performance as implemented in the repository.
+
+\section{Results}
+\subsection{All Runs: Leaderboard}
+We parse all discovered runs in \texttt{Research\_Runs/} and summarize overall metrics in Table~\ref{tab:leaderboard}.
+\begin{table}[t]\centering
+\caption{All discovered runs/baselines (from repository reports).}
+\label{tab:leaderboard}
+\input{tables/leaderboard_all_runs.tex}
+\end{table}
+\begin{figure}[t]\centering
+\includegraphics[width=\columnwidth]{figures/leaderboard_macro_f1.png}
+\caption{Macro-F1 leaderboard across all runs (derived from reports).}
+\label{fig:leaderboard}
+\end{figure}
+
+\subsection{Main Model: Per-class Metrics}
+Per-class precision/recall/F1 for the main model are listed in Table~\ref{tab:mainperclass}.
+\begin{table}[t]\centering
+\caption{Per-class metrics for the main model (from classification report).}
+\label{tab:mainperclass}
+\input{tables/main_per_class_report.tex}
+\end{table}
+
+\subsection{Diagnostic Plots (Copied from Repo)}
+We reuse confusion, ROC, and PR plots generated by the repository. PR emphasis is appropriate under imbalance \cite{Saito2015}.
+\begin{figure}[t]\centering
+\includegraphics[width=\columnwidth]{figures/confusion_matrix.png}
+\caption{Confusion matrix (as generated in the repository).}
+\label{fig:cm}
+\end{figure}
+\begin{figure}[t]\centering
+\includegraphics[width=\columnwidth]{figures/roc_curves.png}
+\caption{One-vs-rest ROC curves (as generated in the repository).}
+\label{fig:roc}
+\end{figure}
+\begin{figure}[t]\centering
+\includegraphics[width=\columnwidth]{figures/precision_recall.png}
+\caption{Precision--Recall curves (as generated in the repository).}
+\label{fig:pr}
+\end{figure}
+
+\subsection{Derived Analyses from Existing Results}
+Without retraining, we derive additional summaries from classification reports. Figure~\ref{fig:classwise} compares F1 per class across runs, and Figure~\ref{fig:delta} shows \mbox{$\Delta$F1} relative to the main model.
+\begin{figure}[t]\centering
+\includegraphics[width=\columnwidth]{figures/classwise_f1_grid.png}
+\caption{Class-wise F1 across runs/baselines (derived from reports).}
+\label{fig:classwise}
+\end{figure}
+\begin{figure}[t]\centering
+\includegraphics[width=\columnwidth]{figures/delta_f1_vs_main.png}
+\caption{$\Delta$F1 per class relative to the main model (derived from reports).}
+\label{fig:delta}
+\end{figure}
+
+\section{Discussion}
+Class imbalance and morphology variability make S and F classes challenging \cite{He2009,Saito2015}. The Conformer-based architecture \cite{Gulati2020} offers a principled way to fuse local and contextual cues beyond pure CNN or RNN pipelines \cite{Kiranyaz2016,Acharya2017}. Time--frequency front-ends \cite{Addison2005,Torrence1998,Gao2019CWT} remain competitive, especially when training data are limited. We intentionally constrain conclusions to patterns present in the repository outputs.
+
+\section{Reproducibility and Availability}
+This manuscript is bound to repository commit \texttt{\commitsha}. Data access via PhysioNet \cite{Goldberger2000} and the end-to-end scripts in the repo enable full reproduction of all tables and figures herein. Our paper folder assembles figures copied from the repo and derived plots computed from the run reports, ensuring exact reproducibility from the pinned snapshot.
+
+\balance
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+\end{document}
