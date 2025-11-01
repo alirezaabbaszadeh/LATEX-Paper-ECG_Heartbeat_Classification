@@ -1,0 +1,22 @@
+Classification Report
+=========================
+              precision    recall  f1-score   support
+
+      Normal       0.95      0.60      0.74     12061
+        SVEB       0.00      0.00      0.00       214
+         VEB       0.48      0.70      0.57      2913
+      Fusion       0.01      0.01      0.01       383
+     Unknown       0.00      0.00      0.00         2
+
+    accuracy                           0.60     15573
+   macro avg       0.29      0.26      0.26     15573
+weighted avg       0.82      0.60      0.68     15573
+
+
+Area Under Curve (AUC) Scores
+=========================
+AUC for class 'Normal': 0.9009
+AUC for class 'SVEB': 0.6681
+AUC for class 'VEB': 0.8431
+AUC for class 'Fusion': 0.3140
+AUC for class 'Unknown': 0.5837
