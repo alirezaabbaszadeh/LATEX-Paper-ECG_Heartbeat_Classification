@@ -1,5 +1,63 @@
-% BSPC submission version (Elsevier elsarticle)
-}
-\bibliography{../references}
+% BSPC main file (elsarticle)
+\documentclass[preprint,3p]{elsarticle}
+\input{../preamble}
 
+\begin{document}
+\begin{frontmatter}
+\title{Heartbeat Classification with Conformer-CNN on MIT-BIH: AAMI-oriented Evaluation with Robustness and Calibration}
+\author[1]{Alireza Abbaszadeh\corref{cor1}}\ead{alireza.abbaszadeh.research@gmail.com}
+\author[2]{Armita Shahlaee}\ead{Armita.shahlaee@gmail.com}
+\cortext[cor1]{Corresponding author.}
+\address[1]{Department of Computer Engineering, Ma.C., Islamic Azad University, Mashhad, Iran}
+\address[2]{Department of Biological Sciences and Technologies, Faculty of Basic Sciences, Islamic Azad University, Mashhad, Iran}
+
+\begin{abstract}
+We present a practical ECG heartbeat classifier trained and evaluated on \dataset{}, following the \aami{} scheme (N/S/V/F/Q). The method leverages spectro-temporal representations and a lightweight Conformer-CNN, and we report comprehensive metrics (macro-F1, PR-AUC, ROC-AUC) alongside calibration and robustness analyses. All results and figures are harvested from the public repository logs and artifacts for strict reproducibility.\todo{Tighten to BSPC word/page guidance later.}
+\end{abstract}
+
+\begin{keyword}
+ECG; Arrhythmia; MIT-BIH; AAMI; Conformer; Calibration; Robustness; Reproducibility
+\end{keyword}
+\end{frontmatter}
+
+\section{Introduction}
+\label{sec:intro}
+\todo{Cite clinical motivation; summarize imbalance challenges; contributions list.}
+
+\section{Related Work}
+\label{sec:related}
+\todo{Deep ECG classification, AAMI protocols, calibration in medical ML.}
+
+\section{Methods}
+\label{sec:methods}
+\subsection{Data and Preprocessing}
+We use \dataset{} with AAMI mapping to five classes (N/S/V/F/Q).\todo{Add class counts from auto table.}
+\subsection{Model}
+Conformer-CNN hybrid with spectro-temporal front-end.\todo{Add architecture table/diagram.}
+\subsection{Training and Evaluation}
+Inter-patient split; metrics: accuracy, macro-F1, ROC-AUC, PR-AUC; calibration: ECE/Brier.\todo{Hyperparameters.}
+
+\section{Results}
+\label{sec:results}
+\subsection{Overall performance}
+\input{../tables/leaderboard_all_runs}
+\subsection{Per-class curves and confusion}
+\begin{figure}[H]\centering\includegraphics[width=.48\textwidth]{../figures/confusion_matrix.png}\includegraphics[width=.48\textwidth]{../figures/precision_recall.png}\caption{Confusion matrix and PR curves.}\label{fig:conf_pr}\end{figure}
+\begin{figure}[H]\centering\includegraphics[width=.6\textwidth]{../figures/roc_curves.png}\caption{ROC curves by class.}\label{fig:roc}\end{figure}
+\subsection{Calibration and robustness}
+\input{../tables/table_calibration}
+\input{../tables/table_robustness}
+
+\section{Discussion}
+\label{sec:discussion}
+\todo{Clinical implications, error modes in S/F classes, limitations.}
+
+\section{Reproducibility}
+All scripts and figures are harvested from the repository at commit \commit{TBD}. The script `scripts/copy_core_figs.py` copies PNGs.\todo{Pin exact SHA.}
+
+\section{Conclusion}
+\label{sec:conclusion}
+\todo{Summarize gains, practical readiness, and future work.}
+
+\bibliography{../references}
 \end{document}
