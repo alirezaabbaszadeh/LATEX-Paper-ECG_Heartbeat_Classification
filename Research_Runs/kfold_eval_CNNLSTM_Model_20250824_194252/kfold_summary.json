@@ -1,0 +1,36 @@
+{
+    "model_evaluated": "CNNLSTM_Model",
+    "num_successful_folds": 5,
+    "best_fold": 5,
+    "mean_accuracy": 0.07525718063116074,
+    "std_accuracy": 0.03975427643985715,
+    "mean_loss": 1.6334250688552856,
+    "std_loss": 0.09499357357080081,
+    "individual_fold_results": [
+        {
+            "fold": 1,
+            "loss": 1.5700268745422363,
+            "accuracy": 0.05057375878095627
+        },
+        {
+            "fold": 2,
+            "loss": 1.6244733333587646,
+            "accuracy": 0.031013093888759613
+        },
+        {
+            "fold": 3,
+            "loss": 1.8051061630249023,
+            "accuracy": 0.0765918642282486
+        },
+        {
+            "fold": 4,
+            "loss": 1.6412559747695923,
+            "accuracy": 0.07000858336687088
+        },
+        {
+            "fold": 5,
+            "loss": 1.5262629985809326,
+            "accuracy": 0.14809860289096832
+        }
+    ]
+}

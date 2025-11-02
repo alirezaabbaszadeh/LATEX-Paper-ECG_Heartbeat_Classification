@@ -1,0 +1,49 @@
+#tensorflow==2.20.0
+#numpy==2.1.*
+#pandas==2.2.2
+#scikit-learn==1.4.2
+#scipy==1.13.*
+wfdb==4.1.2
+#matplotlib==3.8.4
+seaborn==0.13.2
+PyWavelets==1.6.0
+
+0
+
+Value             |Best Value So Far |Hyperparameter
+128               |64                |embed_dim
+6                 |4                 |num_heads
+64                |256               |ff_dim
+0.5               |0.3               |dropout
+0.001             |1e-05             |learning_rate
+4                 |10                |tuner/epochs
+0                 |4                 |tuner/initial_epoch
+1                 |2                 |tuner/bracket
+0                 |2                 |tuner/round
+
+
+
+
+Value             |Best Value So Far |Hyperparameter
+32                |64                |embed_dim
+8                 |4                 |num_heads
+256               |256               |ff_dim
+0.3               |0.3               |dropout
+1e-05             |1e-05             |learning_rate
+4                 |10                |tuner/epochs
+0                 |4                 |tuner/initial_epoch
+1                 |2                 |tuner/bracket
+0                 |2                 |tuner/round
+
+
+
+Value             |Best Value So Far |Hyperparameter
+128               |32                |embed_dim
+4                 |8                 |num_heads
+256               |256               |ff_dim
+0.3               |0.3               |dropout
+0.001             |1e-05             |learning_rate
+4                 |4                 |tuner/epochs
+0                 |0                 |tuner/initial_epoch
+1                 |1                 |tuner/bracket
+0                 |0                 |tuner/round

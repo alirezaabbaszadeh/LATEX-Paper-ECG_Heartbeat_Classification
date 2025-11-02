@@ -1,42 +1,39 @@
 #!/usr/bin/env python3
-import argparse, os, shutil
+import argparse, shutil, re
 from pathlib import Path
 
-TARGETS = {
- 'confusion_matrix.png': ['confusion','confmat','confusion_matrix'],
- 'roc_curves.png': ['roc','auc','roc_curve'],
- 'precision_recall.png': ['precision_recall','precision','pr','pr_curve'],
- 'class_dist.png': ['class_dist','class_distribution','dataset_distribution']
-}
+CANDIDATES = [
+    ('confusion_matrix.png', ['confusion','confmat']),
+    ('roc_curves.png', ['roc','auc']),
+    ('precision_recall.png', ['precision.*recall','pr','pr_curve']),
+]
 
-def find_best(root, keys):
-    best = None
-    for dirpath, _, filenames in os.walk(root):
-        for name in filenames:
-            if name.lower().endswith('.png'):
-                path = Path(dirpath)/name
-                low = path.as_posix().lower()
-                if any(k in low for k in keys):
-                    if best is None or path.stat().st_size > best.stat().st_size:
-                        best = path
-    return best
+def find_best(repo_root: Path, patterns):
+    files = []
+    for pat in patterns:
+        rx = re.compile(pat, re.IGNORECASE)
+        for p in repo_root.rglob('*.png'):
+            if rx.search(p.as_posix()):
+                files.append(p)
+    files = sorted(set(files), key=lambda p: (len(p.as_posix()), p.stat().st_mtime), reverse=True)
+    return files[0] if files else None
 
 if __name__ == '__main__':
-    p = argparse.ArgumentParser()
-    p.add_argument('--repo', required=True)
-    p.add_argument('--out', default='paper/figures')
-    p.add_argument('--force', action='store_true')
-    args = p.parse_args()
-    out = Path(args.out); out.mkdir(parents=True, exist_ok=True)
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--repo', required=True)
+    ap.add_argument('--out', default='figures')
+    args = ap.parse_args()
+    repo = Path(args.repo)
+    out = Path(args.out)
+    out.mkdir(parents=True, exist_ok=True)
     copied = []
-    for tgt, keys in TARGETS.items():
-        src = find_best(args.repo, keys)
+    for target, pats in CANDIDATES:
+        src = find_best(repo, pats)
         if src:
-            dst = out/tgt
-            if (not dst.exists()) or args.force:
-                shutil.copy2(src, dst)
-                copied.append((str(src), str(dst)))
+            dst = out / target
+            shutil.copy2(src, dst)
+            copied.append((src, dst))
     for s,d in copied:
-        print(f'copied {s} -> {d}')
+        print(f'Copied {s} -> {d}')
     if not copied:
-        print('no figures found')
+        print('No figures found to copy.')
