@@ -1,0 +1,53 @@
+2025-08-24 18:27:29,563 [INFO    ] root: ✅ GPU memory growth and Mixed Precision enabled. (run_final_evaluation.py:67)
+2025-08-24 18:27:29,563 [INFO    ] __main__: === FINAL STAGE: Training & Evaluation for Baseline_Model === (run_final_evaluation.py:146)
+2025-08-24 18:27:29,563 [INFO    ] __main__: STEP 1: Locating artifacts from the most recent tuning run... (run_final_evaluation.py:148)
+2025-08-24 18:27:29,591 [INFO    ] __main__: Found best hyperparameters, config, and data splits. (run_final_evaluation.py:154)
+2025-08-24 18:27:29,601 [INFO    ] __main__: ✅ Loaded optimal hyperparameters: {'embed_dim': 128, 'tuner/epochs': 3, 'tuner/initial_epoch': 0, 'tuner/bracket': 2, 'tuner/round': 0} (run_final_evaluation.py:163)
+2025-08-24 18:27:29,602 [INFO    ] __main__: STEP 2: Preparing final datasets and building the champion model... (run_final_evaluation.py:169)
+2025-08-24 18:27:29,602 [INFO    ] __main__: Using 38 records for final training and 7 for final testing. (run_final_evaluation.py:172)
+2025-08-24 18:27:29,602 [INFO    ] __main__: Calculating final normalization statistics in memory-efficient chunks... (run_final_evaluation.py:105)
+2025-08-24 18:27:46,421 [INFO    ] __main__: ✅ Final normalization statistics calculated successfully (memory-efficiently). (run_final_evaluation.py:131)
+2025-08-24 18:27:46,422 [INFO    ] __main__: Using batch size: 128 (run_final_evaluation.py:180)
+2025-08-24 18:27:50,149 [INFO    ] DataLoader: Optimized tf.data.Dataset created using combined shuffling for training. (DataLoader.py:124)
+2025-08-24 18:27:50,197 [INFO    ] DataLoader: Optimized tf.data.Dataset created using combined shuffling for validation. (DataLoader.py:124)
+2025-08-24 18:27:50,198 [INFO    ] tensorflow: ModelBuilder initialized with SOTA Conformer and enhanced ablation models. (run_final_evaluation.py:188)
+2025-08-24 18:27:50,198 [INFO    ] tensorflow: Building a new BASELINE (CNN-Only) model instance... (run_final_evaluation.py:198)
+2025-08-24 18:27:50,841 [INFO    ] __main__: ✅ Champion model built successfully. (run_final_evaluation.py:199)
+2025-08-24 18:27:50,841 [INFO    ] __main__: STEP 3: Training the final model on the entire training dataset... (run_final_evaluation.py:201)
+2025-08-24 18:27:50,842 [INFO    ] __main__: Starting final training for 20 epochs. (run_final_evaluation.py:204)
+2025-08-24 18:27:51,052 [INFO    ] __main__: Applying class weights for final training: {0: 0.22314518810260608, 1: 6.8006235385814495, 2: 4.104045155221073, 3: 41.64773269689737, 4: 9.62515168229454} (run_final_evaluation.py:211)
+2025-08-24 19:18:56,372 [INFO    ] __main__: ✅ Final model training completed. (run_final_evaluation.py:220)
+2025-08-24 19:18:56,499 [INFO    ] __main__: 💾 Final trained model saved to: Research_Runs/final_run_Baseline_Model_20250824_182728/final_model_Baseline_Model.keras (run_final_evaluation.py:224)
+2025-08-24 19:18:56,503 [INFO    ] HistoryManager: 💾 Training history saved successfully to: Research_Runs/final_run_Baseline_Model_20250824_182728/final_model_training_history.json (HistoryManager.py:34)
+2025-08-24 19:18:56,503 [INFO    ] __main__: STEP 4: Evaluating the final model on the hold-out test set... (run_final_evaluation.py:229)
+2025-08-24 19:18:56,662 [INFO    ] Evaluator: Starting evaluation on the test set... (Evaluator.py:59)
+2025-08-24 19:18:56,662 [INFO    ] Evaluator: Generating predictions and collecting true labels (122 steps)... (Evaluator.py:66)
+2025-08-24 19:19:03,201 [INFO    ] Evaluator: Calculating classification report... (Evaluator.py:86)
+2025-08-24 19:19:03,218 [INFO    ] Evaluator: Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.96      0.17      0.29     12061
+        SVEB       0.03      0.27      0.05       214
+         VEB       0.12      0.00      0.00      2913
+      Fusion       0.00      0.00      0.00       383
+     Unknown       0.00      1.00      0.00         2
+
+    accuracy                           0.14     15573
+   macro avg       0.22      0.29      0.07     15573
+weighted avg       0.77      0.14      0.23     15573
+ (Evaluator.py:88)
+2025-08-24 19:19:03,218 [INFO    ] Evaluator: Calculating ROC curve and AUC for each class... (Evaluator.py:90)
+2025-08-24 19:19:03,243 [INFO    ] Evaluator: AUC for class 'Normal': 0.6922 (Evaluator.py:104)
+2025-08-24 19:19:03,246 [INFO    ] Evaluator: AUC for class 'SVEB': 0.6521 (Evaluator.py:104)
+2025-08-24 19:19:03,250 [INFO    ] Evaluator: AUC for class 'VEB': 0.7207 (Evaluator.py:104)
+2025-08-24 19:19:03,253 [INFO    ] Evaluator: AUC for class 'Fusion': 0.4057 (Evaluator.py:104)
+2025-08-24 19:19:03,256 [INFO    ] Evaluator: AUC for class 'Unknown': 0.8558 (Evaluator.py:104)
+2025-08-24 19:19:03,259 [INFO    ] Evaluator: Classification report and AUC scores saved to: Research_Runs/final_run_Baseline_Model_20250824_182728/classification_report.txt (Evaluator.py:148)
+2025-08-24 19:19:04,025 [INFO    ] Evaluator: Confusion matrix plot saved to: Research_Runs/final_run_Baseline_Model_20250824_182728/confusion_matrix.png (Evaluator.py:160)
+2025-08-24 19:19:04,326 [INFO    ] Evaluator: ROC curves plot saved to: Research_Runs/final_run_Baseline_Model_20250824_182728/roc_curves.png (Evaluator.py:178)
+2025-08-24 19:19:04,664 [INFO    ] Evaluator: Precision-Recall curves plot saved to: Research_Runs/final_run_Baseline_Model_20250824_182728/precision_recall_curves.png (Evaluator.py:130)
+2025-08-24 19:19:04,677 [INFO    ] Evaluator: Raw predictions saved to: Research_Runs/final_run_Baseline_Model_20250824_182728/raw_predictions.npz (Evaluator.py:187)
+2025-08-24 19:19:04,677 [INFO    ] __main__: ========================================================== (run_final_evaluation.py:242)
+2025-08-24 19:19:04,678 [INFO    ] __main__: === RESEARCH PIPELINE COMPLETED SUCCESSFULLY           === (run_final_evaluation.py:243)
+2025-08-24 19:19:04,678 [INFO    ] __main__: All final results are saved in: Research_Runs/final_run_Baseline_Model_20250824_182728 (run_final_evaluation.py:244)
+2025-08-24 19:19:04,678 [INFO    ] __main__: ========================================================== (run_final_evaluation.py:245)
