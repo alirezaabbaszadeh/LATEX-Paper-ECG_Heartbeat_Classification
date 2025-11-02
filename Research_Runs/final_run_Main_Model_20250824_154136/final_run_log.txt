@@ -1,0 +1,53 @@
+2025-08-24 15:41:38,484 [INFO    ] root: ✅ GPU memory growth and Mixed Precision enabled. (run_final_evaluation.py:67)
+2025-08-24 15:41:38,485 [INFO    ] __main__: === FINAL STAGE: Training & Evaluation for Main_Model === (run_final_evaluation.py:146)
+2025-08-24 15:41:38,485 [INFO    ] __main__: STEP 1: Locating artifacts from the most recent tuning run... (run_final_evaluation.py:148)
+2025-08-24 15:41:38,499 [INFO    ] __main__: Found best hyperparameters, config, and data splits. (run_final_evaluation.py:154)
+2025-08-24 15:41:38,506 [INFO    ] __main__: ✅ Loaded optimal hyperparameters: {'embed_dim': 128, 'num_heads': 8, 'ff_dim_multiplier': 4, 'kernel_size': 11, 'dropout': 0.2, 'num_blocks': 1, 'tuner/epochs': 7, 'tuner/initial_epoch': 0, 'tuner/bracket': 1, 'tuner/round': 0} (run_final_evaluation.py:163)
+2025-08-24 15:41:38,507 [INFO    ] __main__: STEP 2: Preparing final datasets and building the champion model... (run_final_evaluation.py:169)
+2025-08-24 15:41:38,507 [INFO    ] __main__: Using 38 records for final training and 7 for final testing. (run_final_evaluation.py:172)
+2025-08-24 15:41:38,507 [INFO    ] __main__: Calculating final normalization statistics in memory-efficient chunks... (run_final_evaluation.py:105)
+2025-08-24 15:41:56,118 [INFO    ] __main__: ✅ Final normalization statistics calculated successfully (memory-efficiently). (run_final_evaluation.py:131)
+2025-08-24 15:41:56,119 [INFO    ] __main__: Using batch size: 128 (run_final_evaluation.py:180)
+2025-08-24 15:42:00,169 [INFO    ] DataLoader: Optimized tf.data.Dataset created using combined shuffling for training. (DataLoader.py:124)
+2025-08-24 15:42:00,224 [INFO    ] DataLoader: Optimized tf.data.Dataset created using combined shuffling for validation. (DataLoader.py:124)
+2025-08-24 15:42:00,225 [INFO    ] tensorflow: ModelBuilder initialized with SOTA Conformer and enhanced ablation models. (run_final_evaluation.py:188)
+2025-08-24 15:42:00,226 [INFO    ] tensorflow: Building a new SOTA (CNN-Conformer) model instance... (run_final_evaluation.py:198)
+2025-08-24 15:42:01,504 [INFO    ] __main__: ✅ Champion model built successfully. (run_final_evaluation.py:199)
+2025-08-24 15:42:01,505 [INFO    ] __main__: STEP 3: Training the final model on the entire training dataset... (run_final_evaluation.py:201)
+2025-08-24 15:42:01,505 [INFO    ] __main__: Starting final training for 20 epochs. (run_final_evaluation.py:204)
+2025-08-24 15:42:01,735 [INFO    ] __main__: Applying class weights for final training: {0: 0.22314518810260608, 1: 6.8006235385814495, 2: 4.104045155221073, 3: 41.64773269689737, 4: 9.62515168229454} (run_final_evaluation.py:211)
+2025-08-24 16:48:20,655 [INFO    ] __main__: ✅ Final model training completed. (run_final_evaluation.py:220)
+2025-08-24 16:48:20,958 [INFO    ] __main__: 💾 Final trained model saved to: Research_Runs/final_run_Main_Model_20250824_154136/final_model_Main_Model.keras (run_final_evaluation.py:224)
+2025-08-24 16:48:20,960 [INFO    ] HistoryManager: 💾 Training history saved successfully to: Research_Runs/final_run_Main_Model_20250824_154136/final_model_training_history.json (HistoryManager.py:34)
+2025-08-24 16:48:20,961 [INFO    ] __main__: STEP 4: Evaluating the final model on the hold-out test set... (run_final_evaluation.py:229)
+2025-08-24 16:48:21,103 [INFO    ] Evaluator: Starting evaluation on the test set... (Evaluator.py:59)
+2025-08-24 16:48:21,104 [INFO    ] Evaluator: Generating predictions and collecting true labels (122 steps)... (Evaluator.py:66)
+2025-08-24 16:48:29,313 [INFO    ] Evaluator: Calculating classification report... (Evaluator.py:86)
+2025-08-24 16:48:29,331 [INFO    ] Evaluator: Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.95      0.60      0.74     12061
+        SVEB       0.00      0.00      0.00       214
+         VEB       0.48      0.70      0.57      2913
+      Fusion       0.01      0.01      0.01       383
+     Unknown       0.00      0.00      0.00         2
+
+    accuracy                           0.60     15573
+   macro avg       0.29      0.26      0.26     15573
+weighted avg       0.82      0.60      0.68     15573
+ (Evaluator.py:88)
+2025-08-24 16:48:29,331 [INFO    ] Evaluator: Calculating ROC curve and AUC for each class... (Evaluator.py:90)
+2025-08-24 16:48:29,351 [INFO    ] Evaluator: AUC for class 'Normal': 0.9009 (Evaluator.py:104)
+2025-08-24 16:48:29,355 [INFO    ] Evaluator: AUC for class 'SVEB': 0.6681 (Evaluator.py:104)
+2025-08-24 16:48:29,360 [INFO    ] Evaluator: AUC for class 'VEB': 0.8431 (Evaluator.py:104)
+2025-08-24 16:48:29,364 [INFO    ] Evaluator: AUC for class 'Fusion': 0.3140 (Evaluator.py:104)
+2025-08-24 16:48:29,369 [INFO    ] Evaluator: AUC for class 'Unknown': 0.5837 (Evaluator.py:104)
+2025-08-24 16:48:29,371 [INFO    ] Evaluator: Classification report and AUC scores saved to: Research_Runs/final_run_Main_Model_20250824_154136/classification_report.txt (Evaluator.py:148)
+2025-08-24 16:48:30,395 [INFO    ] Evaluator: Confusion matrix plot saved to: Research_Runs/final_run_Main_Model_20250824_154136/confusion_matrix.png (Evaluator.py:160)
+2025-08-24 16:48:30,731 [INFO    ] Evaluator: ROC curves plot saved to: Research_Runs/final_run_Main_Model_20250824_154136/roc_curves.png (Evaluator.py:178)
+2025-08-24 16:48:31,111 [INFO    ] Evaluator: Precision-Recall curves plot saved to: Research_Runs/final_run_Main_Model_20250824_154136/precision_recall_curves.png (Evaluator.py:130)
+2025-08-24 16:48:31,126 [INFO    ] Evaluator: Raw predictions saved to: Research_Runs/final_run_Main_Model_20250824_154136/raw_predictions.npz (Evaluator.py:187)
+2025-08-24 16:48:31,126 [INFO    ] __main__: ========================================================== (run_final_evaluation.py:242)
+2025-08-24 16:48:31,126 [INFO    ] __main__: === RESEARCH PIPELINE COMPLETED SUCCESSFULLY           === (run_final_evaluation.py:243)
+2025-08-24 16:48:31,127 [INFO    ] __main__: All final results are saved in: Research_Runs/final_run_Main_Model_20250824_154136 (run_final_evaluation.py:244)
+2025-08-24 16:48:31,127 [INFO    ] __main__: ========================================================== (run_final_evaluation.py:245)

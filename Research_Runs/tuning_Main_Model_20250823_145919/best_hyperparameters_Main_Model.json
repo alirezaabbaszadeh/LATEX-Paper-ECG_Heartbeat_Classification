@@ -1,0 +1,89 @@
+{
+    "space": [
+        {
+            "class_name": "Int",
+            "config": {
+                "name": "embed_dim",
+                "default": null,
+                "conditions": [],
+                "min_value": 64,
+                "max_value": 128,
+                "step": 64,
+                "sampling": "linear"
+            }
+        },
+        {
+            "class_name": "Int",
+            "config": {
+                "name": "num_heads",
+                "default": null,
+                "conditions": [],
+                "min_value": 4,
+                "max_value": 8,
+                "step": 4,
+                "sampling": "linear"
+            }
+        },
+        {
+            "class_name": "Int",
+            "config": {
+                "name": "ff_dim_multiplier",
+                "default": null,
+                "conditions": [],
+                "min_value": 2,
+                "max_value": 4,
+                "step": 2,
+                "sampling": "linear"
+            }
+        },
+        {
+            "class_name": "Choice",
+            "config": {
+                "name": "kernel_size",
+                "default": 7,
+                "conditions": [],
+                "values": [
+                    7,
+                    11
+                ],
+                "ordered": true
+            }
+        },
+        {
+            "class_name": "Float",
+            "config": {
+                "name": "dropout",
+                "default": 0.1,
+                "conditions": [],
+                "min_value": 0.1,
+                "max_value": 0.3,
+                "step": 0.1,
+                "sampling": "linear"
+            }
+        },
+        {
+            "class_name": "Int",
+            "config": {
+                "name": "num_blocks",
+                "default": null,
+                "conditions": [],
+                "min_value": 1,
+                "max_value": 2,
+                "step": 1,
+                "sampling": "linear"
+            }
+        }
+    ],
+    "values": {
+        "embed_dim": 128,
+        "num_heads": 8,
+        "ff_dim_multiplier": 4,
+        "kernel_size": 11,
+        "dropout": 0.2,
+        "num_blocks": 1,
+        "tuner/epochs": 7,
+        "tuner/initial_epoch": 0,
+        "tuner/bracket": 1,
+        "tuner/round": 0
+    }
+}

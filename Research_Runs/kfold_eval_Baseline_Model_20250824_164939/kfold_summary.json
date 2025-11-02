@@ -1,0 +1,36 @@
+{
+    "model_evaluated": "Baseline_Model",
+    "num_successful_folds": 5,
+    "best_fold": 5,
+    "mean_accuracy": 0.017676714155822993,
+    "std_accuracy": 0.012532140477534594,
+    "mean_loss": 1.8592535257339478,
+    "std_loss": 0.21218081767442562,
+    "individual_fold_results": [
+        {
+            "fold": 1,
+            "loss": 1.7593063116073608,
+            "accuracy": 0.020873358473181725
+        },
+        {
+            "fold": 2,
+            "loss": 1.69354248046875,
+            "accuracy": 0.022340914234519005
+        },
+        {
+            "fold": 3,
+            "loss": 1.9471821784973145,
+            "accuracy": 0.00486297532916069
+        },
+        {
+            "fold": 4,
+            "loss": 2.2345869541168213,
+            "accuracy": 0.0031702001579105854
+        },
+        {
+            "fold": 5,
+            "loss": 1.6616497039794922,
+            "accuracy": 0.03713612258434296
+        }
+    ]
+}

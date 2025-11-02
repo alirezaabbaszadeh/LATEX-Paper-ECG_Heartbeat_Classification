@@ -1,0 +1,23 @@
+{
+    "space": [
+        {
+            "class_name": "Int",
+            "config": {
+                "name": "embed_dim",
+                "default": null,
+                "conditions": [],
+                "min_value": 64,
+                "max_value": 128,
+                "step": 64,
+                "sampling": "linear"
+            }
+        }
+    ],
+    "values": {
+        "embed_dim": 128,
+        "tuner/epochs": 3,
+        "tuner/initial_epoch": 0,
+        "tuner/bracket": 2,
+        "tuner/round": 0
+    }
+}
