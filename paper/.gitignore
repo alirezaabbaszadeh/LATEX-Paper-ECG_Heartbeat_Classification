@@ -1,0 +1,10 @@
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+*.toc
+*.synctex.gz
+*.pdf
+_build/
+figures/*.pdf
