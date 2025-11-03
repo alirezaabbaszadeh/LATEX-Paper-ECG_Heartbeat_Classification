@@ -349,3 +349,10 @@ This repository is released under the permissive [MIT License](LICENSE). The lic
 [2] A. Gulati, J. Qin, C.-C. Chiu, et al., “Conformer: Convolution-augmented Transformer for Speech Recognition,” in *Proceedings of Interspeech*, 2020, pp. 5036–5040. doi:10.21437/Interspeech.2020-3015
 [3] P. Rajpurkar, A. Y. Hannun, M. Haghpanahi, C. Bourn, and A. Y. Ng, “Cardiologist-level arrhythmia detection with convolutional neural networks,” *arXiv preprint arXiv:1707.01836*, 2017.
 [4] U. R. Acharya, S. L. Oh, Y. Hagiwara, J. H. Tan, and M. Adam, “A deep convolutional neural network model to classify heartbeats,” *Computers in Biology and Medicine*, vol. 89, pp. 389–396, 2017. doi:10.1016/j.compbiomed.2017.08.022
+
+## Editorial Research Tasks
+
+1. Select two ECG/biomedical signal journals; note their scopes.
+2. Download and study each Guide for Authors: formatting, section order, length, citation style, figure limits.
+3. Check official announcements/newsletters for 2026 policy changes (data/code sharing, ethics, style).
+4. Summarize the required and optional items into a checklist per journal.
