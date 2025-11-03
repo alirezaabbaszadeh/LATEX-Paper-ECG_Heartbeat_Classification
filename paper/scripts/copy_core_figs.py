@@ -59,6 +59,12 @@ if __name__ == '__main__':
         src = find_best(repo, pats)
         if src:
             dst = out / target
+            # Skip copying when the source already matches the destination to
+            # avoid raising shutil.SameFileError when the figures directory is
+            # inside the search path (e.g., running the script from within the
+            # paper repo after previous copies).
+            if src.resolve() == dst.resolve():
+                continue
             shutil.copy2(src, dst)
             copied.append((src, dst))
     pipeline_dst = out / 'pipeline.png'
