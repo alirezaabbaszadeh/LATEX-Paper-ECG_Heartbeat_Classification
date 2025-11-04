@@ -314,6 +314,15 @@ Use `scripts/bootstrap_journal_repos.sh` to export either template into an indep
 ## Reproducible Research
 Consistent configuration files, deterministic seeds, and scripted training/evaluation workflows align the project with reproducible research practices, enabling others to replicate and extend the results.
 
+## Version Control Policy
+To keep submission-critical artifacts available without polluting the history with transient build outputs, the `.gitignore` files were audited and updated.
+
+- **Tracked templates.** LaTeX class (`*.cls`) and bibliography style (`*.bst`) files are explicitly unignored so journal-supplied templates live inside the repository alongside the manuscript sources.
+- **Curated figures.** Generated vector figures (for example, `paper/figures/synthetic_ecg.pdf`) are committed once curated so downstream collaborators and Overleaf exports reproduce the exact visuals shipped with the paper.
+- **Transient noise excluded.** Auxiliary logs (`*.aux`, `*.log`, etc.), latexmk build directories, and scratch figures with the `-scratch` suffix remain ignored to prevent churn from local builds.
+
+These rules ensure that release-ready PDFs and templates survive code clean-ups while day-to-day LaTeX builds stay out of the repository history.
+
 ## Contributing
 Contributions that refine the codebase, documentation, or scientific analyses are welcome. To report a bug or request a new feature, please open an issue through the [GitHub issue tracker](https://github.com/AlirezaAbbaszadeh/ECG_Heartbeat_Classification/issues).
 
