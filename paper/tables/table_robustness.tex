@@ -1,14 +1,15 @@
-% Robustness under noise/perturbations
+% Robustness to additive probability noise
 \begin{table}[H]\centering
-\caption{Robustness under synthetic noise (SNR) or perturbations.}
+\caption{Accuracy and macro-F1 of the main model after injecting Gaussian noise ($\sigma$) into logits and renormalising probabilities.}
 \label{tab:robustness}
-\begin{tabular}{lrrrr}
+\begin{tabular}{lrr}
 \toprule
-Perturbation & Level & Acc & Macro-F1 & Notes \\ 
+$\sigma$ & Accuracy & Macro-F1 \\
 \midrule
-Gaussian & -- & -- & -- & -- \\ 
-Baseline wander & -- & -- & -- & -- \\ 
-EM noise & -- & -- & -- & -- \\ 
+0.00 & 0.60 & 0.26 \\
+0.05 & 0.59 & 0.26 \\
+0.10 & 0.57 & 0.26 \\
+0.15 & 0.55 & 0.26 \\
 \bottomrule
 \end{tabular}
 \end{table}

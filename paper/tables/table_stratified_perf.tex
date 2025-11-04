@@ -1,12 +1,17 @@
-% Stratified performance
+% Per-class metrics for the main model
 \begin{table}[H]\centering
-\caption{Stratified performance (e.g., by subject or record).}
-\label{tab:stratified}
+\caption{Per-class precision, recall, and F1 for the main Conformer-CNN on the hold-out test split.}
+\label{tab:perclass}
 \begin{tabular}{lrrrr}
 \toprule
-Stratum & Acc & Macro-F1 & PR-AUC (avg) & N \\ 
+Class & Precision & Recall & F1 & Support \\
 \midrule
--- & -- & -- & -- & -- \\ 
+Normal & 0.95 & 0.60 & 0.74 & 12061 \\
+SVEB & 0.00 & 0.00 & 0.00 & 214 \\
+VEB & 0.48 & 0.70 & 0.57 & 2913 \\
+Fusion & 0.01 & 0.01 & 0.01 & 383 \\
+Unknown & 0.00 & 0.00 & 0.00 & 2 \\
+Total & -- & -- & -- & 15573 \\
 \bottomrule
 \end{tabular}
 \end{table}
