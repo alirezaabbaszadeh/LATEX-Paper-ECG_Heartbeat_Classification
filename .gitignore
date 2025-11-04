@@ -22,3 +22,7 @@ output/
 
 # Local deployment directories created by bootstrap script
 /deploy/
+
+# Keep LaTeX class/bibliography templates tracked
+!*.cls
+!*.bst
