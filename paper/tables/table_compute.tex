@@ -1,14 +1,15 @@
-% Compute cost
+% Training and inference efficiency
 \begin{table}[H]\centering
-\caption{Compute cost: latency (ms), throughput (Hz), memory (MB) per model.}
+\caption{Training duration and evaluation latency measured from final run logs (minutes and seconds).}
 \label{tab:compute}
-\begin{tabular}{lrrr}
+\begin{tabular}{lrrrr}
 \toprule
-Model & Latency (ms) & Throughput (Hz) & Memory (MB) \\ 
+Run & Train (min) & Eval (s) & Epochs & Batch \\
 \midrule
-CNN & -- & -- & -- \\ 
-Transformer & -- & -- & -- \\ 
-Conformer & -- & -- & -- \\ 
+AttentionOnly_20250824_090531 & 56.4 & 8.8 & 20 & 128 \\
+Baseline_Model_20250824_182728 & 51.1 & 8.0 & 20 & 128 \\
+CNNLSTM_Model_20250824_213453 & 51.6 & 8.8 & 20 & 128 \\
+Main_Model_20250824_154136 & 66.3 & 10.0 & 20 & 128 \\
 \bottomrule
 \end{tabular}
 \end{table}
