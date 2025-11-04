@@ -1,0 +1,24 @@
+# LaTeX build artifacts
+*.aux
+*.bcf
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.lot
+*.lof
+
+# latexmk intermediate directories
+*_latexmk/
+
+# Build output folders
+build/
+output/
+
+# Local deployment directories created by bootstrap script
+/deploy/

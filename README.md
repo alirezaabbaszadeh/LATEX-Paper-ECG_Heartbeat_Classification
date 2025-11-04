@@ -307,6 +307,9 @@ Architectures are listed in the `MODELS` array within `run_full_pipeline.sh`; ed
 - **Core modules** – `ModelBuilder.py`, `DataLoader.py`, and `Evaluator.py` implement the model architecture, streaming data pipeline, and evaluation metrics.
 - **Run scripts** – automation helpers such as `run_full_pipeline.sh`, `run_hyperparameter_tuning.py`, `run_kfold_evaluation.py`, and `run_final_evaluation.py` orchestrate training, tuning, and assessment.
 - **Research artifacts** – experiment outputs and logs are stored in `Research_Runs/`.
+- **Manuscript templates** – `paper-journal-A/` and `paper-journal-B/` contain journal-specific LaTeX skeletons, figures, and supplementary folders plus instructions for maintaining separate publication workflows.
+
+Use `scripts/bootstrap_journal_repos.sh` to export either template into an independent Git repository with distinct GitHub/GitLab and Overleaf remotes (see each template’s `README.md` for examples).
 
 ## Reproducible Research
 Consistent configuration files, deterministic seeds, and scripted training/evaluation workflows align the project with reproducible research practices, enabling others to replicate and extend the results.

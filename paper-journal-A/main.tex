@@ -1,0 +1,36 @@
+% Journal of Electrocardiology manuscript template
+\documentclass[11pt]{article}
+\input{preamble}
+\input{macros}
+
+\addbibresource{bibliography/references.bib}
+
+\begin{document}
+\input{sections/titlepage}
+\maketitle
+\input{sections/highlights}
+\input{sections/abstract}
+
+\section*{Keywords}
+% Provide 1--7 keywords ordered alphabetically.
+\input{sections/keywords}
+
+\input{sections/introduction}
+\input{sections/methods}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/conclusion}
+
+\section*{Acknowledgements}
+\input{sections/acknowledgements}
+
+\section*{Data Availability}
+% Provide an Elsevier Option B compliant statement.
+\input{sections/data-availability}
+
+\printbibliography
+
+\appendix
+\section*{Supplementary Material}
+\input{supplementary/main}
+\end{document}
