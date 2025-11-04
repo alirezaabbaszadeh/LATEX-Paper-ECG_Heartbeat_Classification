@@ -1,0 +1,29 @@
+% Journal of Electrocardiology manuscript template built on elsarticle
+\documentclass[preprint,review]{elsarticle}
+\journal{Journal of Electrocardiology}
+
+\input{preamble}
+\input{macros}
+
+\begin{document}
+\input{sections/frontmatter}
+
+\input{sections/introduction}
+\input{sections/methods}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/conclusion}
+
+\section*{Acknowledgements}
+\input{sections/acknowledgements}
+
+\section*{Data Availability}
+\input{sections/data-availability}
+
+\bibliographystyle{elsarticle-num}
+\bibliography{../bib/references}
+
+\appendix
+\section*{Supplementary Material}
+\input{supplement/main}
+\end{document}
