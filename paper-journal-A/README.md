@@ -1,40 +1,42 @@
 # Journal of Electrocardiology Manuscript Workspace
 
-This directory provides an author-ready LaTeX skeleton tailored to the Journal of Electrocardiology requirements documented in [`../journals.md`](../journals.md).
+This directory provides an author-ready LaTeX skeleton tailored to the Journal of Electrocardiology requirements documented in [`../journals.md`](../journals.md). It now builds directly on Elsevier's official `elsarticle` class and numeric bibliography style.
 
 ## Directory layout
 
-- `main.tex` – compiles the manuscript using `biblatex` with the numeric style required by the journal.
-- `preamble.tex` and `macros.tex` – shared packages and custom commands.
-- `sections/` – structured content files (highlights, abstract, body sections, compliance statements).
-- `bibliography/references.bib` – central BibTeX database for the manuscript.
-- `figures/` – folder for final figures that meet Elsevier resolution standards.
-- `supplementary/main.tex` – entry point for supplementary material submitted alongside the manuscript.
+```
+paper-journal-A/
+├── bib/                 # BibTeX database(s)
+├── figures/             # Submission-ready figures
+├── src/
+│   ├── main.tex         # Entry point compiled with latexmk
+│   ├── macros.tex       # Custom commands
+│   ├── preamble.tex     # Package and formatting configuration
+│   ├── sections/        # Modular manuscript content
+│   └── supplement/      # Appendix and supplementary text
+└── tables/              # Table source files (CSV/TeX)
+```
 
 ## Building locally
 
 ```bash
-latexmk -pdf main.tex
+cd paper-journal-A
+latexmk -pdf -cd src/main.tex
 ```
 
-The default preamble uses `biber`. Run `latexmk -pdf -bibtex main.tex` if you prefer BibTeX.
+`latexmk` automatically invokes `bibtex` (via the `elsarticle-num` style) to respect the journal's numeric reference format. Clean artifacts with `latexmk -c -cd src/main.tex`.
 
 ## Journal-specific checklist hooks
 
-- Highlights block included before the abstract (3–5 bullets ≤85 characters).
-- Numerical references generated with `biblatex` numeric style and `sorting=none`.
-- Dedicated Data Availability section in accordance with Elsevier Option B expectations.
+- Highlights provided with the official `highlights` environment within the `frontmatter` block.
+- Numerical references generated with `bibtex` and the `elsarticle-num` style to respect order of appearance.
+- Data availability statement sectioned explicitly after the discussion, following Elsevier Option B guidance.
 
-## Independent repository bootstrapping
+## Overleaf usage
 
-Use `../scripts/bootstrap_journal_repos.sh` to clone this layout into a standalone Git repository, commit the initial version, and register remotes. Example:
+1. Create a new Overleaf project using the "Upload Project" option.
+2. Zip the contents of `paper-journal-A/` (excluding the `latexmk` build directory if present) and upload the archive.
+3. Set the main file to `src/main.tex` in Overleaf's project settings.
+4. Enable the `latexmk` compiler in Overleaf (Menu → Settings → Compiler → `Latexmk`), which matches the local workflow.
 
-```bash
-../scripts/bootstrap_journal_repos.sh \
-  --journal paper-journal-A \
-  --target ../deploy \
-  --primary git@github.com:example-org/paper-journal-A.git \
-  --overleaf https://git.overleaf.com/your-overleaf-project-id
-```
-
-This creates `../deploy/paper-journal-A` as an independent Git repository with the provided GitHub `origin` and Overleaf remote.
+Overleaf automatically provides Elsevier's `elsarticle` class, but this repository also ships the exact class and bibliography style in `docs/journal-styles/journal-of-electrocardiology/` for reproducible offline builds.

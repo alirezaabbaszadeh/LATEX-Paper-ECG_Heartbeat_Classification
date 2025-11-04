@@ -1,14 +1,12 @@
-% BioMedical Engineering OnLine manuscript template
-\documentclass[12pt]{article}
+% BioMedical Engineering OnLine manuscript template built on sn-jnl
+\documentclass[sn-basic,Numbered]{sn-jnl}
+
 \input{preamble}
 \input{macros}
 
 \begin{document}
 \input{sections/titlepage}
 \maketitle
-\input{sections/abstract}
-
-\textbf{Keywords:} \input{sections/keywords}
 
 \input{sections/introduction}
 \input{sections/methods}
@@ -34,9 +32,8 @@
 \section*{Acknowledgements}
 \input{sections/acknowledgements}
 
-\bibliographystyle{unsrtnat}
-\bibliography{bibliography/references}
+\bibliography{../bib/references}
 
 \appendix
-\input{supplementary/main}
+\input{supplement/main}
 \end{document}

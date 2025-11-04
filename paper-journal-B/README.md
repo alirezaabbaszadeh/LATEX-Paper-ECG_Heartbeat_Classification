@@ -1,40 +1,40 @@
 # BioMedical Engineering OnLine Manuscript Workspace
 
-This directory prepares an author-ready LaTeX skeleton aligned with BioMedical Engineering OnLine policies summarized in [`../journals.md`](../journals.md).
+This directory prepares an author-ready LaTeX skeleton aligned with BioMedical Engineering OnLine policies summarized in [`../journals.md`](../journals.md). The template now relies on Springer Nature's official `sn-jnl` class with the numbered citation style expected by BMC.
 
 ## Directory layout
 
-- `main.tex` – orchestrates the manuscript and mandatory declarations.
-- `preamble.tex` and `macros.tex` – packages, spacing, line numbers, and helper commands.
-- `sections/` – modular content files mirroring the journal's required headings.
-- `bibliography/references.bib` – BibTeX database compiled with `natbib` (unsorted numeric style).
-- `figures/` – destination for final submission-ready figures (≤10 MB each).
-- `supplementary/main.tex` – entry point for additional files uploaded to BMC's system.
+```
+paper-journal-B/
+├── bib/                 # BibTeX database(s)
+├── figures/             # Submission-ready figures
+├── src/
+│   ├── main.tex         # Entry point compiled with latexmk
+│   ├── macros.tex       # Custom commands
+│   ├── preamble.tex     # Package and formatting configuration
+│   ├── sections/        # Modular manuscript content
+│   └── supplement/      # Appendix and supplementary text
+└── tables/              # Table source files (CSV/TeX)
+```
 
 ## Building locally
 
 ```bash
-latexmk -pdf main.tex
+cd paper-journal-B
+latexmk -pdf -cd src/main.tex
 ```
 
-Line numbers are enabled by default through `lineno`. Disable by removing `\linenumbers` in `preamble.tex` if not needed.
+`latexmk` uses `bibtex` under the hood to satisfy the `sn-basic` bibliography style included with the Springer template. Clean build artifacts with `latexmk -c -cd src/main.tex` so the command runs from the `src/` directory and removes intermediate files.
 
 ## Journal-specific checklist hooks
 
-- Explicit sections for data availability, ethics, competing interests, funding, and author contributions.
-- Double-line spacing and line numbers for peer review, as requested by BMC.
-- Numerical citations produced via `natbib` using `unsrtnat` to preserve order of appearance.
+- Double-line spacing and line numbers activated automatically at the start of the document.
+- Mandatory editorial statements (data availability, ethics, competing interests, funding, contributions) broken into dedicated sections.
+- Numerical references rendered with the `sn-basic` style to preserve order of appearance.
 
-## Independent repository bootstrapping
+## Overleaf usage
 
-Run `../scripts/bootstrap_journal_repos.sh` to materialize this directory as its own Git repository with distinct remotes. Example:
-
-```bash
-../scripts/bootstrap_journal_repos.sh \
-  --journal paper-journal-B \
-  --target ../deploy \
-  --primary git@gitlab.com:example-group/paper-journal-B.git \
-  --overleaf https://git.overleaf.com/your-overleaf-project-id
-```
-
-The script creates `../deploy/paper-journal-B`, initializes Git history, and adds a GitLab `origin` plus an Overleaf remote for collaborative editing.
+1. Create a new Overleaf project and choose "Upload Project".
+2. Zip the contents of `paper-journal-B/` (excluding any previous `_latexmk/` build directory) and upload the archive.
+3. Set the main document to `src/main.tex` in the Overleaf settings so the compiler runs from the new source tree.
+4. Keep the compiler set to `Latexmk`. Overleaf provides the official `sn-jnl` class; the identical files from its public template mirror are stored under `docs/journal-styles/biomedical-engineering-online/` for reproducibility.
