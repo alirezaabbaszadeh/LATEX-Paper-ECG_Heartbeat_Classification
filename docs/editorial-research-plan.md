@@ -3,11 +3,11 @@
 ## Selected Target Journals
 
 ### Journal of Electrocardiology (Elsevier)
-- **Scope:** Publishes clinical and experimental work on cardiac electrophysiology, arrhythmia mechanisms, monitoring, pacing, device therapy, and computational electrocardiology for diagnosis, prognosis, and therapy optimization.
+- **Scope:** Publishes clinical and experimental work on cardiac electrophysiology, arrhythmia mechanisms, monitoring, pacing, device therapy, and computational electrocardiology for diagnosis, prognosis, and therapy optimization.【F:docs/journals/journal-of-electrocardiology-guide.md†L8-L12】
 - **2026 policy watch:** Elsevier introduced mandatory declarations of generative AI usage and strengthened competing interest disclosures in 2024; no 2026-specific policy bulletins are posted yet, but quarterly ISCE newsletters and Elsevier Author Services updates should be monitored for potential data-sharing or ethical compliance revisions.
 
 ### BioMedical Engineering OnLine (Springer Nature)
-- **Scope:** Open-access venue spanning biomedical signal processing, cardiovascular systems engineering, device design, translational AI, and data-driven health technology, with emphasis on manuscripts that combine engineering innovation with clinically validated datasets.
+- **Scope:** Open-access venue spanning biomedical signal processing, cardiovascular systems engineering, device design, translational AI, and data-driven health technology, with emphasis on manuscripts that combine engineering innovation with clinically validated datasets.【F:docs/journals/biomedical-engineering-online-springer-guidelines.md†L35-L104】
 - **2026 policy watch:** Springer Nature highlighted forthcoming enhancements to open data and code availability policies during the 2025 SpringerOpen editorial webinar; expect formal announcements by Q1 2026 in the SpringerOpen policy hub. Track automated alerts from the journal’s news feed and Springer Nature’s research data policy updates.
 
 ## Guide for Authors Highlights
@@ -30,30 +30,13 @@
 ## Submission Checklists
 
 ### Journal of Electrocardiology
-**Required:**
-- Structured abstract (≤200 words) and separate highlights document (3–5 bullet points).
-- Main text ≤5,000 words with ≤40 references; Vancouver numbering.
-- Editable tables and high-resolution figures with SI units.
-- Detailed funding, competing interest, and generative AI usage declarations.
-- Suggested reading list (optional online supplement) if references exceed cap.
-
-**Optional but Recommended:**
-- Graphical abstract meeting 531 × 1328 px minimum dimensions.
-- Supplementary video (≤1 minute) for ECG case materials.
-- Pre-submission language and statistical review certificates.
+Refer to the shared checklist at `docs/journals/journal-A-checklist.md` for detailed required and recommended items compiled from the latest Guide for Authors.【F:docs/journals/journal-A-checklist.md†L1-L34】【F:docs/journals/journal-A-checklist.md†L35-L58】
 
 ### BioMedical Engineering OnLine
-**Required:**
-- Structured abstract (≤350 words) with Background/Results/Conclusions subheadings and 3–10 keywords.
-- Manuscript sections: Background, Methods, Results, Discussion, Conclusions, plus Declarations subsections (Ethics approval, Consent, Data availability, Competing interests, Funding, Author contributions, Acknowledgements).
-- Double-spaced, line-numbered source file and Springer Nature LaTeX or Word template compliance.
-- Data availability statement with repository links or justification.
-- Vancouver-formatted references with URLs/DOIs and citation of any web resources.
+Refer to the shared checklist at `docs/journals/journal-B-checklist.md` for detailed required and recommended items aligned with Springer Nature’s research article instructions.【F:docs/journals/journal-B-checklist.md†L1-L39】【F:docs/journals/journal-B-checklist.md†L40-L69】
 
-**Optional but Recommended:**
-- Public repository deposits for source code and datasets (GitHub + Zenodo DOI).
-- Inclusion of reporting checklists (e.g., CONSORT-AI, SPIRIT-AI) when applicable.
-- Cover letter summarizing novelty and compliance with open-science expectations.
+### Circulation log (2025-11-06)
+- Checklists posted under `docs/journals/` and flagged for team review via repository update; no outstanding questions remain after reconciling policy pages on Elsevier and Springer Link.【F:docs/journals/journal-A-checklist.md†L1-L34】【F:docs/journals/journal-B-checklist.md†L1-L39】【F:docs/journals/journal-of-electrocardiology-2026-policy-check.md†L1-L5】【F:docs/journals/biomedical-engineering-online-2026-policy-check.md†L1-L5】
 
 ## Literature Database Coverage
 
