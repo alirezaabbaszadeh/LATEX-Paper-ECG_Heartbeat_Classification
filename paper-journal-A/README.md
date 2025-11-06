@@ -12,8 +12,9 @@ paper-journal-A/
 │   ├── main.tex         # Entry point compiled with latexmk
 │   ├── macros.tex       # Custom commands
 │   ├── preamble.tex     # Package and formatting configuration
-│   ├── sections/        # Modular manuscript content
-│   └── supplement/      # Appendix and supplementary text
+│   └── sections/        # Modular manuscript content
+├── supplementary/       # Appendix and supplementary text
+├── templates/           # Bundled elsarticle class and BST files
 └── tables/              # Table source files (CSV/TeX)
 ```
 
@@ -39,4 +40,4 @@ latexmk -pdf -cd src/main.tex
 3. Set the main file to `src/main.tex` in Overleaf's project settings.
 4. Enable the `latexmk` compiler in Overleaf (Menu → Settings → Compiler → `Latexmk`), which matches the local workflow.
 
-Overleaf automatically provides Elsevier's `elsarticle` class, but this repository also ships the exact class and bibliography style in `docs/journal-styles/journal-of-electrocardiology/` for reproducible offline builds.
+Overleaf automatically provides Elsevier's `elsarticle` class, but this repository also ships the exact class and bibliography style under `templates/` for reproducible offline builds.

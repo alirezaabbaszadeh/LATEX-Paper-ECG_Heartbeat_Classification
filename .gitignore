@@ -26,3 +26,8 @@ output/
 # Keep LaTeX class/bibliography templates tracked
 !*.cls
 !*.bst
+
+# Ensure repository-managed assets remain versioned
+!paper-journal-*/figures/
+!paper-journal-*/supplementary/
+!paper-journal-*/templates/
