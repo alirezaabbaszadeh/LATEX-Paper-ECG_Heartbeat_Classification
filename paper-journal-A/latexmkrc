@@ -1,4 +1,4 @@
 use Cwd 'abs_path';
-my $style_path = abs_path('../docs/journal-styles/journal-of-electrocardiology');
+my $style_path = abs_path('templates');
 $ENV{'TEXINPUTS'} = $style_path . '//:' . ($ENV{'TEXINPUTS'} // '');
 $ENV{'BSTINPUTS'} = $style_path . '//:' . ($ENV{'BSTINPUTS'} // '');

@@ -12,8 +12,9 @@ paper-journal-B/
 │   ├── main.tex         # Entry point compiled with latexmk
 │   ├── macros.tex       # Custom commands
 │   ├── preamble.tex     # Package and formatting configuration
-│   ├── sections/        # Modular manuscript content
-│   └── supplement/      # Appendix and supplementary text
+│   └── sections/        # Modular manuscript content
+├── supplementary/       # Appendix and supplementary text
+├── templates/           # Bundled sn-jnl class and BST files
 └── tables/              # Table source files (CSV/TeX)
 ```
 
@@ -37,4 +38,4 @@ latexmk -pdf -cd src/main.tex
 1. Create a new Overleaf project and choose "Upload Project".
 2. Zip the contents of `paper-journal-B/` (excluding any previous `_latexmk/` build directory) and upload the archive.
 3. Set the main document to `src/main.tex` in the Overleaf settings so the compiler runs from the new source tree.
-4. Keep the compiler set to `Latexmk`. Overleaf provides the official `sn-jnl` class; the identical files from its public template mirror are stored under `docs/journal-styles/biomedical-engineering-online/` for reproducibility.
+4. Keep the compiler set to `Latexmk`. Overleaf provides the official `sn-jnl` class; the identical files from its public template mirror are stored locally under `templates/` for reproducibility.
