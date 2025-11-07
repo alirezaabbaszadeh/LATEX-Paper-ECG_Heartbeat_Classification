@@ -1,0 +1,30 @@
+% TikZ schematic describing the ECG heartbeat classification workflow
+\begin{tikzpicture}[
+  node distance = 1.8cm and 2.6cm,
+  process/.style = {rectangle, rounded corners=2pt, draw=blue!60, fill=blue!5, minimum height=1.2cm, minimum width=3.6cm, align=center, font=\footnotesize, thick},
+  datastore/.style = {cylinder, cylinder uses custom fill, cylinder body fill=green!5, cylinder end fill=green!20, shape border rotate=90, draw=green!50!black, minimum height=1.4cm, minimum width=1.9cm, align=center, font=\footnotesize, thick},
+  decision/.style = {diamond, draw=purple!60!black, fill=purple!5, aspect=1.6, align=center, font=\footnotesize, thick},
+  artifact/.style = {rectangle, draw=orange!70!black, fill=orange!10, minimum height=1cm, minimum width=3.4cm, align=center, font=\footnotesize, dashed, thick},
+  arrow/.style = {-{Stealth[length=4pt]}, very thick, draw=black!80}
+]
+
+\node[process] (download) {Data acquisition\\MIT-BIH Arrhythmia DB};
+\node[process, right=of download] (preprocess) {Signal conditioning\\R-peak alignment \\ Baseline wander removal};
+\node[process, right=of preprocess] (scalogram) {Time-frequency encoding\\Morlet scalograms};
+\node[datastore, below=1.1cm of preprocess] (records) {TFRecord\\shards};
+\node[process, right=of scalogram] (training) {Model training\\Conformer + Adam};
+\node[decision, right=of training] (tuning) {Hyperband\\model selection};
+\node[process, right=of tuning] (evaluation) {Evaluation\\Held-out test set};
+\node[artifact, below=1.1cm of evaluation] (reports) {Diagnostics\\Confusion/ROC/PR};
+
+\draw[arrow] (download) -- node[above, font=\scriptsize]{Stratified patient split} (preprocess);
+\draw[arrow] (preprocess) -- node[above, font=\scriptsize]{Windowed beats} (scalogram);
+\draw[arrow] (scalogram) -- node[above, font=\scriptsize]{Tensor batches} (training);
+\draw[arrow] (training) -- node[above, font=\scriptsize]{Weights + metrics} (tuning);
+\draw[arrow] (tuning.east) -- node[above, font=\scriptsize]{Champion config} (evaluation.west);
+\draw[arrow] (evaluation) -- node[right, font=\scriptsize]{CSV + plots} (reports);
+
+\draw[arrow] (preprocess) -- node[right, font=\scriptsize]{Serialized triples} (records);
+\draw[arrow] (records) -- node[right, font=\scriptsize]{Streaming dataloader} (training);
+\draw[arrow, dashed] (reports.west) |- ++(-2.0,1.4) -| node[above, font=\scriptsize]{Model monitoring} (training.south);
+\end{tikzpicture}
