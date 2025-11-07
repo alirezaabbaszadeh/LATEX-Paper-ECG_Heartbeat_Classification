@@ -1,0 +1,100 @@
+name: BibTeX Lint
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install biber
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y biber
+
+      - name: Validate BibTeX files
+        id: lint
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          files=("references/journal-A/references.bib" "references/journal-B/references.bib")
+          exit_code=0
+          report_file=$(mktemp)
+
+          for file in "${files[@]}"; do
+            echo "### ${file}" >> "$report_file"
+            if [ ! -f "$file" ]; then
+              echo "ERROR: File not found." >> "$report_file"
+              exit_code=1
+              echo "" >> "$report_file"
+              continue
+            fi
+
+            output=$(biber --tool --validate-datamodel "$file" 2>&1)
+            cmd_status=$?
+            echo "$output" >> "$report_file"
+            echo "" >> "$report_file"
+
+            if [ $cmd_status -ne 0 ] || echo "$output" | grep -q "ERROR -"; then
+              exit_code=1
+            fi
+          done
+
+          cat "$report_file"
+
+          {
+            echo "report<<'EOF'"
+            cat "$report_file"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+          exit $exit_code
+
+      - name: Comment on PR with lint results
+        if: github.event_name == 'pull_request' && steps.lint.outcome == 'failure'
+        uses: actions/github-script@v7
+        env:
+          REPORT: ${{ steps.lint.outputs.report }}
+        with:
+          script: |
+            const marker = '<!-- bibtex-lint -->';
+            const report = (process.env.REPORT || '').trim() || 'No output captured.';
+            const body = `${marker}\n## BibTeX Lint Report\n\n\`\`\`\n${report}\n\`\`\``;
+            const {owner, repo} = context.repo;
+            const issue_number = context.issue.number;
+
+            const {data: comments} = await github.rest.issues.listComments({
+              owner,
+              repo,
+              issue_number,
+            });
+
+            const existing = comments.find(comment => comment.body.includes(marker));
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner,
+                repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number,
+                body,
+              });
+            }
+
+      - name: Fail workflow if lint errors detected
+        if: steps.lint.outcome == 'failure'
+        run: exit 1
