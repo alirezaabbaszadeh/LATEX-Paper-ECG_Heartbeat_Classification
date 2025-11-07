@@ -1,0 +1,72 @@
+name: "QA Review"
+description: "Standardized QA issue for documenting review findings and required actions."
+title: "[QA] <concise summary>"
+labels:
+  - qa-review
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Quick Links
+        * [QA Workflow](../../docs/qa/WORKFLOW.md)
+        * [Label Conventions](../../docs/qa/WORKFLOW.md#label-conventions)
+        * [Reviewer Checklist](../../docs/qa/WORKFLOW.md#review-checklist)
+  - type: checkboxes
+    id: sections
+    attributes:
+      label: Sections Reviewed
+      description: "Select every manuscript section your observations reference."
+      options:
+        - label: Title & Abstract
+        - label: Introduction
+        - label: Methods
+        - label: Results
+        - label: Discussion
+        - label: Figures & Tables
+        - label: Supplementary
+  - type: textarea
+    id: references
+    attributes:
+      label: Section References
+      description: "Link to the exact LaTeX files and line ranges for each issue (e.g., `paper/sections/methods.tex#L42-L87`)."
+      placeholder: |
+        * paper/sections/methods.tex#L42-L87 — unclear sampling description
+        * paper/sections/results.tex#L10-L44 — inconsistent terminology
+    validations:
+      required: true
+  - type: textarea
+    id: findings
+    attributes:
+      label: Findings & Impact
+      description: "Summarize the observed problems and their implications."
+      placeholder: |
+        Describe what you found, why it matters, and suggested next steps.
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity Label
+      description: "Select the severity label that best reflects the impact of the issue."
+      options:
+        - label: qa-severity:critical
+        - label: qa-severity:major
+        - label: qa-severity:minor
+        - label: qa-severity:info
+    validations:
+      required: true
+  - type: textarea
+    id: checklist
+    attributes:
+      label: Checklist Links
+      description: "Provide URLs to the checklist items you validated (e.g., `https://example.com/checklists/methods#item-3`)."
+      placeholder: |
+        * https://example.com/checklists/methods#item-3 — Participant inclusion criteria confirmed
+        * https://example.com/checklists/results#item-5 — Figure caption includes acquisition details
+  - type: textarea
+    id: attachments
+    attributes:
+      label: Supporting Material
+      description: "Link to figures, datasets, or supplementary notes that clarify the issue."
+      placeholder: |
+        * docs/qa/figures/roc-curve.png — mislabeled axis
