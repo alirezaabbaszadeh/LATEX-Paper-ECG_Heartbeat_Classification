@@ -43,3 +43,25 @@ When your branch is ready:
 4. Monitor the PR for feedback and apply follow-up commits using the same commit message principles.
 
 Following this workflow keeps the bibliography consistent and ensures timely reviews for reference updates.
+
+## Handling BibTeX Lint Workflow Failures
+
+Every pull request automatically runs the **BibTeX Lint** GitHub Actions workflow against both bibliography files (`references/journal-A/references.bib` and `references/journal-B/references.bib`). If the workflow detects malformed entries, it will:
+
+- Fail the `BibTeX Lint` check in the PR status list.
+- Post a PR comment summarizing the validation output from `biber --tool` so you can see which entries need attention.
+
+When the workflow fails:
+
+1. Open the PR conversation tab and locate the comment labelled **BibTeX Lint Report**.
+2. Review the error messages for each `.bib` file. Typical issues include missing required fields, unmatched braces, or invalid characters.
+3. Fix the highlighted problems locally and re-run the validation command to confirm:
+
+   ```bash
+   biber --tool --validate-datamodel references/journal-A/references.bib
+   biber --tool --validate-datamodel references/journal-B/references.bib
+   ```
+
+4. Commit and push your corrections. The workflow re-runs automatically and will clear once the bibliographies pass validation.
+
+Reach out to the maintainers if the comment output is unclear or you need help interpreting a specific message.
