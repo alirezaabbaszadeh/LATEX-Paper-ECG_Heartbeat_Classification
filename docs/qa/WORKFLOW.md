@@ -62,3 +62,16 @@ paper/sections/discussion.tex#L120-L150 — Data availability mentions Zenodo DO
 ```
 
 Include similar line-anchored references in the **Section References** field of the QA Review issue template so authors can jump straight to the relevant source.
+
+## Rerunning Failed QA Workflows
+
+- Navigate to the **Actions** tab and open the failed `QA` workflow run.
+- Click **Re-run jobs** > **Re-run all jobs** to execute every stage (LaTeX lint, figure validation, references) with the latest commits.
+- For permission-restricted reruns (e.g., community contributors), ask a maintainer to trigger the rerun or push a no-op commit to retrigger the workflow automatically.
+
+## Troubleshooting Workflow Logs
+
+- Open the failed job (e.g., *LaTeX lint (chktex)* or *Figure format validation*) to inspect step-by-step logs.
+- Expand the step showing a red ❌ icon to read the full error output. Pay attention to GitHub log annotations such as `::error file=...` emitted by the automation scripts.
+- Download logs via **Download log archive** when you need to share them asynchronously or annotate them offline.
+- After addressing the reported issues locally (e.g., running `chktex` or `python paper/scripts/check_figure_formats.py`), push the fixes and rerun the workflow to confirm the resolution.
