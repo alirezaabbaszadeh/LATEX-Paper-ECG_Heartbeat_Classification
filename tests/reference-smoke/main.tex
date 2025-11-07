@@ -1,0 +1,28 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\title{Bibliography Style Smoke Test}
+\author{Automation Harness}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section*{Journal~A}
+This section ensures the Elsevier bibliography resources are reachable.
+\begingroup
+  \bibliographystyle{references/journal-A/elsarticle-num}
+  \nocite{*}
+  \bibliography{references/journal-A/references}
+\endgroup
+
+\clearpage
+\section*{Journal~B}
+This section ensures the Springer bibliography resources are reachable.
+\begingroup
+  \bibliographystyle{references/journal-B/sn-basic}
+  \nocite{*}
+  \bibliography{references/journal-B/references}
+\endgroup
+
+\end{document}
