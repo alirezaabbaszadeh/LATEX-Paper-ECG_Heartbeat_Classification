@@ -1,0 +1,4 @@
+filename,width_px,height_px,dpi_x,dpi_y
+confusion_matrix.png,1000,800,300.00,300.00
+roc_curves.png,1000,800,300.00,300.00
+precision_recall_curves.png,1000,800,300.00,300.00
