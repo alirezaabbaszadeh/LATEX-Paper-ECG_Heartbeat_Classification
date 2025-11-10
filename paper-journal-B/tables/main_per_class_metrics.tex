@@ -1,0 +1,18 @@
+% Per-class precision, recall, F1, and support
+\begin{table}[t]
+  \centering
+  \caption{Per-class performance on the held-out test set. Classes follow the AAMI EC57 grouping: Normal (N), supraventricular ectopic beat (SVEB), ventricular ectopic beat (VEB), fusion beat (F), and Unknown.}
+  \label{tab:per-class}
+  \begin{tabular}{lcccc}
+    \toprule
+    Class & Precision & Recall & F1-score & Support \\
+    \midrule
+    Normal & 0.95 & 0.60 & 0.74 & 12061 \\
+    SVEB & 0.00 & 0.00 & 0.00 & 214 \\
+    VEB & 0.48 & 0.70 & 0.57 & 2913 \\
+    Fusion & 0.01 & 0.01 & 0.01 & 383 \\
+    Unknown & 0.00 & 0.00 & 0.00 & 2 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+

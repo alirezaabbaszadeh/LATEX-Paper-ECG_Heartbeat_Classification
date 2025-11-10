@@ -1,5 +1,20 @@
-\section{Additional files}
-List additional figures, multimedia, and datasets ($\leq$20~MB each) prepared for BMC's submission system.
+\section{Supplementary tables}
+\label{sec:supp-tables}
+\input{../tables/supp_kfold_accuracy}
+
+\section{Additional files for upload}
+The following artifacts will be uploaded to BMC's supplementary files portal (each \(\leq\)20~MB) and correspond to results reported in the main text. Filenames match those committed in this repository for traceability.
+\begin{itemize}
+  \item Additional file 1: Classification report (CSV): \texttt{paper-journal-B/tables/classification_report.csv}
+  \item Additional file 2: AUC by class (CSV): \texttt{paper-journal-B/tables/auc_by_class.csv}
+  \item Additional file 3: K-fold accuracies (CSV): \texttt{paper-journal-B/tables/kfold_accuracy.csv}
+  \item Additional file 4: Training history (JSON): \texttt{Research_Runs/final_run_Main_Model_20250824_154136/final_model_training_history.json}
+  \item Additional file 5: Raw predictions (NumPy NPZ): \texttt{Research_Runs/final_run_Main_Model_20250824_154136/raw_predictions.npz}
+  \item Additional file 6: Full classification report (TXT): \texttt{Research_Runs/final_run_Main_Model_20250824_154136/classification_report.txt}
+  \item Additional file 7: Final model weights (Keras): \texttt{Research_Runs/final_run_Main_Model_20250824_154136/final_model_Main_Model.keras}
+\end{itemize}
+
+Each additional file is referenced in \autoref{sec:results} and the associated figure/table captions.
 
 \section{Reporting checklists}
-Attach completed reporting guideline checklists or ethics confirmations as required.
+No human participants, data, or tissues were involved in this study; we used de-identified public datasets and open-source code. As such, CONSORT/STROBE/PRISMA checklists are not applicable. Institutional review board (IRB) approval and consent to participate are not required.

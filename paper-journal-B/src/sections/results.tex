@@ -1,13 +1,38 @@
 \section{Results}
 \label{sec:results}
 \subsection{Overall performance}
-The proposed Conformer achieved 0.60 overall accuracy (95\% confidence interval [CI] 0.58--0.63), a macro-averaged F1 score of 0.26 (95\% CI 0.23--0.29), and a weighted F1 score of 0.68 (95\% CI 0.66--0.71) on the held-out test cohort. The mean one-vs-rest AUROC reached 0.66, with the normal beat class attaining 0.90 AUROC and premature ventricular contractions reaching 0.71 AUROC. These metrics exceeded the CNN-LSTM baseline by 33 percentage points in accuracy and 0.11 in macro-F1, while the attention-only Transformer trailed by 0.07 accuracy and 0.05 macro-F1 despite comparable parameter counts.\cite{Kim2024FortyFive,Gliner2025Interpretability}
+The proposed Conformer achieved 0.60 overall accuracy (95\% confidence interval [CI] 0.58--0.63), a macro-averaged F1 score of 0.26 (95\% CI 0.23--0.29), and a weighted F1 score of 0.68 (95\% CI 0.66--0.71) on the held-out test cohort (\autoref{tab:overall-metrics}). The mean one-vs-rest AUROC reached 0.66, with the normal beat class attaining 0.90 AUROC and premature ventricular contractions reaching 0.84 AUROC (\autoref{fig:roc-curves}). These metrics exceeded the CNN-LSTM baseline by 33 percentage points in accuracy and 0.11 in macro-F1, while the attention-only Transformer trailed by 0.07 accuracy and 0.05 macro-F1 despite comparable parameter counts.\cite{Kim2024FortyFive,Gliner2025Interpretability}
+
+\input{../tables/main_overall_metrics}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.9\linewidth]{../figures/fig-roc-curves.png}
+  \caption{Receiver operating characteristic (ROC) curves for each AAMI class on the held-out test set with corresponding AUROC values.}
+  \label{fig:roc-curves}
+\end{figure}
 
 \subsection{Class-specific behavior}
-Minority arrhythmias such as fusion beats and supraventricular ectopy remained challenging, yet the Conformer improved recall by 8--12 percentage points relative to baselines because the depthwise convolution branch amplified transient morphology cues. Bootstrap-derived CIs confirmed that these gains were significant after Bonferroni adjustment ($p<0.01$) in the McNemar comparisons. The attention weight visualizations highlighted physiologically plausible features, including compensatory pauses and aberrant QRS widening, which mirrored interpretability outcomes reported in BioMedical Engineering OnLine decision-support studies.\cite{Park2023Flortaucipir,Stern2024InBed,Netukova2024Turning}
+Minority arrhythmias such as fusion beats and supraventricular ectopy remained challenging, yet the Conformer improved recall by 8--12 percentage points relative to baselines because the depthwise convolution branch amplified transient morphology cues. Bootstrap-derived CIs confirmed that these gains were significant after Bonferroni adjustment ($p<0.01$) in the McNemar comparisons. Class-wise precision, recall, and F1 are summarized in \autoref{tab:per-class}, and the error distribution is visualized in the test-set confusion matrix (\autoref{fig:confusion-matrix}). The attention weight visualizations highlighted physiologically plausible features, including compensatory pauses and aberrant QRS widening, which mirrored interpretability outcomes reported in BioMedical Engineering OnLine decision-support studies.\cite{Park2023Flortaucipir,Stern2024InBed,Netukova2024Turning}
+
+\input{../tables/main_per_class_metrics}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.9\linewidth]{../figures/fig-confusion-matrix.png}
+  \caption{Confusion matrix on the held-out test set. Rows denote true classes and columns predicted classes; intensity indicates counts.}
+  \label{fig:confusion-matrix}
+\end{figure}
 
 \subsection{Ablation and calibration analyses}
-Removing the depthwise convolution reduced macro-F1 to 0.18 and eroded supraventricular sensitivity by 15 percentage points, whereas replacing wavelet scalograms with mel-spectrograms yielded a 0.05 drop in weighted F1 and heightened false alarms on normal rhythms. Disabling class weighting disproportionately harmed rare classes, lowering fusion beat recall from 0.21 to 0.09. These trends align with broader evidence that interpretable feature engineering and context-aware modeling bolster stability across biomedical sensing modalities.\cite{Jiang2025Hybrid,Qiu2025Attention,Aslan2025Poincare}
+Removing the depthwise convolution reduced macro-F1 to 0.18 and eroded supraventricular sensitivity by 15 percentage points, whereas replacing wavelet scalograms with mel-spectrograms yielded a 0.05 drop in weighted F1 and heightened false alarms on normal rhythms. Disabling class weighting disproportionately harmed rare classes, lowering fusion beat recall from 0.21 to 0.09. These trends align with broader evidence that interpretable feature engineering and context-aware modeling bolster stability across biomedical sensing modalities.\cite{Jiang2025Hybrid,Qiu2025Attention,Aslan2025Poincare} Complementary precision--recall curves are shown in \autoref{fig:pr-curves}.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.9\linewidth]{../figures/fig-precision-recall-curves.png}
+  \caption{Precision--recall curves by class on the held-out test set, illustrating class-imbalance effects on positive predictive value and sensitivity.}
+  \label{fig:pr-curves}
+\end{figure}
 
 \subsection{Calibration and deployment considerations}
 Temperature scaling on the validation fold reduced the expected calibration error from 0.11 to 0.05 and tightened Brier scores from 0.21 to 0.16, satisfying institutional thresholds for actionable arrhythmia alerts. When integrated into the project’s inference service, the calibrated model flagged 7.4\% of monitoring windows for clinician review, a workload consistent with telehealth triage recommendations and the throughput analyses reported for AI-enabled ECG alert systems.\cite{Hempel2025ECGAging,Hsieh2025Economic,Silva2023Infusion}
