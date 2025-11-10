@@ -1,0 +1,37 @@
+% CBM main file (elsarticle)
+\documentclass[preprint,3p]{elsarticle}
+\input{../preamble}
+
+\begin{document}
+\begin{frontmatter}
+\title{Conformer-CNN Heartbeat Classification on MIT-BIH with AAMI Evaluation and Calibration}
+\author[1]{Alireza Abbaszadeh\corref{cor1}}\ead{alireza.abbaszadeh.research@gmail.com}
+\author[2]{}
+\cortext[cor1]{Corresponding author.}
+\address[1]{Department of Computer Engineering, Ma.C., Islamic Azad University, Mashhad, Iran}
+\address[2]{~}
+\begin{abstract}
+We release an end-to-end ECG heartbeat classifier that converts beat-centered recordings from the \dataset{} into Morlet scalograms and applies a compact Conformer-CNN. The public pipeline reproduces training, evaluation, calibration, and robustness analyses using stored `Research\_Runs` artifacts. Hold-out accuracy reaches 0.60 (macro-F1 0.26), and all tables/figures are generated directly from scripts.
+\end{abstract}
+\begin{keyword}
+ECG; Arrhythmia; Deep learning; Calibration; Reproducibility
+\end{keyword}
+\end{frontmatter}
+
+\section{Introduction}
+Wearable arrhythmia monitoring requires reproducible algorithms that report calibrated probabilities and expose robustness to sensor drift. We target the \dataset{} \cite{moody2001mitbih} under \aami{} constraints, extending prior CNN/LSTM approaches \cite{acharya2017ecgdeep} and attention systems \cite{rajpurkar2017cardiologist} with auditable tooling.
+
+\section{Methods}
+The pipeline performs patient-level splits (38 train/validation, 7 test) as detailed in \autoref{tab:subjects}, maps annotations to five \aami{} classes, computes streaming normalization, and renders 32-scale Morlet scalograms. A single Conformer block (128-d embeddings, eight heads) sits atop convolutional feature extractors, training for 20 epochs with class weighting. Evaluation scripts compute leaderboard metrics (\autoref{tab:leaderboard}), per-class precision/recall (\autoref{tab:perclass}), and calibration plus robustness summaries (\autoref{tab:calibration}, \autoref{tab:robustness}).
+
+\section{Results}
+Compared to CNN-LSTM and attention-only baselines, the Conformer-CNN raises macro-F1 by at least 0.11 and preserves ventricular F1 at 0.57 (\autoref{tab:perclass}). Confusion and PR plots (\autoref{fig:conf_pr}) reveal SVEB and Fusion misclassifications, while calibration scores show conservative probabilities for minority classes. Gaussian noise perturbations degrade accuracy by only five percentage points at $\sigma{=}0.15$ (\autoref{tab:robustness}).
+
+\section{Discussion}
+Minority-class weaknesses motivate targeted augmentation and potentially semi-supervised fine-tuning. Nevertheless, the scripted workflow---from TFRecord generation to LaTeX tables---offers a transparent baseline for community benchmarking and facilitates integration into telemetry systems that demand reliability evidence.
+
+\section{Conclusion}
+We provide scripts, metrics, and figures for a Conformer-CNN heartbeat classifier emphasizing reproducibility, calibration, and robustness. Future work will extend to multi-lead Holter data and reliability-aware decision rules.
+
+\bibliography{../references}
+\end{document}

@@ -307,9 +307,21 @@ Architectures are listed in the `MODELS` array within `run_full_pipeline.sh`; ed
 - **Core modules** – `ModelBuilder.py`, `DataLoader.py`, and `Evaluator.py` implement the model architecture, streaming data pipeline, and evaluation metrics.
 - **Run scripts** – automation helpers such as `run_full_pipeline.sh`, `run_hyperparameter_tuning.py`, `run_kfold_evaluation.py`, and `run_final_evaluation.py` orchestrate training, tuning, and assessment.
 - **Research artifacts** – experiment outputs and logs are stored in `Research_Runs/`.
+- **Manuscript templates** – `paper-journal-A/` and `paper-journal-B/` contain journal-specific LaTeX skeletons, figures, and supplementary folders plus instructions for maintaining separate publication workflows.
+
+Use `scripts/bootstrap_journal_repos.sh` to export either template into an independent Git repository with distinct GitHub/GitLab and Overleaf remotes (see each template’s `README.md` for examples).
 
 ## Reproducible Research
 Consistent configuration files, deterministic seeds, and scripted training/evaluation workflows align the project with reproducible research practices, enabling others to replicate and extend the results.
+
+## Version Control Policy
+To keep submission-critical artifacts available without polluting the history with transient build outputs, the `.gitignore` files were audited and updated.
+
+- **Tracked templates.** LaTeX class (`*.cls`) and bibliography style (`*.bst`) files are explicitly unignored so journal-supplied templates live inside the repository alongside the manuscript sources.
+- **Curated figures.** Generated vector figures (for example, `paper/figures/synthetic_ecg.pdf`) are committed once curated so downstream collaborators and Overleaf exports reproduce the exact visuals shipped with the paper.
+- **Transient noise excluded.** Auxiliary logs (`*.aux`, `*.log`, etc.), latexmk build directories, and scratch figures with the `-scratch` suffix remain ignored to prevent churn from local builds.
+
+These rules ensure that release-ready PDFs and templates survive code clean-ups while day-to-day LaTeX builds stay out of the repository history.
 
 ## Contributing
 Contributions that refine the codebase, documentation, or scientific analyses are welcome. To report a bug or request a new feature, please open an issue through the [GitHub issue tracker](https://github.com/AlirezaAbbaszadeh/ECG_Heartbeat_Classification/issues).
@@ -349,3 +361,10 @@ This repository is released under the permissive [MIT License](LICENSE). The lic
 [2] A. Gulati, J. Qin, C.-C. Chiu, et al., “Conformer: Convolution-augmented Transformer for Speech Recognition,” in *Proceedings of Interspeech*, 2020, pp. 5036–5040. doi:10.21437/Interspeech.2020-3015
 [3] P. Rajpurkar, A. Y. Hannun, M. Haghpanahi, C. Bourn, and A. Y. Ng, “Cardiologist-level arrhythmia detection with convolutional neural networks,” *arXiv preprint arXiv:1707.01836*, 2017.
 [4] U. R. Acharya, S. L. Oh, Y. Hagiwara, J. H. Tan, and M. Adam, “A deep convolutional neural network model to classify heartbeats,” *Computers in Biology and Medicine*, vol. 89, pp. 389–396, 2017. doi:10.1016/j.compbiomed.2017.08.022
+
+## Editorial Research Tasks
+
+1. Select two ECG/biomedical signal journals; note their scopes.
+2. Download and study each Guide for Authors: formatting, section order, length, citation style, figure limits.
+3. Check official announcements/newsletters for 2026 policy changes (data/code sharing, ethics, style).
+4. Summarize the required and optional items into a checklist per journal.

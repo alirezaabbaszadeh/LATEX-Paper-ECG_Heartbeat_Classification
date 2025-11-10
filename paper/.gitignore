@@ -1,0 +1,14 @@
+# LaTeX auxiliary files
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+*.toc
+*.synctex.gz
+
+# latexmk working directory
+_build/
+
+# Figure scratch space (explicit temp prefix only)
+figures/*-scratch.*
