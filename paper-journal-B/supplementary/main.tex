@@ -1,20 +1,21 @@
 \section{Supplementary tables}
 \label{sec:supp-tables}
+Table~\ref{tab:supp-kfold-acc} reports the loss and accuracy achieved on each fold of the Conformer five-fold procedure; the underlying CSV is submitted as Additional file~3 and also stored in \texttt{paper-journal-B/tables/kfold_accuracy.csv}. The per-class AUROC values plotted in \autoref{fig:roc-curves} appear in Table~\ref{tab:auc-by-class}, whose source CSV corresponds to Additional file~2.
+
 \input{../tables/supp_kfold_accuracy}
+\input{../tables/auc_by_class}
 
-\section{Additional files for upload}
-The following artifacts will be uploaded to BMC's supplementary files portal (each \(\leq\)20~MB) and correspond to results reported in the main text. Filenames match those committed in this repository for traceability.
-\begin{itemize}
-  \item Additional file 1: Classification report (CSV): \texttt{paper-journal-B/tables/classification_report.csv}
-  \item Additional file 2: AUC by class (CSV): \texttt{paper-journal-B/tables/auc_by_class.csv}
-  \item Additional file 3: K-fold accuracies (CSV): \texttt{paper-journal-B/tables/kfold_accuracy.csv}
-  \item Additional file 4: Training history (JSON): \texttt{Research_Runs/final_run_Main_Model_20250824_154136/final_model_training_history.json}
-  \item Additional file 5: Raw predictions (NumPy NPZ): \texttt{Research_Runs/final_run_Main_Model_20250824_154136/raw_predictions.npz}
-  \item Additional file 6: Full classification report (TXT): \texttt{Research_Runs/final_run_Main_Model_20250824_154136/classification_report.txt}
-  \item Additional file 7: Final model weights (Keras): \texttt{Research_Runs/final_run_Main_Model_20250824_154136/final_model_Main_Model.keras}
-\end{itemize}
-
-Each additional file is referenced in \autoref{sec:results} and the associated figure/table captions.
+\section{Additional files submitted to BMC}
+The files listed below will be uploaded to the BMC supplementary material portal (each \( \leq \)20~MB) and match the repository paths for traceability. They provide the detailed CSVs, logs, and weights needed to reproduce the figures and tables referenced in \autoref{sec:results} and \autoref{sec:supp-tables}.
+\begin{enumerate}
+  \item Additional file 1: Classification report (CSV) — \texttt{paper-journal-B/tables/classification_report.csv}. Includes per-class precision, recall, F1, and support for the held-out test cohort and underpins the metrics listed in Table~\ref{tab:per-class}.
+  \item Additional file 2: AUC by class (CSV) — \texttt{paper-journal-B/tables/auc_by_class.csv}. Records the class-specific AUROC values highlighted in \autoref{fig:roc-curves} and Table~\ref{tab:auc-by-class}.
+  \item Additional file 3: K-fold accuracies (CSV) — \texttt{paper-journal-B/tables/kfold_accuracy.csv}. Mirrors the statistics reported in Table~\ref{tab:supp-kfold-acc} for the five-fold evaluation.
+  \item Additional file 4: Training history (JSON) — \texttt{Research_Runs/final_run_Main_Model_20250824_154136/final_model_training_history.json}. Logs epoch-level losses and metrics for the final Conformer model before calibration.
+  \item Additional file 5: Raw predictions (NumPy NPZ) — \texttt{Research_Runs/final_run_Main_Model_20250824_154136/raw_predictions.npz}. Provides the true labels, softmax probabilities, and discrete predictions used to generate the ROC, precision--recall, and confusion matrix figures.
+  \item Additional file 6: Full classification report (TXT) — \texttt{Research_Runs/final_run_Main_Model_20250824_154136/classification_report.txt}. Documents the textual report that appears in the repository logs and verifies the CSV summary.
+  \item Additional file 7: Final model weights (Keras) — \texttt{Research_Runs/final_run_Main_Model_20250824_154136/final_model_Main_Model.keras}. Enables loading the calibrated Conformer for deployment or further analysis.
+\end{enumerate}
 
 \section{Reporting checklists}
-No human participants, data, or tissues were involved in this study; we used de-identified public datasets and open-source code. As such, CONSORT/STROBE/PRISMA checklists are not applicable. Institutional review board (IRB) approval and consent to participate are not required.
+No human participants, data, or tissues were involved in this study; we relied solely on publicly available, de-identified ECG records (MIT-BIH Arrhythmia Database) and open-source code. Consequently, CONSORT/STROBE/PRISMA checklists, IRB approval, and consent to participate are not applicable.

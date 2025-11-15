@@ -31,3 +31,6 @@ output/
 !paper-journal-*/figures/
 !paper-journal-*/supplementary/
 !paper-journal-*/templates/
+
+# Local Python virtual environment
+/.venv/

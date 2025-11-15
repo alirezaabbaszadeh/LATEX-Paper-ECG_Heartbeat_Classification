@@ -1,7 +1,7 @@
 # Figures for BioMedical Engineering OnLine Submission
 
-Ensure each figure or panel is combined into a single file ≤10 MB with titles ≤15 words and legends ≤300 words. Provide both 85~mm and 170~mm width-ready exports when applicable.
+Run `./paper-journal-B/scripts/generate_figures.py` with the bundled virtual environment (`.venv/bin/python`) to reproduce every plot from `Research_Runs/final_run_Main_Model_20250824_154136/raw_predictions.npz`. Each figure is exported as both a publication-ready 300 dpi PNG and a vector PDF.
 
-- fig-roc-curves.png — ROC curves per class (test set). Label: `fig:roc-curves`.
-- fig-precision-recall-curves.png — Precision–recall curves per class (test set). Label: `fig:pr-curves`.
-- fig-confusion-matrix.png — Confusion matrix (test set). Label: `fig:confusion-matrix`.
+- `fig-roc-curves.{png,pdf}` — ROC curves per AAMI class on the held-out test set; caption uses `fig:roc-curves`.
+- `fig-precision-recall-curves.{png,pdf}` — Precision–recall curves per class, highlighting imbalance effects; caption uses `fig:pr-curves`.
+- `fig-confusion-matrix.{png,pdf}` — Confusion matrix on the held-out test set; caption uses `fig:confusion-matrix`.
