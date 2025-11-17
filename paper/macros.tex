@@ -2,4 +2,8 @@
 \newcommand{\dataset}{MIT-BIH Arrhythmia Database}\newcommand{\aami}{AAMI EC57}
 \newcommand{\commit}[1]{\texttt{#1}}
 \newcommand{\etal}{\textit{et al.}}
+\ifdefined\draftmode
 \newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
+\else
+\newcommand{\todo}[1]{}
+\fi
