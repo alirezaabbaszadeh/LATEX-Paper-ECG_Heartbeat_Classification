@@ -467,8 +467,8 @@
 
 %% Cleveref definitions
 \newcommand{\cleverefDefinitions}{
-	\crefrangelabelformat{figure}{##3##1##4--##5##2##6} % double # for nesting inside \newcommand
-	\crefrangelabelformat{table}{##3##1##4--##5##2##6}
+		pdfsubject={\@abstract},
+		pdfkeywords={\@keyword},
 	\crefrangelabelformat{section}{##3##1##4--##5##2##6}	
 	\crefrangelabelformat{appendix}{##3##1##4--##5##2##6}
 	\crefrangelabelformat{scheme}{##3##1##4--##5##2##6}
@@ -838,24 +838,24 @@
 			\marginnote[\contentleftcolumn]{}[\MyLen] % Bottom aligned
 			}{%
 		}
-		\isPreprints{\vspace{0.92cm}}{
-		\begin{adjustwidth}{-\extralength}{}
-		}
-	}
-	\begin{flushleft}
-	\ifthenelse{\equal{\@arttype}{Supfile}}{%
-		\fontsize{18}{18}\selectfont
-		\raggedright
-		\hyphenpenalty=10000
-		\tolerance=1000
-		\noindent\textbf{Supplementary Materials: \@Title}%
-		\par
-		\vspace{12pt}
-		\fontsize{10}{10}\selectfont
-		\noindent\boldmath\bfseries{\@Author}
-		}{%
-		\isBookContribution{}{%
-			\vspace*{-1.75cm}
+				\vspace{-2 pt}%
+				\ifthenelse{\equal{\@status}{submit}}{%	
+					\hfill \href{https://www.mdpi.com}{%
+					\includegraphics[height=1cm]{Definitions/logo-mdpi.eps}}%
+					}{
+					\href{https://www.mdpi.com/journal/\@journal}{
+					\includegraphics[height=1.2cm]{Definitions/\@journal-logo.eps}}%
+					\hfill
+					\ifthenelse{\equal{\@journal}{ijom}}{%
+						\href{https://www.mdpi.com}{\includegraphics[height=1cm]{Definitions/logo-mdpi-ijom.eps}}
+					\ifthenelse{\equal{\@journal}{siuj}}{%
+						\href{https://www.mdpi.com}{\includegraphics[height=1cm]{Definitions/logo-mdpi-siuj.eps}}
+						}{
+						\ifthenelse{\equal{\@journal}{scipharm}}{%
+							\href{https://www.mdpi.com}{\includegraphics[height=1cm]{Definitions/logo-mdpi-scipharm.eps}}%
+							}{%
+							\href{https://www.mdpi.com}{\includegraphics[height=1cm]{Definitions/logo-mdpi.eps}}%
+					}%
 		}
 		{%0
 		\ifthenelse{\equal{\@journal}{preprints}
@@ -939,7 +939,7 @@
 			}{%
 		}
 	}
-		\ifthenelse{\equal{\@leftcolumnsplit}{\@empty}}{% Left column split
+		\href{https://www.mdpi.com/article/\@doinum?type=check_update&version=1}{\includegraphics[height=.6cm]{Definitions/logo-updates.eps}}
 			}{
 			\marginnote[\contentleftcolumn]{}% Alignment with the affiliations
 		}
@@ -1890,7 +1890,7 @@
   \newlength{\cellWidthz}
   \newlength{\cellWidthA}
   \newlength{\cellWidthB}
-  \newlength{\cellWidthC}
+\endinput
   \newlength{\cellWidthD}
   \newlength{\cellWidthE}
   \newlength{\cellWidthF}
