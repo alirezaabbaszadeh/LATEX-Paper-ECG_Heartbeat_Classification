@@ -311,6 +311,15 @@ Architectures are listed in the `MODELS` array within `run_full_pipeline.sh`; ed
 
 Use `scripts/bootstrap_journal_repos.sh` to export either template into an independent Git repository with distinct GitHub/GitLab and Overleaf remotes (see each template’s `README.md` for examples).
 
+## Building the applied sciences manuscript without pdflatex
+The applied journal paper in `paper-applied/` can be compiled even on systems that lack a TeX Live installation. A helper script bootstraps a portable TinyTeX toolchain on first use and caches it locally:
+
+```bash
+bash scripts/build_paper_applied.sh
+```
+
+The script produces `paper-applied/src/output/main.pdf` while keeping intermediate files alongside the output. Only `curl` and `tar` are required for the first run; subsequent builds reuse the cached TinyTeX install in `.cache/tinytex/`. If system-wide LaTeX tools (`pdflatex`/`latexmk`) are available, they are used automatically and no download occurs.
+
 ## Reproducible Research
 Consistent configuration files, deterministic seeds, and scripted training/evaluation workflows align the project with reproducible research practices, enabling others to replicate and extend the results.
 

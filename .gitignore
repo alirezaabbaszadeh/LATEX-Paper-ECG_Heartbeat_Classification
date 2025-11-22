@@ -34,3 +34,6 @@ output/
 
 # Local Python virtual environment
 /.venv/
+
+# Locally cached TinyTeX/LaTeX tools for manuscript builds
+/.cache/
