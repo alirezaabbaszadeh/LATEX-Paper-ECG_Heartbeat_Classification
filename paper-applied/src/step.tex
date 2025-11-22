@@ -1,0 +1,29 @@
+\documentclass[applsci,article,accept,pdftex,oneauthor]{Definitions/mdpi}
+\firstpage{1}
+\pubvolume{13}
+\issuenum{1}
+\articlenumber{0}
+\pubyear{2025}
+\copyrightyear{2025}
+\datereceived{3 July 2025}
+\daterevised{18 July 2025}
+\dateaccepted{22 July 2025}
+\datepublished{26 July 2025}
+\hreflink{https://doi.org/10.3390/app13000000}
+\doinum{10.3390/app13000000}
+\input{preamble}
+\input{macros}
+\Title{Morlet--Conformer ECG Heartbeat Classification on MIT-BIH with Calibration and Reproducible Pipeline}
+\TitleCitation{Morlet--Conformer ECG Heartbeat Classification on MIT-BIH with Calibration and Reproducible Pipeline}
+\newcommand{\orcidauthorA}{0000-0000-0000-0000}
+\Author{Test Author\orcidA{}}
+\AuthorNames{Test Author}
+\AuthorCitation{Author, T.}
+\address{Department; email@example.com}
+\corres{Correspondence: email@example.com}
+\abstract{\textbf{Background:} Accurate heartbeat classification underpins arrhythmia screening and remote ECG monitoring. Many deep-learning reports emphasise headline accuracy while omitting reproducible pipelines or uncertainty analyses for minority rhythms. \textbf{Methods:} We built a fully scripted pipeline that converts the MIT-BIH Arrhythmia Database (48 half-hour records, 110{,}919 beats) into three-beat Morlet scalogram sequences. A lightweight Conformer--CNN classifier with class-weighted cross-entropy was trained on 38 development records drawn from the 45 non-paced subjects after Hyperband tuning and five-fold cross-validation, then evaluated once on a strictly held-out MIT-BIH test cohort comprising 7 subjects (15{,}573 beats). All TFRecords, split metadata, checkpoints, and plotting notebooks are released so every metric can be regenerated and extended. \textbf{Results:} The proposed model reached 0.60 accuracy (95\% confidence interval [CI] 0.59--0.60), macro-F1 0.26 (95\% CI 0.26--0.27), and weighted-F1 0.68 (95\% CI 0.67--0.68) on the test split, improving weighted-F1 by 0.30 over attention-only baselines under the same preprocessing. One-vs-rest AUCs measured 0.90 (95\% CI 0.89--0.91) for normal beats, 0.84 (95\% CI 0.84--0.85) for ventricular ectopy, and 0.31 (95\% CI 0.29--0.34) for fusion beats; cross-validation accuracy averaged $0.44\pm0.16$. Diagnostic ROC, precision--recall, and confusion-matrix plots highlight persistent gaps on supraventricular and fusion beats and motivate augmentation priorities. \textbf{Conclusions:} Conformer encoders paired with Morlet scalograms deliver measurable gains over attention-only, CNN-LSTM, and feature-engineered baselines on MIT-BIH, while the open-source pipeline, archived \texttt{Research\_Runs} artifacts, and calibration analyses provide a reproducible, reviewer-verifiable reference for future work on augmentation, cost-sensitive learning, and prospective validation in telemonitoring settings.}
+\keyword{electrocardiogram; arrhythmia classification; MIT-BIH Arrhythmia Database; AAMI heartbeat classes; Conformer--CNN; wavelet scalogram; calibration; reproducible pipeline}
+\featuredapplication{Triage-oriented heartbeat classification diagnostics for telecardiology under the AAMI five-class protocol.}
+\begin{document}
+Test body.
+\end{document}

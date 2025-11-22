@@ -1,0 +1,67 @@
+\documentclass[applsci,article,accept,pdftex,oneauthor]{Definitions/mdpi}
+
+\firstpage{1}
+\makeatletter
+\setcounter{page}{\@firstpage}
+\makeatother
+\pubvolume{13}
+\issuenum{1}
+\articlenumber{0}
+\pubyear{2025}
+\copyrightyear{2025}
+\datereceived{3 July 2025}
+\daterevised{18 July 2025}
+\dateaccepted{22 July 2025}
+\datepublished{26 July 2025}
+\hreflink{https://doi.org/10.3390/app13000000}
+\doinum{10.3390/app13000000}
+\input{preamble}
+\input{macros}
+
+\Title{Morlet--Conformer ECG Heartbeat Classification on MIT-BIH with Calibration and Reproducible Pipeline}
+\TitleCitation{Morlet--Conformer ECG Heartbeat Classification on MIT-BIH with Calibration and Reproducible Pipeline}
+
+\newcommand{\orcidauthorA}{0009-0007-8253-6042}
+
+\Author{Alireza Abbaszadeh $^{1}$\orcidA{}}
+\AuthorNames{Alireza Abbaszadeh}
+\AuthorCitation{Abbaszadeh, A.}
+
+\address{%
+$^{1}$ \quad Department of Computer Engineering, Islamic Azad University, Mashhad, Iran; alireza.abbaszadeh8558@iau.ir}
+
+\corres{Correspondence: alireza.abbaszadeh8558@iau.ir}
+
+\abstract{\input{sections/abstract}}
+
+\keyword{electrocardiogram; arrhythmia classification; MIT-BIH Arrhythmia Database; AAMI heartbeat classes; Conformer--CNN; wavelet scalogram; calibration; reproducible pipeline}
+
+\featuredapplication{Triage-oriented heartbeat classification diagnostics for telecardiology under the AAMI five-class protocol.}
+
+\begin{document}
+
+\input{sections/introduction}
+\input{sections/methods}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/conclusion}
+
+\authorcontributions{Alireza Abbaszadeh conceived the study, designed and implemented the signal processing and neural network experiments, curated the datasets, performed the statistical analyses, and drafted as well as critically revised the manuscript. The author read and approved the final manuscript.}
+
+\funding{This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors.}
+
+\institutionalreviewboard{Not applicable; this study used only publicly available, fully de-identified MIT-BIH Arrhythmia Database records.}
+
+\informedconsent{Not applicable.}
+
+\dataavailability{The MIT-BIH Arrhythmia Database is available from PhysioNet (\url{https://physionet.org/content/mitdb/1.0.0/}). All preprocessing scripts (\texttt{preprocess\_data.py}, \texttt{create\_batched\_tfrecords.py}), training and evaluation code, and generated artifacts (TFRecords, fold splits, logs, and trained checkpoints) are publicly available at \url{https://github.com/alirezaabbaszadeh/ECG_Heartbeat_Classification}. The repository also includes configuration files and saved outputs for the runs referenced in this manuscript.}
+
+\acknowledgments{Consistent with emerging generative AI policies, an AI-assisted tool was used in a limited way for grammar and style checks only; all substantive writing, analysis, and interpretation were performed and verified by the author.}
+
+\conflictsofinterest{The author declares no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.}
+
+\reftitle{References}
+\externalbibliography{yes}
+\bibliography{../bib/references}
+
+\end{document}

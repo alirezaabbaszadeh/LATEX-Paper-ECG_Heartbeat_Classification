@@ -1,0 +1,16 @@
+\begin{table*}[t]
+  \centering
+  \caption{Representative multi-class arrhythmia classifiers on the MIT-BIH Arrhythmia Database. Reported metrics are quoted from the original papers where available; split definitions highlight that many high headline accuracies rely on beat-wise or patient-specific evaluation rather than fully inter-patient, five-class AAMI mapping.}
+  \label{tab:literature-context}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lllll}
+    \toprule
+    Paper & Dataset / split & Classes & Acc./Macro-F1 & Notes \\
+    \midrule
+    This work (Morlet--Conformer) & MIT-BIH, 45 records, 38 train/val / 7 test, inter-patient & 5 (AAMI N/S/V/F/Q) & 0.60 / 0.26 & Record-level split; strictly held-out test subjects; beat-level bootstrap CIs. \\
+    Acharya et al.\ (2017)\cite{acharya2017deep} & MIT-BIH, beat-wise random train/test split & 5 heartbeat categories & $\approx 0.94$ / -- & High beat-wise accuracy; macro-F1 not reported; not strictly inter-patient. \\
+    Kiranyaz et al.\ (2015)\cite{kiranyaz2015personalized} & MIT-BIH, patient-specific adaptive training & Multiple arrhythmia types & -- & Real-time 1-D CNN with subject-specific adaptation; performance not directly comparable to fixed inter-patient split. \\
+    \bottomrule
+  \end{tabular}
+  }
+\end{table*}

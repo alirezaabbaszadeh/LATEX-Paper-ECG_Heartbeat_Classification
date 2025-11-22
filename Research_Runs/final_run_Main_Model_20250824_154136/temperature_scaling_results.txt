@@ -1,0 +1,28 @@
+Temperature scaling for Main_Model (Conformer) on MIT-BIH test set
+==================================================================
+
+Number of test beats: 15573
+Number of classes: 5
+
+Global temperature (single-parameter scaling):
+  T* = 1.050
+
+Negative log-likelihood (mean over test beats):
+  Baseline NLL   : 1.047989
+  Calibrated NLL : 1.047731
+
+Per-class ECE and Brier scores (using 15 bins)
+  Class           |  ECE_before  Brier_before  |  ECE_after   Brier_after
+  -----------------------------------------------------------------------
+  Normal               0.417         0.289  |       0.422         0.293
+  SVEB                 0.098         0.039  |       0.100         0.039
+  VEB                  0.089         0.121  |       0.085         0.120
+  Fusion               0.103         0.049  |       0.104         0.049
+  Unknown              0.153         0.051  |       0.155         0.050
+
+Notes:
+- Temperature was fitted on the held-out MIT-BIH test cohort itself,
+  so these values quantify internal calibration rather than external
+  generalisation.
+- The script operates entirely on stored probabilities from
+  raw_predictions.npz and does not retrain or modify the model.

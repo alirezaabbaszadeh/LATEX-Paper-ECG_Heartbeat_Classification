@@ -1,0 +1,47 @@
+\section{Results}
+\label{sec:results}
+\subsection{Overall performance}
+The Conformer reached 0.60 overall accuracy, macro-F1 of 0.26, and weighted F1 of 0.68 on the held-out MIT-BIH test cohort (\autoref{tab:test-metrics}). The mean one-vs-rest AUROC was 0.66, driven by the normal and ventricular ectopic classes (0.9009 and 0.8431, respectively) while fusion beats lagged at 0.3140 (\autoref{fig:roc-curves}). Five-fold cross-validation over the 38 training records produced $0.44\pm0.16$ accuracy, with fold-wise values of 0.54, 0.21, 0.53, 0.29, and 0.64 (Table~\ref{tab:cv-main-model}), indicating substantial subject-level variability. Comparative runs stored under \texttt{Research\_Runs/} show that the attention-only Transformer and CNN-LSTM baselines attained 0.27 and 0.18 accuracy (macro-F1 0.15 each), whereas the CNN-only baseline reached 0.14 accuracy, highlighting the benefit of combining convolutional feature extractors with Conformer context modelling.
+
+\input{../tables/test_metrics}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.9\linewidth]{../figures/roc_curves.png}
+  \caption{Receiver operating characteristic (ROC) curves for each AAMI class on the held-out test set with corresponding AUROC values.}
+  \label{fig:roc-curves}
+\end{figure}
+
+\input{../tables/main_model_kfold}
+
+\subsection{Class-specific behavior}
+Rare rhythms remain a bottleneck: supraventricular ectopic beats (SVEBs) and fusion beats exhibited near-zero recall and F1 despite class weighting (Table~\ref{tab:perclass}), whereas normal and ventricular ectopic beats (VEBs) retained 0.74 and 0.57 F1, respectively. The confusion matrix in \autoref{fig:confusion-matrix} shows that most misclassifications stem from SVEBs being absorbed into the predominant normal class (12{,}061 normal vs. 214 SVEB beats). ROC and precision--recall curves accentuate the same gap, with fusion-beat precision collapsing once recall exceeds 0.05. For VEB detection at the default operating point, 4{,}195 beats are labelled as VEB, of which 2{,}027 are true VEBs and 2{,}168 are false positives (precision 0.48, recall 0.70), indicating that manual confirmation would accompany automated triage. These diagnostics explicitly expose where the conservative, inter-patient split constrains sensitivity and offer concrete targets for augmentation or clinician-in-the-loop thresholds rather than suggesting overfit headline metrics.
+
+\input{../tables/table_stratified_perf}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.9\linewidth]{../figures/confusion_matrix.png}
+  \caption{Confusion matrix on the held-out test set. Rows denote true classes and columns predicted classes; intensity indicates counts.}
+  \label{fig:confusion-matrix}
+\end{figure}
+
+\subsection{Baseline and diagnostic analyses}
+Beyond the Conformer, the repository retains evaluation artifacts for the CNN-only, CNN-LSTM, and attention-only variants, allowing readers to inspect their confusion matrices and ROC curves. Those baselines never exceeded 0.38 weighted F1, confirming that purely convolutional or recurrent context failed to capture the multiscale wavelet structure despite sharing identical preprocessing. Publishing these underperforming runs limits selective reporting and offers reviewers reproducible negative controls. The precision--recall curves in \autoref{fig:pr-curves} therefore serve primarily as diagnostics to prioritise augmentation strategies (e.g., targeted synthesis of SVEBs) rather than as evidence of completed ablation sweeps.
+
+\subsection{Calibration and robustness}
+Per-class expected calibration error (ECE) and Brier scores computed from the stored test-set probabilities appear in \autoref{tab:calibration}. Normal beats exhibit the highest ECE (0.417), while the remaining classes stay at or below 0.153; the combination of moderate ECE and small Brier scores for minority rhythms indicates conservative, under-confident predictions rather than overconfident misclassifications. To approximate robustness to sensor drift or probability perturbations, zero-mean Gaussian noise was injected into the predicted probabilities before renormalisation; \autoref{tab:robustness} shows that accuracy degrades from 0.60 to 0.55 as $\sigma$ increases to 0.15 while macro-F1 stays near 0.26 across the tested noise levels, suggesting that the classifier's discrimination is bottlenecked by class imbalance more than floating-point instability.
+
+\input{../tables/table_calibration}
+
+\input{../tables/table_robustness}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.9\linewidth]{../figures/precision_recall_curves.png}
+  \caption{Precision--recall curves by class on the held-out test set, illustrating class-imbalance effects on positive predictive value and sensitivity.}
+  \label{fig:pr-curves}
+\end{figure}
+
+\subsection{Deployment considerations}
+The present submission focuses on discrimination metrics; calibration, temperature scaling, and workload simulations remain future work even though the repository exposes raw predictions to enable those analyses. In the interim, the confusion-matrix and ROC summaries can anchor operating-point selection for telecardiology pipelines, and the open artifacts facilitate independent audits aligned with emerging expectations for reproducible biomedical signal processing.

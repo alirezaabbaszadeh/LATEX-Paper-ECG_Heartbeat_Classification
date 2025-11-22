@@ -1,0 +1,23 @@
+Dear Editor,
+
+We would like to submit our manuscript entitled
+“Morlet–Conformer ECG Heartbeat Classification on MIT-BIH: A Reproducible Pipeline with Calibration and Robustness Analysis”
+for consideration as an Original Research Article in Applied Sciences (Section: Biomedical Engineering / Signal Processing).
+
+The manuscript presents a fully scripted ECG heartbeat classification pipeline that pairs Morlet wavelet scalograms with a lightweight Conformer–CNN architecture on the MIT-BIH Arrhythmia Database under the AAMI five-class protocol (N/S/V/F/Q). All preprocessing code, split metadata, TFRecords, checkpoints, and plotting notebooks are archived in the accompanying repository so every table and figure—calibration (expected calibration error and Brier scores), robustness sweeps, confidence intervals, and diagnostics—can be regenerated and extended by reviewers and practitioners.
+
+Under a strict inter-patient split (38 development records, 7 held-out subjects; no augmentation to preserve comparability), the proposed model achieves 0.60 accuracy, 0.26 macro-F1, and 0.68 weighted-F1. These results improve weighted-F1 by 0.30 over attention-only, CNN–LSTM, and CNN-only baselines trained on identical Morlet scalograms while transparently exposing failure modes on rare supraventricular and fusion beats. Publishing the negative controls alongside the champion model reduces selective reporting and clarifies where threshold tuning or targeted augmentation is needed before deployment.
+
+We believe this manuscript fits well within Applied Sciences because it addresses a practical signal-processing problem at the interface of ECG analysis and deep learning, emphasising reproducibility, calibration, and robustness—topics of increasing interest in the biomedical engineering community. To the best of our knowledge, there is no prior work that combines a Conformer–CNN on Morlet scalograms with a fully open, script-driven ECG pipeline and a detailed calibration and robustness analysis on MIT-BIH.
+
+This work has not been published elsewhere and is not under consideration by any other journal. All authors should confirm approval of the manuscript and agreement with its submission. Conflicts of interest, if any, will be declared, and links to public code or artifact repositories (e.g., GitHub/Zenodo) can be added at the camera-ready stage if requested.
+
+Thank you very much for considering our submission. We look forward to your response.
+
+Sincerely,
+
+Alireza Abbaszadeh
+Department of Computer Engineering, Islamic Azad University, Mashhad, Iran
+Email: alireza.abbaszadeh8558@iau.ir
+ORCID: https://orcid.org/0009-0007-8253-6042
+Code repository: https://github.com/alirezaabbaszadeh/ECG_Heartbeat_Classification

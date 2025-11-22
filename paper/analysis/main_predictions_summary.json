@@ -1,0 +1,16 @@
+{
+  "num_samples": 15573,
+  "num_classes": 5,
+  "y_true_dtype": "int64",
+  "probs_dtype": "float64",
+  "probs_min": 5.3048133850097656e-05,
+  "probs_max": 0.998046875,
+  "probs_row_sums_mean": 0.999997923781109,
+  "class_counts": {
+    "0": 12061,
+    "1": 214,
+    "2": 2913,
+    "3": 383,
+    "4": 2
+  }
+}

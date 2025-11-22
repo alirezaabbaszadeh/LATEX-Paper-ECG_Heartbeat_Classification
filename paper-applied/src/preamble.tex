@@ -1,0 +1,28 @@
+% Preamble for internal Applied Sciences draft (generic article)
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{float} % for [H] table floats
+
+\AtBeginDocument{%
+\hypersetup{
+  colorlinks=true,
+  linkcolor=teal,
+  citecolor=teal,
+  urlcolor=teal
+}}
+
+% Optional: double spacing and line numbers during drafting.
+% Uncomment the next line only for review drafts.
+% \AtBeginDocument{\doublespacing\linenumbers}
+
+% Keep floats close to their references.
+\setlength{\textfloatsep}{12pt}
+\setlength{\floatsep}{12pt}
+
+% Allow modest line stretching to suppress overfull boxes in dense paragraphs.
+\setlength{\emergencystretch}{1em}
