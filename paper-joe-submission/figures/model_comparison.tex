@@ -1,42 +1,51 @@
 % AI-assisted data visualization; values are direct transcriptions from qa/claim-ledger.md.
-\begin{tikzpicture}[x=9.4cm,y=0.52cm,font=\footnotesize]
-  \draw[->,black!70] (0,0) -- (0.76,0) node[right]{Score};
+\begin{tikzpicture}[x=10.2cm,y=0.64cm,font=\small]
+  % score axis
+  \draw[->,black!65] (0,0) -- (0.75,0) node[right,font=\footnotesize]{Score};
   \foreach \x/\lab in {0/0.0,0.2/0.2,0.4/0.4,0.6/0.6} {
-    \draw[black!15] (\x,0.3) -- (\x,13.0);
-    \node[below,font=\scriptsize] at (\x,0) {\lab};
+    \draw[black!12] (\x,0.35) -- (\x,13.0);
+    \node[below,font=\footnotesize] at (\x,0) {\lab};
   }
-  \fill[blue!75] (0.02,13.7) rectangle +(0.035,0.32);
-  \node[anchor=west] at (0.065,13.86) {Accuracy};
-  \fill[blue!42] (0.25,13.7) rectangle +(0.035,0.32);
-  \node[anchor=west] at (0.295,13.86) {Macro-F1};
-  \fill[black!25] (0.48,13.7) rectangle +(0.035,0.32);
-  \node[anchor=west] at (0.525,13.86) {Weighted-F1};
-  \node[anchor=east,font=\footnotesize] at (-0.018,11.55) {Proposed CNN--Conformer};
-  \fill[blue!75] (0,12.00) rectangle (0.60,12.34);
-  \fill[blue!42] (0,11.56) rectangle (0.26,11.90);
-  \fill[black!25] (0,11.12) rectangle (0.68,11.46);
-  \node[anchor=west,font=\scriptsize] at (0.605,12.17) {0.60};
-  \node[anchor=west,font=\scriptsize] at (0.265,11.73) {0.26};
-  \node[anchor=west,font=\scriptsize] at (0.685,11.29) {0.68};
-  \node[anchor=east,font=\footnotesize] at (-0.018,8.65) {Attention-only};
-  \fill[blue!75] (0,9.10) rectangle (0.27,9.44);
-  \fill[blue!42] (0,8.66) rectangle (0.15,9.00);
-  \fill[black!25] (0,8.22) rectangle (0.38,8.56);
-  \node[anchor=west,font=\scriptsize] at (0.275,9.27) {0.27};
-  \node[anchor=west,font=\scriptsize] at (0.155,8.83) {0.15};
-  \node[anchor=west,font=\scriptsize] at (0.385,8.39) {0.38};
-  \node[anchor=east,font=\footnotesize] at (-0.018,5.75) {CNN--LSTM};
-  \fill[blue!75] (0,6.20) rectangle (0.18,6.54);
-  \fill[blue!42] (0,5.76) rectangle (0.15,6.10);
-  \fill[black!25] (0,5.32) rectangle (0.29,5.66);
-  \node[anchor=west,font=\scriptsize] at (0.185,6.37) {0.18};
-  \node[anchor=west,font=\scriptsize] at (0.155,5.93) {0.15};
-  \node[anchor=west,font=\scriptsize] at (0.295,5.49) {0.29};
-  \node[anchor=east,font=\footnotesize] at (-0.018,2.85) {Feature-engineered};
-  \fill[blue!75] (0,3.30) rectangle (0.14,3.64);
-  \fill[blue!42] (0,2.86) rectangle (0.07,3.20);
-  \fill[black!25] (0,2.42) rectangle (0.23,2.76);
-  \node[anchor=west,font=\scriptsize] at (0.145,3.47) {0.14};
-  \node[anchor=west,font=\scriptsize] at (0.075,3.03) {0.07};
-  \node[anchor=west,font=\scriptsize] at (0.235,2.59) {0.23};
+
+  % compact legend
+  \fill[blue!75] (0.03,13.75) rectangle +(0.032,0.30);
+  \node[anchor=west,font=\footnotesize] at (0.072,13.90) {Accuracy};
+  \fill[blue!38] (0.255,13.75) rectangle +(0.032,0.30);
+  \node[anchor=west,font=\footnotesize] at (0.297,13.90) {Macro-F1};
+  \fill[black!22] (0.50,13.75) rectangle +(0.032,0.30);
+  \node[anchor=west,font=\footnotesize] at (0.542,13.90) {Weighted-F1};
+
+  % proposed row highlight
+  \fill[blue!3,rounded corners=2pt] (-0.19,10.55) rectangle (0.745,12.95);
+  \node[anchor=east,font=\small\bfseries,text=blue!65!black] at (-0.025,11.75) {CNN--Conformer};
+  \fill[blue!75] (0,12.22) rectangle (0.60,12.58);
+  \fill[blue!38] (0,11.72) rectangle (0.26,12.08);
+  \fill[black!22] (0,11.22) rectangle (0.68,11.58);
+  \node[anchor=west,font=\footnotesize\bfseries] at (0.608,12.40) {0.60};
+  \node[anchor=west,font=\footnotesize\bfseries] at (0.268,11.90) {0.26};
+  \node[anchor=west,font=\footnotesize\bfseries] at (0.688,11.40) {0.68};
+
+  \node[anchor=east,font=\small] at (-0.025,8.55) {Attention-only};
+  \fill[blue!75] (0,9.02) rectangle (0.27,9.38);
+  \fill[blue!38] (0,8.52) rectangle (0.15,8.88);
+  \fill[black!22] (0,8.02) rectangle (0.38,8.38);
+  \node[anchor=west,font=\footnotesize] at (0.278,9.20) {0.27};
+  \node[anchor=west,font=\footnotesize] at (0.158,8.70) {0.15};
+  \node[anchor=west,font=\footnotesize] at (0.388,8.20) {0.38};
+
+  \node[anchor=east,font=\small] at (-0.025,5.35) {CNN--LSTM};
+  \fill[blue!75] (0,5.82) rectangle (0.18,6.18);
+  \fill[blue!38] (0,5.32) rectangle (0.15,5.68);
+  \fill[black!22] (0,4.82) rectangle (0.29,5.18);
+  \node[anchor=west,font=\footnotesize] at (0.188,6.00) {0.18};
+  \node[anchor=west,font=\footnotesize] at (0.158,5.50) {0.15};
+  \node[anchor=west,font=\footnotesize] at (0.298,5.00) {0.29};
+
+  \node[anchor=east,font=\small] at (-0.025,2.15) {Feature-engineered};
+  \fill[blue!75] (0,2.62) rectangle (0.14,2.98);
+  \fill[blue!38] (0,2.12) rectangle (0.07,2.48);
+  \fill[black!22] (0,1.62) rectangle (0.23,1.98);
+  \node[anchor=west,font=\footnotesize] at (0.148,2.80) {0.14};
+  \node[anchor=west,font=\footnotesize] at (0.078,2.30) {0.07};
+  \node[anchor=west,font=\footnotesize] at (0.238,1.80) {0.23};
 \end{tikzpicture}
