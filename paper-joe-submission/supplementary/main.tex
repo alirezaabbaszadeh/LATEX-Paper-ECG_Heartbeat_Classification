@@ -23,24 +23,29 @@ Class-specific trade-offs were examined after final prediction by sweeping decis
 Temperature scaling was also applied to the stored held-out probabilities. Before scaling, 15-bin ECE values were 0.417 for Normal, 0.098 for SVEB, 0.089 for VEB, 0.103 for Fusion, and 0.153 for Q. The fitted global temperature was 1.050, changing mean negative log-likelihood from 1.047989 to 1.047731. Because the temperature parameter was fitted on the held-out test cohort itself, this analysis characterises confidence behaviour in the current cohort only; it is not independent calibration validation and does not establish external generalisability.
 
 \section{Supplementary Figures and Tables}
-The original study-generated confusion matrix and one-vs-rest discrimination curves are retained here as full diagnostic views of the stored held-out predictions. Their image content was not altered during the present editorial revision.
+The confusion matrix and one-vs-rest discrimination curves are retained here as full diagnostic views of the stored held-out predictions. For this production build, the plots were deterministically regenerated from the archived prediction arrays without changing the predictions or derived metrics.
+
+\setcounter{figure}{0}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\theHfigure}{S\arabic{figure}}
+\renewcommand{\figurename}{Supplementary Figure}
 
 \begin{figure}[p]
   \centering
   \includegraphics[width=0.88\linewidth]{../figures/confusion_matrix.png}
-  \caption*{\textbf{Supplementary Figure S1.} Held-out confusion matrix for the proposed CNN--Conformer. The dominant minority-class error paths are SVEB to Normal/VEB and Fusion to VEB.}
+  \caption{Held-out confusion matrix for the proposed CNN--Conformer. The dominant minority-class error paths are SVEB to Normal/VEB and Fusion to VEB.}
 \end{figure}
 
 \begin{figure}[p]
   \centering
   \includegraphics[width=0.88\linewidth]{../figures/roc_curves.png}
-  \caption*{\textbf{Supplementary Figure S2.} One-vs-rest ROC curves on the fixed held-out cohort. Normal and VEB show the strongest ranking discrimination; Fusion is weak.}
+  \caption{One-vs-rest ROC curves on the fixed held-out cohort. Normal and VEB show the strongest ranking discrimination; Fusion is weak.}
 \end{figure}
 
 \begin{figure}[p]
   \centering
   \includegraphics[width=0.88\linewidth]{../figures/precision_recall_curves.png}
-  \caption*{\textbf{Supplementary Figure S3.} Precision--recall curves on the fixed held-out cohort. Minority-class precision declines rapidly as recall increases.}
+  \caption{Precision--recall curves on the fixed held-out cohort. Minority-class precision declines rapidly as recall increases.}
 \end{figure}
 
 Stored probabilities and run-level diagnostics remain with the definitive model archive, and model-level and cross-validation tables remain in the revision's table directory. The exact source paths and evidence boundary are recorded in \texttt{qa/claim-ledger.md}.

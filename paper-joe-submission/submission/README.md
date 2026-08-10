@@ -19,7 +19,7 @@ The manuscript is double-spaced and uses editable LaTeX tables and TikZ vector f
 
 ## Figure policy and disclosure
 
-Current Elsevier policy permits AI-assisted explanatory images and reproducible data visualisations when their use is transparent and the underlying scientific content is not fabricated or altered. The four main TikZ figures therefore include explicit caption disclosure, and the Methods section identifies OpenAI ChatGPT (GPT-5.6 Sol), the purpose of its use, and the evidence source. The original confusion matrix, ROC curves, and precision--recall curves remain unchanged and are placed in the supplementary material.
+Current Elsevier policy permits AI-assisted explanatory images and reproducible data visualisations when their use is transparent and the underlying scientific content is not fabricated or altered. The four main TikZ figures therefore include explicit caption disclosure, and the Methods section identifies OpenAI ChatGPT (GPT-5.6 Sol), the purpose of its use, and the evidence source. The supplementary confusion matrix, ROC curves, and precision--recall curves were regenerated deterministically from the unchanged archived prediction arrays.
 
 A graphical abstract generated with a general-purpose generative-AI tool is not included. If one is added, it should use a journal-compatible dedicated scientific/professional illustration workflow and be checked against the current policy at submission time.
 
@@ -33,5 +33,5 @@ The source of truth for quantitative wording and figure labels is `qa/claim-ledg
 - Review and approve every AI-assisted textual and visual revision.
 - Convert the working AI declaration to final author-approved wording before upload.
 - Create a versioned/immutable repository release and cite it in the Data Availability statement.
-- Build with Git LFS enabled so the original PNG diagnostic plots are materialized.
+- Confirm the regenerated diagnostic PNGs and final 23-page production PDF.
 - Re-check the journal's current AI/artwork instructions on the actual submission date.

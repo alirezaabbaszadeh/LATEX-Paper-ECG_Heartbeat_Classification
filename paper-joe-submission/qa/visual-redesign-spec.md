@@ -74,9 +74,9 @@ The figure explicitly treats these as descriptive held-out diagnostics rather th
 
 Source: `figures/error_structure.tex`.
 
-## Original diagnostic plots
+## Archived-prediction diagnostic plots
 
-The original study-generated confusion matrix, ROC, and precision--recall plots are retained without image alteration as Supplementary Figures S1--S3. This preserves access to the full diagnostic curves while allowing the main article to foreground the most decision-relevant findings.
+The confusion matrix, ROC, and precision--recall plots are retained as Supplementary Figures S1--S3. For the production build they were regenerated deterministically from the archived held-out prediction arrays because the original Git LFS image objects were unavailable. The predictions, confusion counts, curve metrics, and scientific interpretation were not changed.
 
 ## Graphical abstract
 

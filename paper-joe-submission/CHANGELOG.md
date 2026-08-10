@@ -1,5 +1,24 @@
 # Changelog — Journal of Electrocardiology revision
 
+## 2026-08-10 — Verified JOE references and production PDF
+
+### Journal-specific literature
+- Added ten topical articles from the *Journal of Electrocardiology* (2024--2026) and cited them in the Introduction, Methods, and Discussion.
+- Checked titles, author lists, publication details, and DOI identifiers against publisher and DOI records.
+- Normalised DOI fields across the BibTeX database so the Elsevier bibliography style produces valid DOI links without duplicated URL prefixes.
+
+### Reproducible supplementary diagnostics
+- Regenerated the confusion matrix, ROC curves, and precision--recall curves from the unchanged archived `raw_predictions.npz` arrays after the original Git LFS image objects proved unavailable.
+- Confirmed that the confusion-matrix total is 15,573 and that displayed AUC/AP values agree with the archived predictions.
+- Added `scripts/regenerate_diagnostics.py` and updated figure provenance notes and the AI-use disclosure.
+- Corrected Supplementary Figure numbering and captions to render cleanly as S1--S3 under the Elsevier class.
+
+### Production QA
+- Built the complete Elsevier manuscript successfully: 23 pages including declarations, bibliography, supplementary methods, and all diagnostic figures.
+- Confirmed all ten new bibliography entries and DOI identifiers in the generated BibTeX output.
+- Final log scan: 0 undefined citations/references, 0 fatal LaTeX errors, 0 overfull boxes, and 0 underfull boxes.
+- Rendered and visually inspected all 23 pages; no clipping, overlap, broken figures, or malformed DOI links remained.
+
 ## 2026-08-10 — Human narrative and visual clarity pass
 
 ### Narrative

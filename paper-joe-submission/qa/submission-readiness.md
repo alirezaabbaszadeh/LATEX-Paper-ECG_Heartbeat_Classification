@@ -7,9 +7,9 @@ Base manuscript: `paper-journal-A/`
 
 ## Status
 
-**Second editorial/visual pass completed; working draft remains conditional on author sign-off and one Git-LFS-materialized production build before upload.**
+**Production PDF completed and visually inspected; the working draft remains conditional on author sign-off and final repository-release metadata.**
 
-The manuscript has now undergone two evidence-bounded revision passes. The first reorganized the paper around subject-separated benchmarking and rare-rhythm failure analysis. The second focused on a more natural authorial voice, clearer transitions, and journal-scale readability of the four primary figures. No experimental run, prediction, metric, or bibliographic source was added or altered during either pass.
+The manuscript has undergone two evidence-bounded revision passes followed by a production-reference pass. The first reorganized the paper around subject-separated benchmarking and rare-rhythm failure analysis. The second focused on a more natural authorial voice, clearer transitions, and journal-scale readability of the four primary figures. The production pass added ten verified *Journal of Electrocardiology* sources and regenerated the three supplementary diagnostic PNGs from unchanged archived prediction arrays. No experimental run, prediction, or reported metric was added or altered.
 
 ## Base-folder integrity
 
@@ -71,7 +71,7 @@ The four editable TikZ figures were redrawn for normal PDF viewing rather than d
 
 Captions are now interpretation-first rather than plot-description-only. The Methods and captions retain concise disclosure that ChatGPT assisted with deterministic LaTeX/TikZ layout while values come directly from archived study outputs.
 
-The original study-generated confusion matrix, ROC, and precision--recall curves remain unaltered as Supplementary Figures S1--S3.
+The confusion matrix, ROC, and precision--recall curves appear as Supplementary Figures S1--S3. Because the original Git LFS image objects were unavailable, the production PNGs were regenerated deterministically from the archived held-out prediction arrays; the predictions and derived results were not changed.
 
 ## Second-pass QA evidence
 
@@ -88,17 +88,28 @@ Review-PDF checks:
 - One 3.36-pt `Overfull \\hbox` warning is produced by `elsarticle` front-matter/author metadata in the review harness; visual inspection confirms no clipped author/title text. No scientific text, table, or primary figure is affected.
 - Figure-specific compilation: 0 fatal errors; no visual clipping/overlap found.
 
-This ten-page file is a review preview, not the final production submission PDF: it deliberately omits the bibliography, declarations, and Git-LFS-backed supplementary diagnostic PNG pages. The repository source remains the authoritative submission workspace.
+That ten-page file remains a historical review preview. The complete production PDF described below supersedes it for submission review.
 
-## Previous full-source QA and remaining production build
+## Final production-build QA
 
-Before the second visual/narrative pass, a full 20-page source QA build completed with zero undefined citations/references, zero manuscript-content overfull/underfull boxes, and zero fatal LaTeX errors. The second pass changed only editorial prose, title/captions, and deterministic TikZ layout; a final production build with the Git-LFS image objects materialized is still required before upload.
+The final production build completed locally with the Elsevier class and BibTeX. The output is a 23-page US Letter PDF containing the complete manuscript, declarations, 34-item bibliography, supplementary methods, and Supplementary Figures S1--S3.
 
-The branch workflow `.github/workflows/joe-submission-build.yml` is configured to check out Git LFS and build the production manuscript. The GitHub connector currently reports no workflow run for this branch, so no remote CI success is claimed here.
+Production checks:
+
+- 10/10 newly added journal-specific BibTeX entries present in `main.bbl`.
+- 10/10 added DOI identifiers present and correctly formatted; no duplicated DOI URL prefixes.
+- 0 undefined citations or references.
+- 0 fatal LaTeX errors.
+- 0 overfull boxes and 0 underfull boxes.
+- 23/23 pages rendered and visually inspected.
+- Supplementary confusion matrix total: 15,573, matching the archived held-out cohort.
+- The regenerated S1--S3 images show no clipping, overlap, or unreadable labels.
+
+The final log retains only the Elsevier-front-matter `hyperref` token warnings and the template's duplicate `page.1` destination warning; neither affects manuscript text, references, figures, or visual output. No remote CI success is claimed here.
 
 ## AI-use disclosure
 
-The manuscript contains a dedicated declaration immediately before the references. It states that OpenAI ChatGPT (GPT-5.6 Sol) assisted with language/editorial revision and deterministic TikZ layout code, while research data, stored predictions, experimental results, and bibliographic sources were not generated or altered by the tool. The author must review and approve the final wording and every AI-assisted textual/visual change before submission.
+The manuscript contains a dedicated declaration immediately before the references. It states that OpenAI ChatGPT (GPT-5.6 Sol) assisted with language/editorial revision, literature identification and bibliography formatting, deterministic TikZ layout, and regeneration of supplementary diagnostics from archived arrays. Research data, stored predictions, and experimental results were not generated or altered. Metadata and DOI identifiers for the ten additions were checked against publisher and DOI records. The author must review and approve the final wording and every AI-assisted textual, visual, and bibliographic change before submission.
 
 ## Remaining author-side actions
 
@@ -106,10 +117,9 @@ Before upload:
 
 1. Read and approve the complete manuscript and the four redesigned TikZ figures.
 2. Confirm the exact affiliation, postal address, and corresponding-author details required by the Elsevier submission form.
-3. Run a Git-LFS-materialized production build and inspect the PDF containing the real supplementary diagnostic PNGs.
-4. Create an immutable/versioned repository release or archive and update Data Availability with the final citation/URL.
-5. Re-check the live Journal of Electrocardiology Guide for Authors and Elsevier AI/artwork policy on the submission date.
-6. If a graphical abstract is desired, prepare it through a policy-compatible workflow and review it independently before upload.
+3. Create an immutable/versioned repository release or archive and update Data Availability with the final citation/URL.
+4. Re-check the live Journal of Electrocardiology Guide for Authors and Elsevier AI/artwork policy on the submission date.
+5. If a graphical abstract is desired, prepare it through a policy-compatible workflow and review it independently before upload.
 
 ## Editorial assessment
 
