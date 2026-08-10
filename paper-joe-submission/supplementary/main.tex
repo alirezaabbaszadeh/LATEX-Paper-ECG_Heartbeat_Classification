@@ -1,0 +1,35 @@
+\section{Extended Methods}
+\subsection{Data Acquisition and Partitioning}
+We accessed the MIT-BIH Arrhythmia Database through the repository's \texttt{download\_data.py} utility. The script mirrors the PhysioNet distribution, validates checksums, and writes the raw waveforms into a cached directory so that repeated experiments reuse identical sources. From the 45 records used for AAMI-oriented evaluation (identifiers 100--124 and 200--234 after excluding paced-beat recordings), we drew a record-level split with a fixed random seed (42) so that approximately 15.6\% of subjects served as a strictly held-out test cohort and the remaining patients participated in five-fold cross-validation. Concretely, seven records (106, 207, 208, 220, 228, 231, 233) were assigned to the test set and 38 to the K-fold pool, ensuring that both low-burden (1xx) and higher-burden (2xx) arrhythmia cohorts are represented at evaluation. Each fold preserves the original class distribution by sampling beat sequences proportionally to the AAMI taxonomy.
+
+\subsection{Signal Conditioning and Feature Engineering}
+Signal preparation begins with R-peak detection and beat-centric window extraction implemented in \texttt{preprocess\_data.py}. For every annotated beat we carve 187-sample segments centred on the R-peak from the first ECG channel, perform baseline wander removal, and compute complex Morlet wavelet scalograms using the PyWavelets \texttt{morl} kernel at 32 integer scales (1--32). Dynamic range compression is postponed until TFRecord construction so that training-time normalisation statistics remain fold-specific. Subsequent batching via \texttt{create\_batched\_tfrecords.py} assembles triples of adjacent beats, encodes sample rate metadata, and shuffles shards deterministically to enable streaming on modest hardware.
+
+\subsection{Model Configuration and Optimisation}
+The main Conformer architecture follows the implementation in \texttt{ModelBuilder.py}. Two convolutional stem blocks (kernel sizes $[3,3]$ with 32 and 64 filters) precede one or two Conformer encoder blocks configured by the Hyperband search (embedding dimension 64 or 128, 4 or 8 attention heads, feed-forward expansion factor 2 or 4, kernel size 7 or 11, and dropout 0.1--0.3). Dropout is applied within macaron feed-forward units, the self-attention module, and after the convolution block. All neural models are compiled in TensorFlow~2 with the AdamW optimiser (learning rate fixed at $1\times 10^{-5}$) and sparse categorical cross-entropy loss, using mini-batches of 128 sequences. Hyperband tuning explores the architectural hyperparameters while training for up to 20 epochs per trial with early stopping and ReduceLROnPlateau callbacks, and the champion configuration is subsequently retrained for 20 epochs on the union of training folds during the final stage. No gradient clipping or exponential moving average is applied during the definitive training runs. Mixed-float16 precision is enabled on compatible GPUs to accelerate training while preserving numerical stability.
+
+All experiments were executed with Python~3.11 and TensorFlow~2.x on a single GPU, using scikit-learn for class-weight computation and Keras Tuner for Hyperband-based architecture search. The exact configuration files and training logs are archived under the \texttt{Research\_Runs} directory in the accompanying repository to support independent reproduction.
+
+\section{Supplementary Analyses}
+\subsection{Cross-Validation Diagnostics}
+To quantify patient-level robustness we summarise the five-fold training regimen in Table~\ref{tab:cv-main-model}. Folds 1 and 5 exhibit the highest accuracies owing to greater representation of supraventricular ectopic beats, whereas Fold 2 highlights the challenge posed by rare fusion beats. The standard deviation of 0.161 underscores the importance of multi-fold evaluation when reporting arrhythmia classifiers.
+	
+\input{../tables/main_model_kfold}
+	
+\subsection{Error Breakdown and Threshold Sweeps}
+Beyond the aggregate metrics reported in the main manuscript, we evaluated class-specific trade-offs by sweeping decision thresholds on the stored test-set probabilities for the final Conformer model. Treating supraventricular ectopic beats (SVEB) and fusion beats as one-vs-rest detection problems and varying their per-class thresholds from 0.0 to 0.9, the maximum attainable F1-scores reached only 0.06 for SVEB (threshold 0.09; precision 0.03, recall 0.90) and 0.05 for fusion beats (threshold 0.0; precision 0.02, recall 1.00), illustrating that aggressive threshold tuning cannot recover clinically acceptable performance for these minority classes. Confusion-matrix statistics further show that 71\% (151/214) of SVEB beats are predicted as normal and 24\% (51/214) as ventricular ectopic beats, while 90\% (343/383) of fusion beats are predicted as ventricular ectopy, underscoring both morphological overlap with frequent rhythms and the impact of data scarcity. These analyses support our choice to retain a balanced training objective with class weights and to present SVEB and fusion outputs as low-confidence screening signals rather than autonomous diagnostic labels.
+
+\subsection{Pipeline Visualisation}
+Figure~\ref{fig:pipeline-supp} expands the processing pipeline depicted in the main text. It details the flow from raw ECG downloads through TFRecord materialisation, model training, hyperparameter selection, and report generation via \texttt{Evaluator.py}. The schematic emphasises the hand-off between data engineering scripts and the TensorFlow runtime, clarifying the hooks available for reproducibility audits or clinical integration.
+
+\begin{figure}[t]
+  \centering
+  \resizebox{0.95\linewidth}{!}{%
+    \input{../figures/pipeline_diagram.tex}
+  }
+  \caption{End-to-end workflow for data ingestion, preprocessing, model optimisation, and evaluation. Solid arrows represent deterministic operations; dashed arrows denote optional diagnostic exports used for supplementary analyses.}
+  \label{fig:pipeline-supp}
+\end{figure}
+
+\section{Supplementary Figures and Tables}
+High-resolution confusion matrices, ROC curves, and precision-recall plots for every evaluated model variant are archived in \texttt{paper-journal-A/figures/}. Tabulated CSV sources accompanying the main-manuscript performance summary (\texttt{test\_metrics.csv}) and the cross-validation diagnostics in Table~\ref{tab:cv-main-model} (\texttt{main\_model\_kfold.csv}) reside in \texttt{paper-journal-A/tables/} to facilitate downstream statistical reanalysis.

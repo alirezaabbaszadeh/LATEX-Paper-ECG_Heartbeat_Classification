@@ -1,0 +1,21 @@
+\section{Results}
+\subsection{Overall Performance}
+The proposed Conformer model achieved 60\% accuracy (95\% confidence interval [CI] 0.59--0.60), macro-F1 of 0.26 (95\% CI 0.26--0.27), and weighted-F1 of 0.68 (95\% CI 0.67--0.68) on the held-out MIT-BIH test set comprising 15{,}573 beats from 7 subjects, substantially outperforming the attention-only, CNN-LSTM, and handcrafted feature baselines (Table~\ref{tab:test-metrics}). Mean five-fold validation accuracy for the proposed model reached $0.44\pm0.16$, underscoring consistent gains across patient splits. The best competing neural baseline (attention-only) delivered only 27\% accuracy and macro-F1 of 0.15, highlighting the benefit of coupling convolutional context with global attention for arrhythmia discrimination. Per-class analyses show F1-scores of 0.74 for normal beats and 0.57 for ventricular ectopic beats (VEB), whereas supraventricular ectopic beats (SVEB) and fusion beats remained near zero despite class weighting. These gaps mirror the extreme imbalance of 214 SVEB and 383 fusion beats versus 12{,}061 normal beats in the test cohort and are reflected in the bootstrap confidence intervals for class-wise AUCs reported in Table~\ref{tab:test-metrics}.
+
+\input{../tables/test_metrics}
+
+\subsection{Error Analysis}
+Figure~\ref{fig:diagnostics} summarises the diagnostic plots produced by \texttt{Evaluator.py}. The confusion matrix reveals that most residual errors arise from confusing supraventricular ectopic beats with normal rhythms, reflecting their morphological similarity and class imbalance: 71\% of SVEB beats are predicted as normal and 24\% as ventricular ectopic beats, while 90\% of fusion beats are predicted as ventricular ectopy. One-vs-rest ROC curves show strong separability for normal and ventricular ectopic beats (AUC $>$ 0.84) but attenuated discrimination for fusion beats (AUC 0.31). Precision-recall curves demonstrate steep precision drop-offs for minority classes beyond moderate recall levels, and supplementary threshold-sweep analyses confirm that even aggressive per-class threshold tuning raises SVEB and fusion F1-scores only to 0.06 and 0.05, respectively, indicating that clinical deployment should pair the model with human oversight when screening for infrequent arrhythmias.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.47\textwidth]{../figures/confusion_matrix.png}
+  \hfill
+  \includegraphics[width=0.47\textwidth]{../figures/roc_curves.png}\\[1.5ex]
+  \includegraphics[width=0.7\textwidth]{../figures/precision_recall_curves.png}
+  \caption{Diagnostic visualisations for the proposed Conformer model: (top) confusion matrix and one-vs-rest ROC curves, and (bottom) precision-recall curves across AAMI classes.}
+  \label{fig:diagnostics}
+\end{figure*}
+
+\subsection{Baseline Comparisons}
+Relative to the handcrafted feature baseline, the Conformer lifts accuracy by 46 percentage points and macro-F1 by 0.19, while also improving weighted-F1 by 0.45. Gains over the attention-only and CNN-LSTM configurations remain substantial (33--42 percentage points in accuracy), confirming that hybrid convolution-attention inductive biases are better suited for the Morlet scalogram representation than pure attention or recurrent temporal modelling. Nevertheless, fusion beats remain challenging for all models, with AUCs ranging from 0.31 to 0.47 despite heterogeneous architectures, underscoring a systemic limitation tied to data scarcity.
