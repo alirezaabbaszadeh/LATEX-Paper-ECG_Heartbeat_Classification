@@ -1,0 +1,22 @@
+% AI-assisted data visualization; values are direct transcriptions from qa/claim-ledger.md.
+\begin{tikzpicture}[x=8.6cm,y=0.62cm,font=\footnotesize]
+  \draw[->,black!70] (0,0) -- (1.03,0) node[right]{Score};
+  \foreach \x/\lab in {0/0.0,0.2/0.2,0.4/0.4,0.6/0.6,0.8/0.8,1.0/1.0} {\draw[black!15] (\x,0.4) -- (\x,11.5); \node[below,font=\scriptsize] at (\x,0) {\lab};}
+  \fill[blue!70] (0.04,12.1) rectangle +(0.045,0.30); \node[anchor=west] at (0.095,12.25) {F1};
+  \fill[black!15,draw=black!65] (0.23,12.1) rectangle +(0.045,0.30); \node[anchor=west] at (0.285,12.25) {One-vs-rest AUC};
+  \node[anchor=east] at (-0.02,10.25) {Normal (N), $n=12{,}061$};
+  \fill[blue!70] (0,10.48) rectangle (0.74,10.78); \fill[black!15,draw=black!65] (0,10.03) rectangle (0.90,10.33);
+  \node[anchor=west,font=\scriptsize] at (0.745,10.63) {0.74}; \node[anchor=west,font=\scriptsize] at (0.905,10.18) {0.90};
+  \node[anchor=east] at (-0.02,8.15) {SVEB (S), $n=214$};
+  \draw[blue!70,line width=1.2pt] (0,8.38) -- (0,8.68); \fill[black!15,draw=black!65] (0,7.93) rectangle (0.67,8.23);
+  \node[anchor=west,font=\scriptsize] at (0.012,8.53) {0.00}; \node[anchor=west,font=\scriptsize] at (0.675,8.08) {0.67};
+  \node[anchor=east] at (-0.02,6.05) {VEB (V), $n=2{,}913$};
+  \fill[blue!70] (0,6.28) rectangle (0.57,6.58); \fill[black!15,draw=black!65] (0,5.83) rectangle (0.84,6.13);
+  \node[anchor=west,font=\scriptsize] at (0.575,6.43) {0.57}; \node[anchor=west,font=\scriptsize] at (0.845,5.98) {0.84};
+  \node[anchor=east] at (-0.02,3.95) {Fusion (F), $n=383$};
+  \fill[blue!70] (0,4.18) rectangle (0.01,4.48); \fill[black!15,draw=black!65] (0,3.73) rectangle (0.31,4.03);
+  \node[anchor=west,font=\scriptsize] at (0.018,4.33) {0.01}; \node[anchor=west,font=\scriptsize] at (0.315,3.88) {0.31};
+  \node[anchor=east] at (-0.02,1.85) {Unknown (Q), $n=2$};
+  \draw[blue!70,line width=1.2pt] (0,2.08) -- (0,2.38); \fill[black!15,draw=black!65] (0,1.63) rectangle (0.59,1.93);
+  \node[anchor=west,font=\scriptsize] at (0.012,2.23) {0.00}; \node[anchor=west,font=\scriptsize] at (0.595,1.78) {0.59};
+\end{tikzpicture}
