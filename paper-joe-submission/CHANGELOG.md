@@ -1,5 +1,31 @@
 # Changelog — Journal of Electrocardiology revision
 
+## 2026-08-10 — Human narrative and visual clarity pass
+
+### Narrative
+- Retitled the manuscript as `Subject-Separated ECG Beat Classification With a Morlet CNN--Conformer: Performance Gains and Rare-Rhythm Limitations`.
+- Rewrote the Abstract into a problem → protocol → two-sided result → implication arc while retaining the existing evidence; conservative count is approximately 225 words.
+- Reworked the Introduction into connected scientific prose focused on patient heterogeneity, subject-separated evaluation, the representation hypothesis, and the study question.
+- Made Results transitions question-driven so aggregate improvement leads directly into the class-specific limitation.
+- Rewrote Discussion in a more natural reasoning voice and reduced repetitive metric recitation.
+- Shortened Conclusion to the controlled-benchmark gain, rare-rhythm bottleneck, and next validation steps.
+
+### Visual clarity
+- Rebuilt Figure 1 as a two-lane development/held-out workflow with more prominent cohort counts.
+- Increased label/value size and visual hierarchy in Figure 2 while preserving all evaluated baseline values.
+- Increased class-row spacing in Figure 3, highlighted the SVEB AUC/F1 discrepancy, and de-emphasised Q because only two test beats were available.
+- Simplified Figure 4 to the three dominant rare-rhythm error pathways plus two compact post-hoc threshold callouts.
+- Rewrote all four main captions to lead with the scientific interpretation rather than a generic plot description.
+- Kept the original confusion matrix, ROC curves, and precision--recall curves unaltered in Supplementary Figures S1--S3.
+
+### Second-pass QA
+- Compiled and visually inspected a four-page TikZ figure harness; no clipping or overlap was observed.
+- Compiled and visually inspected a ten-page editorial review PDF containing the revised narrative, three main tables, and all four primary figures.
+- Abstract count: approximately 225 words.
+- Prohibited broad-claim scan: 0 matches in the review source.
+- Review harness: 0 fatal LaTeX errors; one minor 3.36-pt front-matter overfull warning with no visible clipping.
+- Fresh `main` vs branch comparison confirms no changes under `paper-journal-A/`.
+
 ## 2026-08-10 — Submission-oriented editorial rewrite
 
 ### Isolation and provenance
