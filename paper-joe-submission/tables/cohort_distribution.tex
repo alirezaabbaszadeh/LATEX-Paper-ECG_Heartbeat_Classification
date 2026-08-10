@@ -1,0 +1,13 @@
+\begin{table*}[t]
+  \centering
+  \caption{Evaluation cohorts and held-out class distribution. The development and test partitions are separated at the record level. Class counts are shown for the held-out cohort because these are the observations used for the reported final metrics; development class totals are not inferred from the test artifacts.}
+  \label{tab:cohort-distribution}
+  \begin{tabular}{lcccccccc}
+    \toprule
+    Cohort & Records & Total beats & N & S (SVEB) & V (VEB) & F & Q & Role \\
+    \midrule
+    Development & 38 & --- & --- & --- & --- & --- & --- & Tuning, 5-fold CV, final fitting \\
+    Held-out test & 7 & 15{,}573 & 12{,}061 & 214 & 2{,}913 & 383 & 2 & Final evaluation only \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
