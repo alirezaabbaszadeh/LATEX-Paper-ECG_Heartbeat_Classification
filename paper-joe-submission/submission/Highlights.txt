@@ -1,0 +1,5 @@
+Subject-separated testing used 15,573 beats from seven held-out records.
+CNN--Conformer led the evaluated baselines on accuracy and F1 metrics.
+Normal/VEB F1 reached 0.74/0.57; SVEB/Fusion remained near zero.
+Threshold shifts did not recover balanced rare-class performance.
+Archived predictions make the benchmark and failure analysis auditable.
