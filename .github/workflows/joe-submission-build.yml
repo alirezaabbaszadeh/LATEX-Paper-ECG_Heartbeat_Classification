@@ -13,11 +13,11 @@ jobs:
   build-and-audit:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out branch
+      - name: Check out branch with study artwork
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          lfs: false
+          lfs: true
 
       - name: Verify base manuscript is unchanged
         run: |
@@ -34,10 +34,22 @@ jobs:
             exit 1
           fi
 
+      - name: Verify required retained figures are materialized
+        run: |
+          set -euo pipefail
+          for figure in confusion_matrix.png roc_curves.png precision_recall_curves.png; do
+            path="paper-joe-submission/figures/$figure"
+            test -s "$path"
+            if grep -q 'git-lfs.github.com/spec' "$path" 2>/dev/null; then
+              echo "Git LFS pointer was not materialized: $path"
+              exit 1
+            fi
+          done
+
       - name: Install LaTeX toolchain
         run: |
           sudo apt-get update
-          sudo apt-get install -y latexmk texlive-latex-extra texlive-science texlive-pictures texlive-fonts-recommended
+          sudo apt-get install -y latexmk texlive-latex-extra texlive-science texlive-pictures texlive-fonts-recommended poppler-utils
 
       - name: Build manuscript
         working-directory: paper-joe-submission/src
@@ -48,23 +60,18 @@ jobs:
             echo 'Unresolved references or citations found.'
             exit 1
           fi
-
-      - name: Build graphical abstract
-        working-directory: paper-joe-submission/figures
-        run: |
-          set -euo pipefail
-          latexmk -pdf -interaction=nonstopmode -halt-on-error graphical_abstract.tex
+          if grep -E 'Overfull \\hbox|Overfull \\vbox' main.log; then
+            echo 'Overfull LaTeX boxes found.'
+            exit 1
+          fi
 
       - name: Record PDF metadata
         run: |
-          pdfinfo paper-joe-submission/src/main.pdf | grep -E 'Pages|Page size' || true
-          pdfinfo paper-joe-submission/figures/graphical_abstract.pdf | grep -E 'Pages|Page size' || true
+          pdfinfo paper-joe-submission/src/main.pdf | grep -E 'Pages|Page size'
 
-      - name: Upload submission previews
+      - name: Upload manuscript preview
         uses: actions/upload-artifact@v4
         with:
           name: joe-submission-preview
-          path: |
-            paper-joe-submission/src/main.pdf
-            paper-joe-submission/figures/graphical_abstract.pdf
+          path: paper-joe-submission/src/main.pdf
           if-no-files-found: error
