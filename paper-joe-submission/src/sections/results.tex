@@ -6,36 +6,36 @@ The final evaluation was performed once on a subject-separated hold-out comprisi
 \input{../tables/cohort_distribution}
 
 \subsection{Performance relative to evaluated baselines}
-On the held-out cohort, the proposed CNN--Conformer achieved an accuracy of 0.60 (95\% confidence interval [CI] 0.59--0.60), macro-F1 of 0.26 (95\% CI 0.26--0.27), and weighted-F1 of 0.68 (95\% CI 0.67--0.68). These were the highest values for all three model-level metrics among the four architectures evaluated under the same test split (Table~\ref{tab:test-metrics}; Figure~\ref{fig:model-comparison}). The attention-only network---the strongest competing neural model by held-out accuracy---reached 0.27 accuracy, 0.15 macro-F1, and 0.38 weighted-F1. The corresponding absolute differences were therefore 0.33, 0.11, and 0.30, respectively. CNN--LSTM and feature-engineered comparators reached accuracies of 0.18 and 0.14. The model-level advantage was not uniform across every class-specific discrimination metric; for example, CNN--LSTM produced a slightly higher VEB AUC than the proposed model. We therefore interpret the comparison as evidence of better overall balance across the evaluated metrics rather than across-the-board superiority for every rhythm class.
+On the held-out cohort, the proposed CNN--Conformer achieved an accuracy of 0.60 (95\% confidence interval [CI] 0.59--0.60), macro-F1 of 0.26 (95\% CI 0.26--0.27), and weighted-F1 of 0.68 (95\% CI 0.67--0.68). These were the highest values for all three model-level metrics among the four architectures evaluated under the same test split (Table~\ref{tab:test-metrics}). The attention-only network---the strongest competing neural model by held-out accuracy---reached 0.27 accuracy, 0.15 macro-F1, and 0.38 weighted-F1. The corresponding absolute differences were therefore 0.33, 0.11, and 0.30, respectively. CNN--LSTM and feature-engineered comparators reached accuracies of 0.18 and 0.14. The model-level advantage was not uniform across every class-specific discrimination metric; for example, CNN--LSTM produced a slightly higher VEB AUC than the proposed model. We therefore interpret the comparison as evidence of better overall balance across the evaluated metrics rather than across-the-board superiority for every rhythm class.
 
 \input{../tables/test_metrics}
 
-\begin{figure*}[t]
-  \centering
-  \resizebox{0.95\textwidth}{!}{\input{../figures/model_comparison}}
-  \caption{Held-out model-level comparison under the common subject-separated protocol. The CNN--Conformer leads the evaluated alternatives on accuracy, macro-F1, and weighted-F1; the figure deliberately separates these aggregate metrics from class-specific AUCs, for which the proposed model is not uniformly dominant.}
-  \label{fig:model-comparison}
-\end{figure*}
-
 \subsection{Class-specific discrimination and error structure}
-Performance separated sharply by rhythm class. Normal beats had precision 0.95, recall 0.60, and F1 0.74, while VEB achieved precision 0.48, recall 0.70, and F1 0.57. Their one-vs-rest AUCs were 0.90 (95\% CI 0.89--0.91) and 0.84 (95\% CI 0.84--0.85), respectively. By contrast, SVEB had F1 0.00 and fusion beats F1 0.01; the fusion AUC was 0.31 (95\% CI 0.29--0.34). The Q category contained only two test beats and is therefore reported for completeness but not used for substantive class-level interpretation (Table~\ref{tab:class-metrics}; Figure~\ref{fig:class-performance}).
+Performance separated sharply by rhythm class. Normal beats had precision 0.95, recall 0.60, and F1 0.74, while VEB achieved precision 0.48, recall 0.70, and F1 0.57. Their one-vs-rest AUCs were 0.90 (95\% CI 0.89--0.91) and 0.84 (95\% CI 0.84--0.85), respectively. By contrast, SVEB had F1 0.00 and fusion beats F1 0.01; the fusion AUC was 0.31 (95\% CI 0.29--0.34). The Q category contained only two test beats and is therefore reported for completeness but not used for substantive class-level interpretation (Table~\ref{tab:class-metrics}).
 
 \input{../tables/class_metrics}
 
-\begin{figure*}[t]
-  \centering
-  \resizebox{0.95\textwidth}{!}{\input{../figures/class_performance}}
-  \caption{Rhythm-specific F1 and one-vs-rest AUC for the proposed model. Normal and VEB carry most of the realised classification performance. In SVEB, the moderate AUC (0.67) coexists with F1=0.00, illustrating why rank discrimination alone can overstate practical performance in a severely imbalanced operating regime.}
-  \label{fig:class-performance}
-\end{figure*}
-
-The error structure makes the minority-class limitation more concrete. Of 214 SVEB beats, 151 (71\%) were assigned to the normal class and 51 (24\%) to VEB. Of 383 fusion beats, 343 (90\%) were assigned to VEB. These errors show that the principal limitation is not simply a small reduction in overall accuracy: under this split, rare rhythms are systematically absorbed into the much more prevalent normal or ventricular categories (Figure~\ref{fig:error-structure}). Conventional ROC and precision--recall curves generated from the stored probabilities are retained as supplementary diagnostics, whereas the main-text figures foreground class support, realised F1, and dominant error directions.
+The confusion structure makes the minority-class limitation more concrete. Of 214 SVEB beats, 151 (71\%) were assigned to the normal class and 51 (24\%) to VEB. Of 383 fusion beats, 343 (90\%) were assigned to VEB. These errors show that the principal limitation is not simply a small reduction in overall accuracy: under this split, rare rhythms are systematically absorbed into the much more prevalent normal or ventricular categories. The pre-existing held-out confusion matrix and discrimination curves are retained in the revised submission because they were generated from the archived study predictions before this editorial rewrite; their captions have been rewritten to foreground the class imbalance and error direction rather than aggregate performance alone.
 
 \begin{figure}[t]
   \centering
-  \resizebox{0.98\linewidth}{!}{\input{../figures/error_structure}}
-  \caption{Dominant minority-class failure modes and the corresponding post-hoc threshold trade-off. Most SVEB errors collapse into Normal or VEB, and most Fusion errors collapse into VEB. Threshold changes increased recall only with very low precision, indicating that the failure is not resolved by a simple operating-point shift.}
-  \label{fig:error-structure}
+  \includegraphics[width=0.88\linewidth]{../figures/confusion_matrix.png}
+  \caption{Held-out confusion matrix for the proposed CNN--Conformer. The most consequential errors are concentrated in the minority rhythms: SVEB is predominantly assigned to Normal or VEB, while Fusion is predominantly assigned to VEB. Absolute class support should therefore be considered alongside the diagonal counts.}
+  \label{fig:confusion}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.88\linewidth]{../figures/roc_curves.png}
+  \caption{One-vs-rest receiver operating characteristic curves on the fixed held-out cohort. Normal and VEB show the strongest ranking discrimination, whereas Fusion is weak. AUC should be interpreted with the corresponding precision--recall behaviour because the class distribution is highly imbalanced.}
+  \label{fig:roc}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.88\linewidth]{../figures/precision_recall_curves.png}
+  \caption{Precision--recall curves on the fixed held-out cohort. Minority-class precision declines rapidly as recall is increased, making the rare-rhythm limitation more apparent than in aggregate accuracy alone.}
+  \label{fig:pr}
 \end{figure}
 
 \subsection{Post-hoc threshold and calibration analyses}
