@@ -1,21 +1,40 @@
 \section{Results}
-\subsection{Overall Performance}
-The proposed Conformer model achieved 60\% accuracy (95\% confidence interval [CI] 0.59--0.60), macro-F1 of 0.26 (95\% CI 0.26--0.27), and weighted-F1 of 0.68 (95\% CI 0.67--0.68) on the held-out MIT-BIH test set comprising 15{,}573 beats from 7 subjects, substantially outperforming the attention-only, CNN-LSTM, and handcrafted feature baselines (Table~\ref{tab:test-metrics}). Mean five-fold validation accuracy for the proposed model reached $0.44\pm0.16$, underscoring consistent gains across patient splits. The best competing neural baseline (attention-only) delivered only 27\% accuracy and macro-F1 of 0.15, highlighting the benefit of coupling convolutional context with global attention for arrhythmia discrimination. Per-class analyses show F1-scores of 0.74 for normal beats and 0.57 for ventricular ectopic beats (VEB), whereas supraventricular ectopic beats (SVEB) and fusion beats remained near zero despite class weighting. These gaps mirror the extreme imbalance of 214 SVEB and 383 fusion beats versus 12{,}061 normal beats in the test cohort and are reflected in the bootstrap confidence intervals for class-wise AUCs reported in Table~\ref{tab:test-metrics}.
+
+\subsection{Held-out cohort and class imbalance}
+The final evaluation was performed once on a subject-separated hold-out comprising 15{,}573 beats from seven MIT-BIH records that were not used for hyperparameter selection or model fitting. The test distribution was strongly imbalanced: 12{,}061 beats (77.5\%) were normal (N), 2{,}913 (18.7\%) were ventricular ectopic beats (VEB; V), 383 (2.5\%) were fusion beats (F), 214 (1.4\%) were supraventricular ectopic beats (SVEB; S), and only two belonged to the unknown/unclassifiable category (Q). This distribution is important for interpreting the aggregate scores: a model can achieve a relatively high weighted metric while still failing on clinically relevant minority rhythms. Five-fold evaluation across the 38 development records yielded an accuracy of $0.44\pm0.16$, indicating substantial between-split variability and motivating the class-specific analyses below.
+
+\subsection{Performance relative to evaluated baselines}
+On the held-out cohort, the proposed CNN--Conformer achieved an accuracy of 0.60 (95\% confidence interval [CI] 0.59--0.60), macro-F1 of 0.26 (95\% CI 0.26--0.27), and weighted-F1 of 0.68 (95\% CI 0.67--0.68). These were the highest values for all three model-level metrics among the four architectures evaluated under the same test split (Table~\ref{tab:test-metrics}). The attention-only network---the strongest competing neural model by held-out accuracy---reached 0.27 accuracy, 0.15 macro-F1, and 0.38 weighted-F1. The corresponding absolute differences were therefore 0.33, 0.11, and 0.30, respectively. CNN--LSTM and feature-engineered comparators reached accuracies of 0.18 and 0.14. The model-level advantage was not uniform across every class-specific discrimination metric; for example, CNN--LSTM produced a slightly higher VEB AUC than the proposed model. We therefore interpret the comparison as evidence of better overall balance across the evaluated metrics rather than across-the-board superiority for every rhythm class.
 
 \input{../tables/test_metrics}
 
-\subsection{Error Analysis}
-Figure~\ref{fig:diagnostics} summarises the diagnostic plots produced by \texttt{Evaluator.py}. The confusion matrix reveals that most residual errors arise from confusing supraventricular ectopic beats with normal rhythms, reflecting their morphological similarity and class imbalance: 71\% of SVEB beats are predicted as normal and 24\% as ventricular ectopic beats, while 90\% of fusion beats are predicted as ventricular ectopy. One-vs-rest ROC curves show strong separability for normal and ventricular ectopic beats (AUC $>$ 0.84) but attenuated discrimination for fusion beats (AUC 0.31). Precision-recall curves demonstrate steep precision drop-offs for minority classes beyond moderate recall levels, and supplementary threshold-sweep analyses confirm that even aggressive per-class threshold tuning raises SVEB and fusion F1-scores only to 0.06 and 0.05, respectively, indicating that clinical deployment should pair the model with human oversight when screening for infrequent arrhythmias.
+\subsection{Class-specific discrimination and error structure}
+Performance separated sharply by rhythm class. Normal beats had precision 0.95, recall 0.60, and F1 0.74, while VEB achieved precision 0.48, recall 0.70, and F1 0.57. Their one-vs-rest AUCs were 0.90 (95\% CI 0.89--0.91) and 0.84 (95\% CI 0.84--0.85), respectively. By contrast, SVEB had F1 0.00 and fusion beats F1 0.01; the fusion AUC was 0.31 (95\% CI 0.29--0.34). The Q category contained only two test beats and is therefore reported for completeness but not used for substantive class-level interpretation.
 
-\begin{figure*}[t]
+The confusion structure makes the minority-class limitation more concrete. Of 214 SVEB beats, 151 (71\%) were assigned to the normal class and 51 (24\%) to VEB. Of 383 fusion beats, 343 (90\%) were assigned to VEB. These errors show that the principal limitation is not simply a small reduction in overall accuracy: under this split, rare rhythms are systematically absorbed into the much more prevalent normal or ventricular categories. Figure~\ref{fig:confusion} presents both absolute counts and row-normalised error proportions, while Figures~\ref{fig:roc} and~\ref{fig:pr} show the corresponding one-vs-rest discrimination curves.
+
+\begin{figure}[t]
   \centering
-  \includegraphics[width=0.47\textwidth]{../figures/confusion_matrix.png}
-  \hfill
-  \includegraphics[width=0.47\textwidth]{../figures/roc_curves.png}\\[1.5ex]
-  \includegraphics[width=0.7\textwidth]{../figures/precision_recall_curves.png}
-  \caption{Diagnostic visualisations for the proposed Conformer model: (top) confusion matrix and one-vs-rest ROC curves, and (bottom) precision-recall curves across AAMI classes.}
-  \label{fig:diagnostics}
-\end{figure*}
+  \includegraphics[width=0.82\linewidth]{../figures/confusion_matrix.png}
+  \caption{Confusion matrix for the held-out subject-separated cohort. The dominant error pattern is the reassignment of rare supraventricular and fusion beats to the more prevalent normal or ventricular classes, rather than uniformly distributed errors across all AAMI categories.}
+  \label{fig:confusion}
+\end{figure}
 
-\subsection{Baseline Comparisons}
-Relative to the handcrafted feature baseline, the Conformer lifts accuracy by 46 percentage points and macro-F1 by 0.19, while also improving weighted-F1 by 0.45. Gains over the attention-only and CNN-LSTM configurations remain substantial (33--42 percentage points in accuracy), confirming that hybrid convolution-attention inductive biases are better suited for the Morlet scalogram representation than pure attention or recurrent temporal modelling. Nevertheless, fusion beats remain challenging for all models, with AUCs ranging from 0.31 to 0.47 despite heterogeneous architectures, underscoring a systemic limitation tied to data scarcity.
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.82\linewidth]{../figures/roc_curves.png}
+  \caption{One-vs-rest receiver operating characteristic curves for the proposed model. Normal and ventricular ectopic beats show the strongest discrimination, whereas fusion-beat discrimination is poor. AUC values should be interpreted alongside class prevalence and the precision--recall analysis.}
+  \label{fig:roc}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.82\linewidth]{../figures/precision_recall_curves.png}
+  \caption{Precision--recall curves on the imbalanced held-out cohort. The minority classes lose precision rapidly as recall increases, exposing a limitation that is less apparent from aggregate accuracy or ROC analysis alone.}
+  \label{fig:pr}
+\end{figure}
+
+\subsection{Post-hoc threshold and calibration analyses}
+Threshold sweeps on the stored held-out probabilities did not convert the weak minority-class scores into balanced detectors. For SVEB, the maximum observed one-vs-rest F1 was 0.06 at a threshold of 0.09, with precision 0.03 and recall 0.90. For fusion beats, the maximum F1 was 0.05 at a threshold of 0.00, with precision 0.02 and recall 1.00. Thus, the apparent recall gains were obtained at the cost of very high false-positive burden. These sweeps are descriptive post-hoc analyses of the held-out predictions rather than independently validated operating-point selection.
+
+An internal calibration analysis of the same stored probabilities further showed heterogeneous confidence behaviour. Before temperature scaling, the 15-bin expected calibration error (ECE) was 0.417 for normal beats and 0.089 for VEB, with Brier scores of 0.289 and 0.121, respectively. The fitted global temperature ($T=1.050$) changed mean negative log-likelihood only marginally, from 1.047989 to 1.047731. Because the temperature parameter was fitted on the held-out test cohort itself, these values are presented only as an internal diagnostic and not as independent evidence of calibration generalisability.
