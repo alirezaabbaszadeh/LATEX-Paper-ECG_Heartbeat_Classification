@@ -15,7 +15,7 @@ Performance separated sharply by rhythm class. Normal beats had precision 0.95, 
 
 \input{../tables/class_metrics}
 
-The confusion structure makes the minority-class limitation more concrete. Of 214 SVEB beats, 151 (71\%) were assigned to the normal class and 51 (24\%) to VEB. Of 383 fusion beats, 343 (90\%) were assigned to VEB. These errors show that the principal limitation is not simply a small reduction in overall accuracy: under this split, rare rhythms are systematically absorbed into the much more prevalent normal or ventricular categories. The pre-existing held-out confusion matrix and discrimination curves are retained in the revised submission because they were generated from the archived study predictions before this editorial rewrite; their captions have been rewritten to foreground the class imbalance and error direction rather than aggregate performance alone.
+The confusion structure makes the minority-class limitation more concrete. Of 214 SVEB beats, 151 (71\%) were assigned to the normal class and 51 (24\%) to VEB. Of 383 fusion beats, 343 (90\%) were assigned to VEB. These errors show that the principal limitation is not simply a small reduction in overall accuracy: under this split, rare rhythms are systematically absorbed into the much more prevalent normal or ventricular categories. The confusion matrix and one-vs-rest discrimination curves provide complementary views of this behaviour: the confusion matrix shows the realised decision errors, ROC curves summarise ranking discrimination, and precision--recall curves expose the false-positive cost of pursuing minority-class sensitivity under severe imbalance.
 
 \begin{figure}[t]
   \centering
