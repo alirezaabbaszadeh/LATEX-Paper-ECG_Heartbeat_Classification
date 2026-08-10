@@ -1,30 +1,32 @@
-# Manual visual redesign specification
+# Visual redesign specification and evidence map
 
 Date: 2026-08-10
 Target: *Journal of Electrocardiology*
-Status: author-side redesign specification; **not submission artwork**.
+Status: implemented as editable TikZ figures in the working submission draft.
 
-The current Elsevier guidance for this journal does not permit generative-AI or AI-assisted tools to create or alter submitted artwork, including graphical abstracts. Accordingly, the present revision retains only the pre-existing study plots in the submission manuscript. The following specification records how an author can manually recreate improved artwork without relying on AI-assisted image generation or alteration.
+Current Elsevier journal policy permits AI-assisted explanatory images and reproducible data visualisations when the assistance is transparently disclosed and the scientific content is faithfully derived from underlying evidence. The working manuscript therefore includes four AI-assisted TikZ figures with tool disclosure in Methods and captions. A general-purpose generative-AI graphical abstract is not included.
 
 ## Figure 1 — Study design / evaluation workflow
 
-Purpose: make the evaluation boundary visually undeniable.
+Purpose: make the evaluation boundary visually explicit.
 
-Recommended manual layout:
+Implemented content:
 
 1. MIT-BIH source and paced-record exclusions.
 2. Fixed record-level split into 38 development records and 7 held-out records.
 3. Development branch: beat extraction -> 32-scale Morlet scalograms -> three-beat sequences -> Hyperband -> five-fold CV -> final fitting.
-4. Held-out branch: 15,573 beats -> one final evaluation.
-5. A clearly separated post-hoc branch for threshold sweeps and calibration analysis.
+4. Held-out branch: 15,573 beats -> final evaluation.
+5. Separate post-hoc branch for threshold sweeps and calibration analysis.
 
-Use solid arrows for model-development/evaluation flow and dashed arrows for post-hoc diagnostics. Do not describe threshold or temperature scaling as independent validation.
+Solid arrows represent model-development/evaluation flow and the post-hoc branch is visually differentiated. The figure does not describe threshold or temperature scaling as independent validation.
+
+Source: `figures/pipeline_diagram.tex`.
 
 ## Figure 2 — Model-level comparison
 
 Purpose: communicate the controlled baseline result in one glance.
 
-Manually plot the four evaluated models using three grouped metrics only:
+The plotted values are:
 
 | Model | Accuracy | Macro-F1 | Weighted-F1 |
 |---|---:|---:|---:|
@@ -33,13 +35,13 @@ Manually plot the four evaluated models using three grouped metrics only:
 | CNN--LSTM | 0.18 | 0.15 | 0.29 |
 | Feature-engineered | 0.14 | 0.07 | 0.23 |
 
-Do not imply that the proposed model is best on every class-specific AUC. Confidence intervals belong in Table 2 unless the author manually adds the exact archived intervals to the plot.
+The figure deliberately excludes class-specific AUCs so that it does not imply uniform class-wise superiority. Confidence intervals remain in Table 2.
+
+Source: `figures/model_comparison.tex`.
 
 ## Figure 3 — Class-specific performance
 
 Purpose: expose the gap between aggregate performance and rare-rhythm recognition.
-
-Recommended manual display: paired horizontal markers/bars for F1 and one-vs-rest AUC, with class support written beside each class.
 
 | Class | Support | F1 | AUC |
 |---|---:|---:|---:|
@@ -49,42 +51,41 @@ Recommended manual display: paired horizontal markers/bars for F1 and one-vs-res
 | F | 383 | 0.01 | 0.31 |
 | Q | 2 | 0.00 | 0.59 |
 
-The key visual message should be that SVEB can show moderate ranking AUC while still having realised F1=0.00 under the current decision rule and prevalence.
+The central visual message is that SVEB can show moderate ranking AUC while realised F1 remains 0.00 under the current decision rule and prevalence.
+
+Source: `figures/class_performance.tex`.
 
 ## Figure 4 — Rare-rhythm error structure
 
 Purpose: make the clinically important failure mode concrete.
 
-Show only the dominant error paths supported by archived counts:
+Displayed error paths:
 
 - SVEB -> Normal: 151/214 (71%).
 - SVEB -> VEB: 51/214 (24%).
 - Fusion -> VEB: 343/383 (90%).
 
-A small annotation can add the post-hoc threshold result:
+Displayed post-hoc threshold diagnostics:
 
 - SVEB max F1 0.06 at threshold 0.09, precision 0.03, recall 0.90.
 - Fusion max F1 0.05 at threshold 0.00, precision 0.02, recall 1.00.
 
-The figure must state that these threshold sweeps are descriptive analyses of the held-out predictions, not independently validated operating points.
+The figure explicitly treats these as descriptive held-out diagnostics rather than independently validated operating points.
+
+Source: `figures/error_structure.tex`.
+
+## Original diagnostic plots
+
+The original study-generated confusion matrix, ROC, and precision--recall plots are retained without image alteration as Supplementary Figures S1--S3. This preserves access to the full diagnostic curves while allowing the main article to foreground the most decision-relevant findings.
 
 ## Graphical abstract
 
-A graphical abstract is optional. If the authors create one manually, use four blocks:
-
-1. subject-separated benchmark;
-2. Morlet + three-beat representation;
-3. controlled architecture comparison;
-4. two-sided result: stronger aggregate metrics **and** unresolved rare-rhythm failure.
-
-Avoid phrases such as `triage-ready`, `clinically ready`, `state of the art`, or `lightweight` unless separately substantiated.
+No graphical abstract created with a general-purpose generative-AI tool is included. If the authors create one before submission, it should use a dedicated scientific/professional illustration workflow compatible with the journal's current policy.
 
 ## Visual style
 
-- Prefer vector PDF/EPS for diagrams and charts.
-- Use consistent typography and class naming across all figures.
-- Avoid 3D effects and decorative gradients.
-- Use a colour-blind-safe palette chosen manually by the authors.
-- Keep labels readable at the journal's final print/display size.
-- Captions should state the interpretation, not merely identify the plot.
-- Preserve exact values from `qa/claim-ledger.md`.
+- Editable vector TikZ for the new explanatory/data-summary figures.
+- Consistent class names and typography.
+- No 3D effects or decorative gradients.
+- Captions state the scientific takeaway and disclose AI assistance.
+- Exact numerical labels are traceable to `qa/claim-ledger.md`.
