@@ -30,9 +30,7 @@
   \draw[->,line width=1.1pt,blue!65!black] (representation) -- (model);
   \draw[->,line width=1.1pt,blue!65!black] (model) -- (evidence);
 
-  \node[below=0.66cm of $(representation)!0.5!(model)$,text width=10.5cm,align=center,text=blue!65!black,font=\large]
-    {\textbf{Main message:} aggregate improvement over the evaluated baselines coexists with a decisive rare-rhythm failure mode.};
-
-  \node[below=1.18cm of $(representation)!0.5!(model)$,text width=11.0cm,align=center,text=black!72,font=\small]
-    {Archived predictions and class-wise diagnostics make the benchmark auditable and define the next targets for imbalance-aware learning and external validation.};
+  \coordinate (midbottom) at ($(data.south)!0.5!(evidence.south)$);
+  \node[below=0.55cm of midbottom,draw=blue!35!black,fill=blue!3,rounded corners=2mm,text width=13.2cm,align=center,inner sep=6pt,text=blue!65!black,font=\small]
+    {\textbf{Main message:} aggregate improvement over the evaluated baselines coexists with a decisive rare-rhythm failure mode; archived predictions make that trade-off auditable and define the next validation targets.};
 \end{tikzpicture}
