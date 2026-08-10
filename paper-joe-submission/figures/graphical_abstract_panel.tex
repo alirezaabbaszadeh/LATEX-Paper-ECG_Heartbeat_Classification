@@ -1,0 +1,38 @@
+\begin{tikzpicture}[font=\sffamily,>=Stealth,node distance=0.72cm]
+  \tikzset{stage/.style={draw=blue!65!black,rounded corners=2.5mm,minimum width=4.05cm,minimum height=3.25cm,text width=3.75cm,align=center,line width=0.8pt}}
+
+  \node[stage,fill=blue!7] (data) {\textbf{Subject-separated benchmark}\\[5pt]
+    MIT-BIH, 45 retained records\\
+    38 development records\\
+    7 held-out records\\
+    15{,}573 test beats};
+
+  \node[stage,fill=green!8,right=0.92cm of data] (representation) {\textbf{Morphology + short context}\\[5pt]
+    187-sample beat windows\\
+    32-scale Morlet maps\\
+    Three adjacent beats\\
+    Auditable TFRecord pipeline};
+
+  \node[stage,fill=orange!9,right=0.92cm of representation] (model) {\textbf{Controlled architecture test}\\[5pt]
+    CNN--Conformer\\
+    Attention-only\\
+    CNN--LSTM\\
+    Feature-engineered baseline};
+
+  \node[stage,fill=red!6,right=0.92cm of model] (evidence) {\textbf{What the data show}\\[5pt]
+    Accuracy 0.60\\
+    Macro-F1 0.26\\
+    Weighted-F1 0.68\\[3pt]
+    \textbf{but} SVEB F1 0.00\\
+    Fusion F1 0.01};
+
+  \draw[->,line width=1.1pt,blue!65!black] (data) -- (representation);
+  \draw[->,line width=1.1pt,blue!65!black] (representation) -- (model);
+  \draw[->,line width=1.1pt,blue!65!black] (model) -- (evidence);
+
+  \node[below=0.66cm of $(representation)!0.5!(model)$,text width=10.5cm,align=center,text=blue!65!black,font=\large]
+    {\textbf{Main message:} aggregate improvement over the evaluated baselines coexists with a decisive rare-rhythm failure mode.};
+
+  \node[below=1.18cm of $(representation)!0.5!(model)$,text width=11.0cm,align=center,text=black!72,font=\small]
+    {Archived predictions and class-wise diagnostics make the benchmark auditable and define the next targets for imbalance-aware learning and external validation.};
+\end{tikzpicture}
