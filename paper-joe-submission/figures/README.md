@@ -1,21 +1,24 @@
-# Figures for Journal of Electrocardiology Submission
+# Figures for Journal of Electrocardiology submission
 
-This folder stores the production-ready figures referenced throughout the manuscript and supplementary appendix. Each raster export is tagged with Elsevier-compliant metadata (\(\geq 300\)~dpi) and mirrored in the LaTeX sources via relative paths.
+The submission manuscript uses only the study figures that pre-date the present AI-assisted editorial rewrite. The current Journal of Electrocardiology / Elsevier guidance does not permit generative-AI or AI-assisted tools to create or alter submitted artwork; consequently, AI-assisted visual concepts developed during editorial revision are not retained as submission figures.
 
-## Current assets
+## Main retained assets
 
-| Filename | Description | Source notebook/log |
+| Filename | Description | Archived source |
 | --- | --- | --- |
-| `confusion_matrix.png` | Held-out test confusion matrix for the Conformer main model. | `Research_Runs/final_run_Main_Model_20250824_154136/confusion_matrix.png` |
-| `roc_curves.png` | One-vs-rest ROC curves for AAMI classes (Conformer main model). | `Research_Runs/final_run_Main_Model_20250824_154136/roc_curves.png` |
-| `precision_recall_curves.png` | Precision-recall curves for AAMI classes (Conformer main model). | `Research_Runs/final_run_Main_Model_20250824_154136/precision_recall_curves.png` |
-| `pipeline_diagram.tex` | TikZ schematic of the end-to-end data and modelling pipeline. | Derived from `docs/figures/pipeline.mmd` | 
+| `confusion_matrix.png` | Held-out test confusion matrix for the CNN--Conformer main model. | `Research_Runs/final_run_Main_Model_20250824_154136/confusion_matrix.png` |
+| `roc_curves.png` | One-vs-rest ROC curves for AAMI classes. | `Research_Runs/final_run_Main_Model_20250824_154136/roc_curves.png` |
+| `precision_recall_curves.png` | Precision--recall curves for AAMI classes. | `Research_Runs/final_run_Main_Model_20250824_154136/precision_recall_curves.png` |
 
-To regenerate the PNG diagnostics with updated DPI metadata, run:
+The captions and manuscript callouts have been rewritten to make class imbalance, class support, and rare-rhythm failure more prominent without altering the underlying artwork.
+
+## Regeneration
+
+If the authors regenerate these plots from the archived study predictions without generative-AI assistance, use the existing study scripts and preserve the exact underlying predictions and metrics. The repository's original export path should be changed to the independent revision folder:
 
 ```bash
 python scripts/export_figures.py --run Research_Runs/final_run_Main_Model_20250824_154136 \
-  --out paper-journal-A/figures --dpi 300
+  --out paper-joe-submission/figures --dpi 300
 ```
 
-Ensure each figure has a paired caption in the manuscript or supplementary text and avoid mixing colourmaps between related plots.
+Any newly created or altered artwork should be checked against the journal's current artwork and generative-AI policies before submission.
