@@ -1,30 +1,36 @@
-% TikZ schematic describing the ECG heartbeat classification workflow
+% Evidence-led TikZ schematic for the Journal of Electrocardiology revision
 \begin{tikzpicture}[
-  node distance = 1.5cm and 2.4cm,
-  process/.style = {rectangle, rounded corners=2pt, draw=blue!60, fill=blue!5, minimum height=1.2cm, minimum width=3.4cm, align=center, font=\footnotesize, thick},
-  datastore/.style = {cylinder, cylinder uses custom fill, cylinder body fill=green!5, cylinder end fill=green!20, shape border rotate=90, draw=green!50!black, minimum height=1.4cm, minimum width=1.9cm, align=center, font=\footnotesize, thick},
-  decision/.style = {diamond, draw=purple!60!black, fill=purple!5, aspect=1.6, align=center, font=\footnotesize, thick},
-  artifact/.style = {rectangle, draw=orange!70!black, fill=orange!10, minimum height=1cm, minimum width=3.4cm, align=center, font=\footnotesize, dashed, thick},
-  arrow/.style = {-{Stealth[length=4pt]}, very thick, draw=black!80}
+  node distance=1.05cm and 1.25cm,
+  process/.style={rectangle,rounded corners=2pt,draw=blue!65,fill=blue!5,minimum height=1.05cm,minimum width=2.55cm,text width=2.35cm,align=center,font=\scriptsize,thick},
+  cohort/.style={rectangle,rounded corners=2pt,draw=black!60,fill=black!4,minimum height=1.05cm,minimum width=2.55cm,text width=2.35cm,align=center,font=\scriptsize,thick},
+  diagnostic/.style={rectangle,rounded corners=2pt,draw=black!45,fill=black!2,minimum height=1.05cm,minimum width=2.8cm,text width=2.6cm,align=center,font=\scriptsize,dashed},
+  arrow/.style={-{Stealth[length=4pt]},thick,draw=black!75}
 ]
+  \node[process] (source) {MIT-BIH\\45 retained non-paced records};
+  \node[cohort,right=of source] (split) {Fixed record-level split\\seed 42};
+  \node[cohort,right=of split,yshift=0.82cm] (dev) {Development pool\\38 records};
+  \node[cohort,right=of split,yshift=-0.82cm] (test) {Held-out test\\7 records\\15{,}573 beats};
 
-\node[process] (download) {Data acquisition\\MIT-BIH Arrhythmia DB};
-\node[process, right=of download] (preprocess) {Signal conditioning\\R-peak alignment\\Baseline wander removal};
-\node[process, right=of preprocess] (scalogram) {Time-frequency encoding\\Morlet scalograms};
-\node[datastore, below=of preprocess] (records) {TFRecord\\shards};
-\node[process, below=of scalogram] (training) {Model training\\Conformer + Adam};
-\node[decision, right=of training] (tuning) {Hyperband\\model selection};
-\node[process, right=of tuning] (evaluation) {Evaluation\\Held-out test set};
-\node[artifact, below=of evaluation] (reports) {Diagnostics\\Confusion/ROC/PR};
+  \node[process,right=1.45cm of dev] (prep) {Beat windows\\Morlet scalograms\\3-beat sequences};
+  \node[process,right=of prep] (search) {Hyperband + 5-fold CV\\development records only};
+  \node[process,right=of search] (fit) {Final fitting\\selected CNN--Conformer};
 
-\draw[arrow] (download) -- node[above, font=\scriptsize]{Stratified patient split} (preprocess);
-\draw[arrow] (preprocess) -- node[above, font=\scriptsize]{Windowed beats} (scalogram);
-\draw[arrow] (scalogram) -- node[right, font=\scriptsize]{Tensor batches} (training);
-\draw[arrow] (training) -- node[above, font=\scriptsize]{Weights + metrics} (tuning);
-\draw[arrow] (tuning) -- node[above, font=\scriptsize]{Champion config} (evaluation);
-\draw[arrow] (evaluation) -- node[right, font=\scriptsize]{CSV + plots} (reports);
+  \node[process,below=2.05cm of fit] (eval) {Fixed held-out evaluation\\accuracy, F1, class AUC};
+  \node[diagnostic,left=of eval] (posthoc) {Post-hoc diagnostics\\threshold sweeps\\ECE/Brier/temperature};
+  \node[diagnostic,left=of posthoc] (report) {Primary interpretation\\baseline comparison\\rare-rhythm failures};
 
-\draw[arrow] (preprocess) -- node[left, font=\scriptsize]{Serialized triples} (records);
-\draw[arrow] (records) -- node[below, font=\scriptsize]{Streaming dataloader} (training);
-\draw[arrow, dashed] (reports.west) |- ++(-2.3,1.5) -| node[above, font=\scriptsize]{Model monitoring} (training.south);
+  \draw[arrow] (source) -- (split);
+  \draw[arrow] (split) -- (dev);
+  \draw[arrow] (split) -- (test);
+  \draw[arrow] (dev) -- (prep);
+  \draw[arrow] (prep) -- (search);
+  \draw[arrow] (search) -- (fit);
+  \draw[arrow] (fit) -- (eval);
+  \draw[arrow] (test.east) -| (eval.south);
+  \draw[arrow,dashed] (eval) -- (posthoc);
+  \draw[arrow] (eval.south west) -| (report.south);
+  \draw[arrow,dashed] (posthoc) -- (report);
+
+  \node[font=\scriptsize,align=center,below=0.25cm of test,text width=3.0cm] {No model fitting or hyperparameter selection};
+  \node[font=\scriptsize,align=center,below=0.28cm of posthoc,text width=3.2cm] {Descriptive only; not independent calibration/threshold validation};
 \end{tikzpicture}
