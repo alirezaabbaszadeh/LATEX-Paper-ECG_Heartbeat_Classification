@@ -1,5 +1,8 @@
-filename,width_px,height_px,dpi_x,dpi_y
-confusion_matrix.png,1000,800,300.00,300.00
-roc_curves.png,1000,800,300.00,300.00
-precision_recall_curves.png,1000,800,300.00,300.00
-graphical_abstract.pdf,4200,1800,300.00,300.00
+filename,type,placement,provenance
+pipeline_diagram.tex,editable TikZ,Main Figure 1,AI-assisted layout; study protocol values
+model_comparison.tex,editable TikZ,Main Figure 2,AI-assisted layout; archived model metrics
+class_performance.tex,editable TikZ,Main Figure 3,AI-assisted layout; archived class metrics
+error_structure.tex,editable TikZ,Main Figure 4,AI-assisted layout; archived error/threshold metrics
+confusion_matrix.png,PNG 1000x800 300dpi,Supplementary Figure S1,Original study-generated plot
+roc_curves.png,PNG 1000x800 300dpi,Supplementary Figure S2,Original study-generated plot
+precision_recall_curves.png,PNG 1000x800 300dpi,Supplementary Figure S3,Original study-generated plot
