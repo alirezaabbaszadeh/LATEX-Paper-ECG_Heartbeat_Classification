@@ -1,11 +1,11 @@
 # Journal of Electrocardiology submission package notes
 
-This directory contains submission-facing text files kept separate from the main LaTeX source.
+This directory contains submission-facing files kept separate from the main LaTeX source.
 
 ## Included files
 
-- `Highlights.txt` — five editable highlights; every bullet is below the journal's 85-character maximum.
-- `Figure_Captions.txt` — captions for the three retained study figures in manuscript order.
+- `Highlights.txt` — five editable highlights; every bullet is below 85 characters.
+- `Figure_Captions.txt` — captions/disclosures for the four main figures in manuscript order.
 
 ## Main manuscript
 
@@ -15,21 +15,23 @@ Build from `paper-joe-submission/src/`:
 latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
 ```
 
-The manuscript is double-spaced and uses editable LaTeX tables.
+The manuscript is double-spaced and uses editable LaTeX tables and TikZ vector figures.
 
-## Artwork policy decision
+## Figure policy and disclosure
 
-The current Journal of Electrocardiology / Elsevier guide does not permit generative-AI or AI-assisted tools to create or alter submitted artwork, including graphical abstracts. For that reason, visual concepts created during the present AI-assisted editorial session are not included as submission figures or a graphical abstract.
+Current Elsevier policy permits AI-assisted explanatory images and reproducible data visualisations when their use is transparent and the underlying scientific content is not fabricated or altered. The four main TikZ figures therefore include explicit caption disclosure, and the Methods section identifies OpenAI ChatGPT (GPT-5.6 Sol), the purpose of its use, and the evidence source. The original confusion matrix, ROC curves, and precision--recall curves remain unchanged and are placed in the supplementary material.
 
-The manuscript retains the pre-existing author/study-generated confusion matrix, ROC curves, and precision--recall curves. Their captions and narrative placement have been improved without changing the image content. A text-only redesign specification is stored under `qa/visual-redesign-spec.md` if the authors wish to recreate additional artwork manually and independently before submission.
+A graphical abstract generated with a general-purpose generative-AI tool is not included. If one is added, it should use a journal-compatible dedicated scientific/professional illustration workflow and be checked against the current policy at submission time.
 
 ## Editorial evidence boundary
 
-The source of truth for quantitative wording is `qa/claim-ledger.md`. Do not strengthen a claim beyond that ledger without adding and verifying new experimental evidence.
+The source of truth for quantitative wording and figure labels is `qa/claim-ledger.md`. Do not strengthen a claim or change a plotted value beyond that ledger without adding and verifying new experimental evidence.
 
 ## Required author-side checks before upload
 
-- Confirm the full postal affiliation/contact details required by the submission system.
-- Review and approve every AI-assisted textual change.
-- Keep the generative-AI declaration immediately before the references.
-- If new artwork or a graphical abstract is added, create it without generative-AI assistance and re-check the current journal policy.
+- Confirm full postal affiliation/contact details required by the submission system.
+- Review and approve every AI-assisted textual and visual revision.
+- Convert the working AI declaration to final author-approved wording before upload.
+- Create a versioned/immutable repository release and cite it in the Data Availability statement.
+- Build with Git LFS enabled so the original PNG diagnostic plots are materialized.
+- Re-check the journal's current AI/artwork instructions on the actual submission date.
