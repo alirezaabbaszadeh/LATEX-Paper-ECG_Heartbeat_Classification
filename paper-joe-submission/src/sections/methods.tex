@@ -22,10 +22,3 @@ Hyperparameter search is orchestrated by \texttt{run\_hyperparameter\_tuning.py}
 The primary held-out metrics are accuracy, macro-F1, weighted-F1, class-wise precision, recall, F1, and one-vs-rest AUC. Macro-F1 is emphasised because it gives equal weight to each rhythm class and is therefore less dominated by the abundant normal beats than accuracy or weighted-F1. Five-fold development accuracy is summarised by its mean and standard deviation to expose variability across record partitions. For held-out point estimates, 95\% bootstrap confidence intervals are reported where archived in the study tables. ROC and precision--recall diagnostics are generated from the stored probabilities; precision--recall behaviour is considered particularly important for minority classes\cite{fawcett2006introduction,saito2015precision}.
 
 Two additional analyses were performed after the definitive model predictions had been generated. First, one-vs-rest decision thresholds for SVEB and fusion beats were swept on the stored held-out probabilities to determine whether a simple operating-point change could recover minority-class F1. Second, per-class expected calibration error (ECE; 15 equally spaced confidence bins) and Brier scores were calculated, followed by single-parameter temperature scaling. Both analyses are explicitly post-hoc: the threshold sweep uses the held-out predictions, and the temperature parameter was fitted on the held-out cohort itself. They are therefore used to describe error and confidence structure, not to claim independently validated thresholds or calibration generalisability.
-
-\begin{figure*}[t]
-  \centering
-  \resizebox{0.96\textwidth}{!}{\input{../figures/pipeline_diagram}}
-  \caption{Auditable study workflow. The seven held-out records are separated before model development; the 38-record development pool is used for tuning, cross-validation, and final fitting, after which the fixed held-out cohort is evaluated once. Threshold and calibration analyses operate post-hoc on the stored final probabilities and are interpreted as diagnostics rather than independent validation.}
-  \label{fig:pipeline}
-\end{figure*}
