@@ -1,15 +1,36 @@
-% AI-assisted explanatory figure. See manuscript Methods and caption disclosure.
-\begin{tikzpicture}[node distance=1.15cm and 1.25cm,process/.style={rectangle,rounded corners=2pt,draw=blue!65,fill=blue!5,minimum height=1.15cm,minimum width=2.9cm,text width=2.65cm,align=center,font=\scriptsize,thick},cohort/.style={rectangle,rounded corners=2pt,draw=black!60,fill=black!4,minimum height=1.15cm,minimum width=2.9cm,text width=2.65cm,align=center,font=\scriptsize,thick},diagnostic/.style={rectangle,rounded corners=2pt,draw=black!45,fill=black!2,minimum height=1.15cm,minimum width=3.05cm,text width=2.8cm,align=center,font=\scriptsize,dashed},arrow/.style={-{Stealth[length=4pt]},thick,draw=black!75}]
-\node[process] (source) {MIT-BIH\\45 retained non-paced records};
-\node[cohort,right=of source] (split) {Fixed record-level split\\seed 42};
-\node[cohort,right=of split] (dev) {Development pool\\38 records};
-\node[process,right=of dev] (repr) {187-sample beats\\32-scale Morlet maps\\3-beat sequences};
-\node[process,right=of repr] (develop) {Model development\\Hyperband + 5-fold CV\\final fitting};
-\node[cohort,below=1.7cm of split] (test) {Held-out test\\7 records\\15{,}573 beats};
-\node[process,right=1.55cm of test] (eval) {Fixed evaluation\\accuracy, F1, class AUC};
-\node[diagnostic,right=1.55cm of eval] (evidence) {Primary evidence\\baseline comparison\\rare-rhythm failures};
-\node[diagnostic,right=1.55cm of evidence] (posthoc) {Post-hoc diagnostics\\threshold sweeps\\ECE and Brier scores};
-\draw[arrow] (source) -- (split); \draw[arrow] (split) -- (dev); \draw[arrow] (dev) -- (repr); \draw[arrow] (repr) -- (develop); \draw[arrow] (split) -- (test); \draw[arrow] (test) -- (eval); \draw[arrow] (develop.south) |- (eval.north); \draw[arrow] (eval) -- (evidence); \draw[arrow,dashed] (evidence) -- (posthoc);
-\node[font=\scriptsize,align=center,below=0.25cm of test,text width=3.2cm] {Excluded from model fitting and hyperparameter selection};
-\node[font=\scriptsize,align=center,below=0.25cm of posthoc,text width=3.4cm] {Descriptive analyses of stored held-out probabilities};
+% AI-assisted explanatory figure. Counts are direct transcriptions from the study protocol.
+\begin{tikzpicture}[
+  node distance=0.9cm and 1.15cm,
+  base/.style={rectangle,rounded corners=2.5pt,minimum height=1.25cm,minimum width=2.75cm,text width=2.5cm,align=center,font=\footnotesize,thick},
+  source/.style={base,draw=black!65,fill=black!3},
+  dev/.style={base,draw=blue!70!black,fill=blue!6},
+  test/.style={base,draw=green!55!black,fill=green!7},
+  diag/.style={base,draw=black!45,fill=black!2,dashed},
+  arrow/.style={-{Stealth[length=4pt]},thick,draw=black!72}
+]
+
+\node[source] (source) {\textbf{MIT-BIH}\\[2pt]{\Large 45} retained\\non-paced records};
+\node[source,right=of source] (split) {\textbf{Fixed record split}\\seed 42};
+
+\node[dev,right=1.4cm of split,yshift=1.35cm] (devpool) {\textbf{Development}\\[2pt]{\Large 38} records};
+\node[dev,right=of devpool] (repr) {\textbf{Representation}\\187-sample beats\\32-scale Morlet\\3-beat context};
+\node[dev,right=of repr] (fit) {\textbf{Model development}\\Hyperband\\5-fold CV\\final fitting};
+
+\node[test,right=1.4cm of split,yshift=-1.35cm] (holdout) {\textbf{Held-out test}\\[2pt]{\Large 7} records\\{\large 15{,}573} beats};
+\node[test,right=of holdout] (eval) {\textbf{One final evaluation}\\accuracy\\macro/weighted F1\\class AUC};
+\node[test,right=of eval] (finding) {\textbf{Primary result}\\baseline comparison\\+\\rare-rhythm failures};
+\node[diag,below=0.85cm of finding] (posthoc) {\textbf{Post-hoc diagnostics}\\threshold sweeps\\ECE / Brier};
+
+\draw[arrow] (source) -- (split);
+\draw[arrow] (split.east) -- ++(0.55,0) |- (devpool.west);
+\draw[arrow] (split.east) -- ++(0.55,0) |- (holdout.west);
+\draw[arrow] (devpool) -- (repr);
+\draw[arrow] (repr) -- (fit);
+\draw[arrow] (holdout) -- (eval);
+\draw[arrow] (fit.south) |- (eval.north);
+\draw[arrow] (eval) -- (finding);
+\draw[arrow,dashed] (finding) -- (posthoc);
+
+\node[anchor=east,font=\small\bfseries,text=blue!70!black] at ($(devpool.west)+(-0.22,0)$) {DEVELOPMENT};
+\node[anchor=east,font=\small\bfseries,text=green!45!black] at ($(holdout.west)+(-0.22,0)$) {HELD-OUT};
 \end{tikzpicture}
