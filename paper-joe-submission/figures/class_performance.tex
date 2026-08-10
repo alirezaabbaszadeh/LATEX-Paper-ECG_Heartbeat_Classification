@@ -1,22 +1,55 @@
 % AI-assisted data visualization; values are direct transcriptions from qa/claim-ledger.md.
-\begin{tikzpicture}[x=8.6cm,y=0.62cm,font=\footnotesize]
-  \draw[->,black!70] (0,0) -- (1.03,0) node[right]{Score};
-  \foreach \x/\lab in {0/0.0,0.2/0.2,0.4/0.4,0.6/0.6,0.8/0.8,1.0/1.0} {\draw[black!15] (\x,0.4) -- (\x,11.5); \node[below,font=\scriptsize] at (\x,0) {\lab};}
-  \fill[blue!70] (0.04,12.1) rectangle +(0.045,0.30); \node[anchor=west] at (0.095,12.25) {F1};
-  \fill[black!15,draw=black!65] (0.23,12.1) rectangle +(0.045,0.30); \node[anchor=west] at (0.285,12.25) {One-vs-rest AUC};
-  \node[anchor=east] at (-0.02,10.25) {Normal (N), $n=12{,}061$};
-  \fill[blue!70] (0,10.48) rectangle (0.74,10.78); \fill[black!15,draw=black!65] (0,10.03) rectangle (0.90,10.33);
-  \node[anchor=west,font=\scriptsize] at (0.745,10.63) {0.74}; \node[anchor=west,font=\scriptsize] at (0.905,10.18) {0.90};
-  \node[anchor=east] at (-0.02,8.15) {SVEB (S), $n=214$};
-  \draw[blue!70,line width=1.2pt] (0,8.38) -- (0,8.68); \fill[black!15,draw=black!65] (0,7.93) rectangle (0.67,8.23);
-  \node[anchor=west,font=\scriptsize] at (0.012,8.53) {0.00}; \node[anchor=west,font=\scriptsize] at (0.675,8.08) {0.67};
-  \node[anchor=east] at (-0.02,6.05) {VEB (V), $n=2{,}913$};
-  \fill[blue!70] (0,6.28) rectangle (0.57,6.58); \fill[black!15,draw=black!65] (0,5.83) rectangle (0.84,6.13);
-  \node[anchor=west,font=\scriptsize] at (0.575,6.43) {0.57}; \node[anchor=west,font=\scriptsize] at (0.845,5.98) {0.84};
-  \node[anchor=east] at (-0.02,3.95) {Fusion (F), $n=383$};
-  \fill[blue!70] (0,4.18) rectangle (0.01,4.48); \fill[black!15,draw=black!65] (0,3.73) rectangle (0.31,4.03);
-  \node[anchor=west,font=\scriptsize] at (0.018,4.33) {0.01}; \node[anchor=west,font=\scriptsize] at (0.315,3.88) {0.31};
-  \node[anchor=east] at (-0.02,1.85) {Unknown (Q), $n=2$};
-  \draw[blue!70,line width=1.2pt] (0,2.08) -- (0,2.38); \fill[black!15,draw=black!65] (0,1.63) rectangle (0.59,1.93);
-  \node[anchor=west,font=\scriptsize] at (0.012,2.23) {0.00}; \node[anchor=west,font=\scriptsize] at (0.595,1.78) {0.59};
+\begin{tikzpicture}[x=8.8cm,y=0.76cm,font=\small]
+  \draw[->,black!65] (0,0) -- (1.04,0) node[right,font=\footnotesize]{Score};
+  \foreach \x/\lab in {0/0.0,0.2/0.2,0.4/0.4,0.6/0.6,0.8/0.8,1.0/1.0} {
+    \draw[black!12] (\x,0.35) -- (\x,13.1);
+    \node[below,font=\footnotesize] at (\x,0) {\lab};
+  }
+
+  \fill[blue!70] (0.04,13.75) rectangle +(0.038,0.30);
+  \node[anchor=west,font=\footnotesize] at (0.09,13.90) {F1};
+  \fill[black!12,draw=black!60] (0.20,13.75) rectangle +(0.038,0.30);
+  \node[anchor=west,font=\footnotesize] at (0.25,13.90) {One-vs-rest AUC};
+
+  % Normal
+  \node[anchor=east,font=\small\bfseries] at (-0.025,11.45) {Normal (N)};
+  \node[anchor=east,font=\scriptsize,text=black!60] at (-0.025,10.98) {support 12{,}061};
+  \fill[blue!70] (0,11.55) rectangle (0.74,11.90);
+  \fill[black!12,draw=black!60] (0,11.05) rectangle (0.90,11.40);
+  \node[anchor=west,font=\footnotesize\bfseries] at (0.75,11.72) {0.74};
+  \node[anchor=west,font=\footnotesize] at (0.91,11.22) {0.90};
+
+  % SVEB highlighted
+  \fill[orange!7,rounded corners=2pt] (-0.22,7.95) rectangle (1.025,10.25);
+  \node[anchor=east,font=\small\bfseries] at (-0.025,9.15) {SVEB (S)};
+  \node[anchor=east,font=\scriptsize,text=black!60] at (-0.025,8.68) {support 214};
+  \draw[blue!70,line width=1.7pt] (0,9.25) -- (0,9.60);
+  \fill[black!12,draw=black!60] (0,8.75) rectangle (0.67,9.10);
+  \node[anchor=west,font=\footnotesize\bfseries,text=blue!70!black] at (0.012,9.42) {F1 0.00};
+  \node[anchor=west,font=\footnotesize\bfseries] at (0.68,8.92) {0.67};
+
+  % VEB
+  \node[anchor=east,font=\small\bfseries] at (-0.025,6.45) {VEB (V)};
+  \node[anchor=east,font=\scriptsize,text=black!60] at (-0.025,5.98) {support 2{,}913};
+  \fill[blue!70] (0,6.55) rectangle (0.57,6.90);
+  \fill[black!12,draw=black!60] (0,6.05) rectangle (0.84,6.40);
+  \node[anchor=west,font=\footnotesize\bfseries] at (0.58,6.72) {0.57};
+  \node[anchor=west,font=\footnotesize] at (0.85,6.22) {0.84};
+
+  % Fusion
+  \node[anchor=east,font=\small\bfseries] at (-0.025,3.75) {Fusion (F)};
+  \node[anchor=east,font=\scriptsize,text=black!60] at (-0.025,3.28) {support 383};
+  \fill[blue!70] (0,3.85) rectangle (0.01,4.20);
+  \fill[black!12,draw=black!60] (0,3.35) rectangle (0.31,3.70);
+  \node[anchor=west,font=\footnotesize\bfseries] at (0.022,4.02) {0.01};
+  \node[anchor=west,font=\footnotesize] at (0.32,3.52) {0.31};
+
+  % Q descriptive only
+  \fill[black!3,rounded corners=2pt] (-0.22,0.55) rectangle (1.025,2.75);
+  \node[anchor=east,font=\small,text=black!55] at (-0.025,1.75) {Unknown (Q)};
+  \node[anchor=east,font=\scriptsize,text=black!50] at (-0.025,1.28) {support 2; descriptive};
+  \draw[blue!45,line width=1.3pt] (0,1.85) -- (0,2.20);
+  \fill[black!8,draw=black!45] (0,1.35) rectangle (0.59,1.70);
+  \node[anchor=west,font=\footnotesize,text=black!55] at (0.012,2.02) {0.00};
+  \node[anchor=west,font=\footnotesize,text=black!55] at (0.60,1.52) {0.59};
 \end{tikzpicture}
