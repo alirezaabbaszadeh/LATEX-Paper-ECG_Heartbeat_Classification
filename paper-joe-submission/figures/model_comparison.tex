@@ -1,56 +1,42 @@
 % Vector model-level comparison; values sourced from qa/claim-ledger.md
 \begin{tikzpicture}[x=9.4cm,y=0.52cm,font=\footnotesize]
-  % x-axis and grid
   \draw[->,black!70] (0,0) -- (0.76,0) node[right]{Score};
   \foreach \x/\lab in {0/0.0,0.2/0.2,0.4/0.4,0.6/0.6} {
     \draw[black!15] (\x,0.3) -- (\x,13.0);
     \node[below,font=\scriptsize] at (\x,0) {\lab};
   }
-
-  % legend
   \fill[blue!75] (0.02,13.7) rectangle +(0.035,0.32);
   \node[anchor=west] at (0.065,13.86) {Accuracy};
   \fill[blue!42] (0.25,13.7) rectangle +(0.035,0.32);
   \node[anchor=west] at (0.295,13.86) {Macro-F1};
   \fill[black!25] (0.48,13.7) rectangle +(0.035,0.32);
   \node[anchor=west] at (0.525,13.86) {Weighted-F1};
-
-  % Proposed
-  \node[anchor=east,font=\footnotesize] at (-0.018,11.55) {Proposed CNN--Conformer};
+  \node[anchor=east] at (-0.018,11.55) {Proposed CNN--Conformer};
   \fill[blue!75] (0,12.00) rectangle (0.60,12.34);
   \fill[blue!42] (0,11.56) rectangle (0.26,11.90);
   \fill[black!25] (0,11.12) rectangle (0.68,11.46);
   \node[anchor=west,font=\scriptsize] at (0.605,12.17) {0.60};
   \node[anchor=west,font=\scriptsize] at (0.265,11.73) {0.26};
   \node[anchor=west,font=\scriptsize] at (0.685,11.29) {0.68};
-
-  % Attention only
-  \node[anchor=east,font=\footnotesize] at (-0.018,8.65) {Attention-only};
+  \node[anchor=east] at (-0.018,8.65) {Attention-only};
   \fill[blue!75] (0,9.10) rectangle (0.27,9.44);
   \fill[blue!42] (0,8.66) rectangle (0.15,9.00);
   \fill[black!25] (0,8.22) rectangle (0.38,8.56);
   \node[anchor=west,font=\scriptsize] at (0.275,9.27) {0.27};
   \node[anchor=west,font=\scriptsize] at (0.155,8.83) {0.15};
   \node[anchor=west,font=\scriptsize] at (0.385,8.39) {0.38};
-
-  % CNN-LSTM
-  \node[anchor=east,font=\footnotesize] at (-0.018,5.75) {CNN--LSTM};
+  \node[anchor=east] at (-0.018,5.75) {CNN--LSTM};
   \fill[blue!75] (0,6.20) rectangle (0.18,6.54);
   \fill[blue!42] (0,5.76) rectangle (0.15,6.10);
   \fill[black!25] (0,5.32) rectangle (0.29,5.66);
   \node[anchor=west,font=\scriptsize] at (0.185,6.37) {0.18};
   \node[anchor=west,font=\scriptsize] at (0.155,5.93) {0.15};
   \node[anchor=west,font=\scriptsize] at (0.295,5.49) {0.29};
-
-  % Feature engineered
-  \node[anchor=east,font=\footnotesize] at (-0.018,2.85) {Feature-engineered};
+  \node[anchor=east] at (-0.018,2.85) {Feature-engineered};
   \fill[blue!75] (0,3.30) rectangle (0.14,3.64);
   \fill[blue!42] (0,2.86) rectangle (0.07,3.20);
   \fill[black!25] (0,2.42) rectangle (0.23,2.76);
   \node[anchor=west,font=\scriptsize] at (0.145,3.47) {0.14};
   \node[anchor=west,font=\scriptsize] at (0.075,3.03) {0.07};
   \node[anchor=west,font=\scriptsize] at (0.235,2.59) {0.23};
-
-  \node[anchor=west,align=left,font=\scriptsize,text width=7.5cm] at (0,0.75)
-    {All four models were evaluated on the same held-out split. Values are point estimates; confidence intervals are reported in Table~\ref{tab:test-metrics}.};
 \end{tikzpicture}
