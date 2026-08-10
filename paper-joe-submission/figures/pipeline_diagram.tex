@@ -1,36 +1,32 @@
 % Evidence-led TikZ schematic for the Journal of Electrocardiology revision
 \begin{tikzpicture}[
-  node distance=1.05cm and 1.25cm,
-  process/.style={rectangle,rounded corners=2pt,draw=blue!65,fill=blue!5,minimum height=1.05cm,minimum width=2.55cm,text width=2.35cm,align=center,font=\scriptsize,thick},
-  cohort/.style={rectangle,rounded corners=2pt,draw=black!60,fill=black!4,minimum height=1.05cm,minimum width=2.55cm,text width=2.35cm,align=center,font=\scriptsize,thick},
-  diagnostic/.style={rectangle,rounded corners=2pt,draw=black!45,fill=black!2,minimum height=1.05cm,minimum width=2.8cm,text width=2.6cm,align=center,font=\scriptsize,dashed},
+  node distance=1.15cm and 1.25cm,
+  process/.style={rectangle,rounded corners=2pt,draw=blue!65,fill=blue!5,minimum height=1.15cm,minimum width=2.9cm,text width=2.65cm,align=center,font=\scriptsize,thick},
+  cohort/.style={rectangle,rounded corners=2pt,draw=black!60,fill=black!4,minimum height=1.15cm,minimum width=2.9cm,text width=2.65cm,align=center,font=\scriptsize,thick},
+  diagnostic/.style={rectangle,rounded corners=2pt,draw=black!45,fill=black!2,minimum height=1.15cm,minimum width=3.05cm,text width=2.8cm,align=center,font=\scriptsize,dashed},
   arrow/.style={-{Stealth[length=4pt]},thick,draw=black!75}
 ]
   \node[process] (source) {MIT-BIH\\45 retained non-paced records};
   \node[cohort,right=of source] (split) {Fixed record-level split\\seed 42};
-  \node[cohort,right=of split,yshift=0.82cm] (dev) {Development pool\\38 records};
-  \node[cohort,right=of split,yshift=-0.82cm] (test) {Held-out test\\7 records\\15{,}573 beats};
+  \node[cohort,right=of split] (dev) {Development pool\\38 records};
+  \node[process,right=of dev] (repr) {187-sample beats\\32-scale Morlet maps\\3-beat sequences};
+  \node[process,right=of repr] (develop) {Model development\\Hyperband + 5-fold CV\\final fitting};
 
-  \node[process,right=1.45cm of dev] (prep) {Beat windows\\Morlet scalograms\\3-beat sequences};
-  \node[process,right=of prep] (search) {Hyperband + 5-fold CV\\development records only};
-  \node[process,right=of search] (fit) {Final fitting\\selected CNN--Conformer};
-
-  \node[process,below=2.05cm of fit] (eval) {Fixed held-out evaluation\\accuracy, F1, class AUC};
-  \node[diagnostic,left=of eval] (posthoc) {Post-hoc diagnostics\\threshold sweeps\\ECE/Brier/temperature};
-  \node[diagnostic,left=of posthoc] (report) {Primary interpretation\\baseline comparison\\rare-rhythm failures};
+  \node[cohort,below=1.7cm of split] (test) {Held-out test\\7 records\\15{,}573 beats};
+  \node[process,right=1.55cm of test] (eval) {Fixed evaluation\\accuracy, F1, class AUC};
+  \node[diagnostic,right=1.55cm of eval] (evidence) {Primary evidence\\baseline comparison\\rare-rhythm failures};
+  \node[diagnostic,right=1.55cm of evidence] (posthoc) {Post-hoc diagnostics\\threshold sweeps\\ECE and Brier scores};
 
   \draw[arrow] (source) -- (split);
   \draw[arrow] (split) -- (dev);
+  \draw[arrow] (dev) -- (repr);
+  \draw[arrow] (repr) -- (develop);
   \draw[arrow] (split) -- (test);
-  \draw[arrow] (dev) -- (prep);
-  \draw[arrow] (prep) -- (search);
-  \draw[arrow] (search) -- (fit);
-  \draw[arrow] (fit) -- (eval);
-  \draw[arrow] (test.east) -| (eval.south);
-  \draw[arrow,dashed] (eval) -- (posthoc);
-  \draw[arrow] (eval.south west) -| (report.south);
-  \draw[arrow,dashed] (posthoc) -- (report);
+  \draw[arrow] (test) -- (eval);
+  \draw[arrow] (develop.south) |- (eval.north);
+  \draw[arrow] (eval) -- (evidence);
+  \draw[arrow,dashed] (evidence) -- (posthoc);
 
-  \node[font=\scriptsize,align=center,below=0.25cm of test,text width=3.0cm] {No model fitting or hyperparameter selection};
-  \node[font=\scriptsize,align=center,below=0.28cm of posthoc,text width=3.2cm] {Descriptive only; not independent calibration/threshold validation};
+  \node[font=\scriptsize,align=center,below=0.25cm of test,text width=3.2cm] {Excluded from model fitting and hyperparameter selection};
+  \node[font=\scriptsize,align=center,below=0.25cm of posthoc,text width=3.4cm] {Descriptive analyses of stored held-out probabilities};
 \end{tikzpicture}
