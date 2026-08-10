@@ -1,0 +1,7 @@
+Figure 1. Auditable study workflow. The seven held-out records are separated before model development; the 38-record development pool is used for tuning, cross-validation, and final fitting, after which the fixed held-out cohort is evaluated once. Threshold and calibration analyses operate post-hoc on the stored final probabilities and are interpreted as diagnostics rather than independent validation.
+
+Figure 2. Held-out model-level comparison under the common subject-separated protocol. The CNN--Conformer leads the evaluated alternatives on accuracy, macro-F1, and weighted-F1; the figure deliberately separates these aggregate metrics from class-specific AUCs, for which the proposed model is not uniformly dominant.
+
+Figure 3. Rhythm-specific F1 and one-vs-rest AUC for the proposed model. Normal and VEB carry most of the realised classification performance. In SVEB, the moderate AUC (0.67) coexists with F1=0.00, illustrating why rank discrimination alone can overstate practical performance in a severely imbalanced operating regime.
+
+Figure 4. Dominant minority-class failure modes and the corresponding post-hoc threshold trade-off. Most SVEB errors collapse into Normal or VEB, and most Fusion errors collapse into VEB. Threshold changes increased recall only with very low precision, indicating that the failure is not resolved by a simple operating-point shift.
