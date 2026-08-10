@@ -1,49 +1,54 @@
 \documentclass{article}
-\usepackage[paperwidth=14in,paperheight=6in,margin=0.2in]{geometry}
+\usepackage[paperwidth=14in,paperheight=6in,margin=0.22in]{geometry}
+\usepackage{xcolor}
 \usepackage{tikz}
 \renewcommand{\familydefault}{\sfdefault}
-\usetikzlibrary{arrows.meta, positioning, calc}
+\usetikzlibrary{arrows.meta,positioning,calc}
 
-\definecolor{darknavy}{HTML}{1B263B}
-\definecolor{lightblue}{HTML}{D6E4FF}
-\definecolor{lightgreen}{HTML}{E8F5E9}
-\definecolor{lightorange}{HTML}{FFF3E0}
-\definecolor{lightpurple}{HTML}{F3E5F5}
-
+\definecolor{navy}{HTML}{23395B}
+\definecolor{bluepanel}{HTML}{EAF1FB}
+\definecolor{greenpanel}{HTML}{ECF6F0}
+\definecolor{goldpanel}{HTML}{FFF6E5}
+\definecolor{rosepanel}{HTML}{FBEDEE}
 \pagestyle{empty}
+
 \begin{document}
-\begin{tikzpicture}[font=\sffamily, >=latex, node distance=1.1cm]
-  \tikzstyle{stage} = [draw=darknavy, rounded corners=3mm, minimum width=4.5cm,
-    minimum height=3.8cm, align=center, line width=0.8pt]
+\begin{tikzpicture}[font=\sffamily,>=Stealth,node distance=0.75cm]
+  \tikzset{stage/.style={draw=navy,rounded corners=2.5mm,minimum width=4.25cm,minimum height=3.35cm,text width=3.95cm,align=center,line width=0.8pt}}
 
-  \node[stage, fill=lightblue, text width=4.2cm] (data)
-    {\textbf{MIT-BIH Arrhythmia}\\[2pt]
-     48 records \\ 110{,}919 beats\\[6pt]
-     Patient-level splits\\ Telemonitoring context};
+  \node[stage,fill=bluepanel] (data) {\textbf{Subject-separated benchmark}\\[5pt]
+    MIT-BIH, 45 retained records\\
+    38 development records\\
+    7 held-out records\\
+    15{,}573 test beats};
 
-  \node[stage, fill=lightgreen, right=3.8cm of data, text width=4.2cm] (prep)
-    {\textbf{Morlet Scalograms}\\[2pt]
-     3-beat windows\\R-peak detection\\[6pt]
-     Wavelet energy maps\\Metadata tracking};
+  \node[stage,fill=greenpanel,right=1.05cm of data] (representation) {\textbf{Morphology + short context}\\[5pt]
+    187-sample beat windows\\
+    32-scale Morlet maps\\
+    Three adjacent beats\\
+    Auditable TFRecord pipeline};
 
-  \node[stage, fill=lightorange, right=3.8cm of prep, text width=4.2cm] (model)
-    {\textbf{Lightweight Conformer}\\[2pt]
-     CNN stem + attention\\Hyperband tuned\\[6pt]
-     Class-weighted training\\Research\_Runs artifacts};
+  \node[stage,fill=goldpanel,right=1.05cm of representation] (model) {\textbf{Controlled architecture test}\\[5pt]
+    CNN--Conformer\\
+    Attention-only\\
+    CNN--LSTM\\
+    Feature-engineered baseline};
 
-  \node[stage, fill=lightpurple, right=3.4cm of model, text width=3.6cm] (output)
-    {\textbf{Clinical Readout}\\[2pt]
-     Accuracy 0.60\\Weighted-F1 0.68\\Macro-F1 0.26\\[6pt]
-     Triage abnormal beats};
+  \node[stage,fill=rosepanel,right=1.05cm of model] (evidence) {\textbf{What the data show}\\[5pt]
+    Accuracy 0.60\\
+    Macro-F1 0.26\\
+    Weighted-F1 0.68\\[3pt]
+    \textbf{but} SVEB F1 0.00\\
+    Fusion F1 0.01};
 
-  \draw[->, line width=1.2pt, darknavy] (data) -- (prep);
-  \draw[->, line width=1.2pt, darknavy] (prep) -- (model);
-  \draw[->, line width=1.2pt, darknavy] (model) -- (output);
+  \draw[->,line width=1.2pt,navy] (data) -- (representation);
+  \draw[->,line width=1.2pt,navy] (representation) -- (model);
+  \draw[->,line width=1.2pt,navy] (model) -- (evidence);
 
-  \node[below=1.3cm of $(prep)!0.5!(model)$, text width=10cm, align=center, darknavy]
-    {\textbf{Pipeline:} PhysioNet download $\rightarrow$ Beat windows $\rightarrow$ Morlet scalograms $\rightarrow$ CNN--Conformer $\rightarrow$ Triage-ready metrics};
+  \node[below=0.70cm of $(representation)!0.5!(model)$,text width=10.8cm,align=center,text=navy,font=\large]
+    {\textbf{Main message:} the hybrid model improves aggregate performance over the evaluated baselines, while rare-rhythm failure remains the limiting result.};
 
-  \node[below=0.4cm of $(prep)!0.5!(model)$, text width=11cm, align=center, darknavy]
-    {Open-source preprocessing, training, and evaluation scripts enable transparency and clinician review.};
+  \node[below=1.25cm of $(representation)!0.5!(model)$,text width=11.3cm,align=center,text=black!75,font=\small]
+    {Reproducible preprocessing, archived predictions, class-wise error analysis, and post-hoc threshold/calibration diagnostics make the benchmark auditable and define the next validation targets.};
 \end{tikzpicture}
 \end{document}
