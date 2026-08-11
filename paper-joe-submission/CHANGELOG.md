@@ -1,5 +1,26 @@
 # Changelog — Journal of Electrocardiology revision
 
+## 2026-08-11 — Strict provenance audit and fourth editorial pass
+
+### Version control
+- Distinguished the unavailable historical 22-page local revision from the 23-page source that was actually recovered from pull request 47.
+- Verified that the previously reported local identifier `a128e9493b3fcd6f0d6d7baeec1844c8f347ec67` is absent from both the current object database and GitHub.
+- Recorded that the new 22-page output is a fresh build from the real PR source, not a recovery of the missing historical file.
+
+### Narrative and journal presentation
+- Re-audited the manuscript against a stricter human-editorial rubric; the preceding 95/100 estimate was withdrawn before revision.
+- Rewrote all principal narrative sections, including a restrained Methods pass, and removed approximately 300 words of repeated framing and procedural commentary.
+- Removed engineered rhetorical questions from the Discussion, reduced repeated explanations of the macro/weighted-F1 gap, and replaced a generic method list with a specified error-linked ablation sequence.
+- Reworked the Highlights and all primary figure captions to state observations directly.
+- Adopted embedded Type 1 Charter and Courier fonts for a clean, readable production proof.
+
+### Evidence and production QA
+- Confirmed that no new numerical token or citation key was introduced into the six principal narrative sections.
+- LaTeX-stripped Abstract count: 201 words.
+- Bibliography: 34 rendered references, including all ten verified *Journal of Electrocardiology* additions.
+- Fresh production build: 22 pages; 0 undefined citations/references, 0 fatal errors, 0 overfull boxes, and 0 underfull boxes.
+- All 22 pages were rendered and visually inspected; no clipping, overlap, broken figure, or unintended blank page was found.
+
 ## 2026-08-11 — Evidence-led human editorial reconstruction
 
 ### Narrative and argument

@@ -1,44 +1,44 @@
 \section{Results}
 
 \subsection{Held-out cohort and class imbalance}
-Seven MIT-BIH records, none used for hyperparameter selection or model fitting, contributed 15{,}573 beats to the final test cohort. The distribution was highly uneven: 12{,}061 beats (77.5\%) were normal (N), 2{,}913 (18.7\%) were ventricular ectopic beats (VEB; V), 383 (2.5\%) were fusion beats (F), 214 (1.4\%) were supraventricular ectopic beats (SVEB; S), and only two belonged to the unknown/unclassifiable category (Q). The two common classes consequently dominate accuracy and weighted-F1, whereas the rare rhythms have little influence on either measure. Across the 38 development records, five-fold accuracy was $0.44\pm0.16$, indicating substantial variation across record partitions.
+The final test cohort comprised 15{,}573 beats from seven MIT-BIH records that had not been used for hyperparameter selection or model fitting. Normal beats accounted for 12{,}061 observations (77.5\%) and ventricular ectopic beats (VEB; V) for 2{,}913 (18.7\%). The remaining classes were much smaller: 383 fusion beats (F; 2.5\%), 214 supraventricular ectopic beats (SVEB; S; 1.4\%), and two unknown/unclassifiable beats (Q). Normal and VEB together therefore represented nearly all of the cohort. Across the 38 development records, five-fold accuracy was $0.44\pm0.16$.
 
 \input{../tables/cohort_distribution}
 
 \subsection{Performance relative to evaluated baselines}
-Across the three aggregate measures, the CNN--Conformer produced the strongest profile on the common held-out split: accuracy was 0.60 (95\% confidence interval [CI] 0.59--0.60), macro-F1 was 0.26 (95\% CI 0.26--0.27), and weighted-F1 was 0.68 (95\% CI 0.67--0.68) (Table~\ref{tab:test-metrics}; Figure~\ref{fig:model-comparison}). The attention-only network---the strongest competing neural model by held-out accuracy---reached 0.27, 0.15, and 0.38 on the same measures. The absolute differences were 0.33, 0.11, and 0.30. CNN--LSTM and the feature-engineered comparator reached accuracies of 0.18 and 0.14, respectively. Class-specific AUCs were less consistent with an across-the-board advantage; CNN--LSTM, for example, had a slightly higher VEB AUC.
+The CNN--Conformer had the highest values for all three aggregate measures on the common test cohort: accuracy 0.60 (95\% confidence interval [CI] 0.59--0.60), macro-F1 0.26 (95\% CI 0.26--0.27), and weighted-F1 0.68 (95\% CI 0.67--0.68) (Table~\ref{tab:test-metrics}; Figure~\ref{fig:model-comparison}). The attention-only network, which had the next highest test accuracy, yielded 0.27, 0.15, and 0.38, respectively. The absolute differences were 0.33 for accuracy, 0.11 for macro-F1, and 0.30 for weighted-F1. Accuracy was 0.18 for CNN--LSTM and 0.14 for the feature-engineered model. The class-specific AUC results did not follow the same ordering; for example, CNN--LSTM had a slightly higher VEB AUC than the CNN--Conformer.
 
 \input{../tables/test_metrics}
 
 \begin{figure*}[t]
   \centering
   \resizebox{0.94\textwidth}{!}{\input{../figures/model_comparison}}
-  \caption{Across the common held-out split, the CNN--Conformer has the strongest aggregate profile for accuracy, macro-F1, and weighted-F1 among the evaluated models. Exact values are printed on the bars. TikZ layout was AI-assisted; plotted values are transcribed from archived study metrics.}
+  \caption{Accuracy, macro-F1, and weighted-F1 for the four models evaluated on the common held-out cohort. Exact values are printed on the bars. The TikZ layout was AI-assisted; plotted values come from the archived study metrics.}
   \label{fig:model-comparison}
 \end{figure*}
 
 \subsection{Class-specific discrimination and error structure}
-Normal and VEB were the only classes with meaningful realised F1. Normal beats had precision 0.95, recall 0.60, and F1 0.74; VEB reached precision 0.48, recall 0.70, and F1 0.57. Their one-vs-rest AUCs were 0.90 (95\% CI 0.89--0.91) and 0.84 (95\% CI 0.84--0.85), respectively. SVEB had F1 0.00 despite an AUC of 0.67, while fusion beats had F1 0.01 with AUC 0.31 (95\% CI 0.29--0.34). With only two test beats, the Q category is included for completeness and does not support substantive class-level interpretation (Table~\ref{tab:class-metrics}; Figure~\ref{fig:class-performance}).
+Meaningful F1-scores were confined to Normal and VEB. For Normal, precision was 0.95, recall 0.60, and F1 0.74; the corresponding VEB values were 0.48, 0.70, and 0.57. One-vs-rest AUC was 0.90 (95\% CI 0.89--0.91) for Normal and 0.84 (95\% CI 0.84--0.85) for VEB. SVEB had an AUC of 0.67 but an F1-score of 0.00. Fusion had an AUC of 0.31 (95\% CI 0.29--0.34) and an F1-score of 0.01. The Q results are shown for completeness; two test beats are insufficient for class-level interpretation (Table~\ref{tab:class-metrics}; Figure~\ref{fig:class-performance}).
 
 \input{../tables/class_metrics}
 
 \begin{figure*}[t]
   \centering
   \resizebox{0.94\textwidth}{!}{\input{../figures/class_performance}}
-  \caption{Class-level performance is concentrated in Normal and VEB. The SVEB row highlights the central imbalance-related finding: moderate ranking discrimination (AUC 0.67) coexists with realised F1=0.00. Q is visually de-emphasised because only two test beats were available. TikZ layout was AI-assisted; values are transcribed from archived class metrics.}
+  \caption{Class-wise F1 and one-vs-rest AUC for the CNN--Conformer. SVEB had AUC 0.67 but F1=0.00; Q is de-emphasised because only two test beats were available. The TikZ layout was AI-assisted; values come from the archived class metrics.}
   \label{fig:class-performance}
 \end{figure*}
 
-The minority-class errors were directional rather than diffuse. Of 214 SVEB beats, 151 (71\%) were assigned to Normal and 51 (24\%) to VEB. Among 383 fusion beats, 343 (90\%) were assigned to VEB. The low F1-scores therefore reflect systematic absorption into the more prevalent normal or ventricular categories, not a small number of scattered mistakes (Figure~\ref{fig:error-structure}). The original confusion matrix and one-vs-rest ROC and precision--recall curves are retained as Supplementary Figures~S1--S3.
+Most minority-class errors followed a small number of paths. Of 214 SVEB beats, 151 (71\%) were assigned to Normal and 51 (24\%) to VEB. Among the 383 fusion beats, 343 (90\%) were assigned to VEB (Figure~\ref{fig:error-structure}). The full confusion matrix and the one-vs-rest receiver operating characteristic and precision--recall curves are provided as Supplementary Figures~S1--S3.
 
 \begin{figure}[t]
   \centering
   \resizebox{0.98\linewidth}{!}{\input{../figures/error_structure}}
-  \caption{The dominant rare-rhythm errors are directional: SVEB is largely absorbed into Normal or VEB, and Fusion into VEB. Post-hoc threshold changes increased recall only with very low precision, so a simple operating-point shift did not recover balanced minority-class performance. TikZ layout was AI-assisted; counts and threshold values are transcribed from archived outputs.}
+  \caption{Dominant SVEB and Fusion error paths and the best F1 observed during post-hoc threshold sweeps. Increased recall was accompanied by very low precision. The TikZ layout was AI-assisted; counts and threshold values come from archived outputs.}
   \label{fig:error-structure}
 \end{figure}
 
 \subsection{Post-hoc threshold and calibration analyses}
-We used the threshold sweeps to check whether the poor minority-class decisions mainly reflected an unsuitable default operating point. For SVEB, the maximum observed one-vs-rest F1 was 0.06 at a threshold of 0.09, with precision 0.03 and recall 0.90. For fusion beats, the maximum F1 was 0.05 at a threshold of 0.00, with precision 0.02 and recall 1.00. Recall rose only with a very large false-positive burden. Because these sweeps used the stored held-out predictions, they are descriptive and do not constitute independent operating-point selection.
+In the post-hoc threshold sweep, the highest observed one-vs-rest SVEB F1 was 0.06 at a threshold of 0.09 (precision 0.03; recall 0.90). For fusion beats, the highest F1 was 0.05 at a threshold of 0.00 (precision 0.02; recall 1.00). The increase in recall thus carried a large false-positive burden. These values are descriptive because the sweep was performed on the stored test predictions.
 
-Confidence behaviour was also heterogeneous. Before temperature scaling, the 15-bin expected calibration error (ECE) was 0.417 for normal beats and 0.089 for VEB, with Brier scores of 0.289 and 0.121, respectively. The fitted global temperature ($T=1.050$) changed mean negative log-likelihood only marginally, from 1.047989 to 1.047731. Because the temperature parameter was fitted on the held-out test cohort itself, these values describe calibration behaviour within this cohort only and are not evidence of independent calibration generalisability.
+Before temperature scaling, the 15-bin expected calibration error (ECE) was 0.417 for Normal and 0.089 for VEB; their Brier scores were 0.289 and 0.121, respectively. A global temperature of $T=1.050$ changed mean negative log-likelihood from 1.047989 to 1.047731. The temperature was fitted on the test cohort, so this is an internal description of confidence behaviour rather than independent calibration validation.

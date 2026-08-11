@@ -9,23 +9,23 @@ Base manuscript: `paper-journal-A/`
 
 **Production PDF completed and visually inspected; the working draft remains conditional on author sign-off and final repository-release metadata.**
 
-The manuscript has undergone three evidence-bounded editorial passes followed by production QA. The first reorganized the paper around subject-separated benchmarking and rare-rhythm failure analysis. The second improved authorial voice, transitions, and journal-scale readability of the four primary figures. The third reconstructed the Introduction, Discussion, future-work priorities, and Conclusion around the actual reasoning path in the evidence, with a light Results edit and no technical change to Materials and Methods. The production-reference pass added ten verified *Journal of Electrocardiology* sources and regenerated the three supplementary diagnostic PNGs from unchanged archived prediction arrays. No experimental run, prediction, or reported metric was added or altered.
+The manuscript has undergone four evidence-bounded editorial passes followed by production QA. The first reorganized the paper around subject-separated benchmarking and rare-rhythm failure analysis. The second improved authorial voice, transitions, and journal-scale readability of the four primary figures. The third reconstructed the Introduction, Discussion, future-work priorities, and Conclusion around the reasoning path in the evidence. A fourth, stricter pass re-audited every principal section, reduced repeated framing, removed engineered rhetorical questions, tightened Methods without changing the protocol, and specified the next error-linked experiment. The production-reference pass added ten verified *Journal of Electrocardiology* sources and regenerated the three supplementary diagnostic PNGs from unchanged archived prediction arrays. No experimental run, prediction, or reported metric was added or altered.
 
-## Third-pass human narrative review
+## Fourth-pass human narrative review
 
-The Discussion no longer repeats a uniform claim--qualification--implication structure. Paragraphs now enter the argument through different evidence: the aggregate/class-wise tension, the weighted-F1 versus macro-F1 discrepancy, the record-separated cohort, architecture comparisons, observed confusion counts, the threshold diagnostic, literature endpoints, and archived confidence estimates. The SVEB-to-Normal and Fusion-to-VEB interpretations are explicitly framed as hypotheses that require matched ablation experiments.
+The Discussion no longer repeats a uniform claim--qualification--implication structure or relies on rhetorical questions to simulate inquiry. Paragraphs enter the argument through different evidence: the aggregate/class-wise tension, the record-separated cohort, architecture comparisons, observed confusion counts, the threshold diagnostic, literature endpoints, and archived confidence estimates. The SVEB-to-Normal and Fusion-to-VEB interpretations remain explicitly framed as hypotheses that require matched ablation experiments.
 
 Future work is ordered by dependency. The manuscript first calls for an error-linked representation experiment, then development-only comparison of minority-class objectives, and only then external and prospective clinician-in-the-loop validation. The Introduction now relates recent journal papers by endpoint and validation design instead of presenting them as a citation catalogue.
 
-Third-pass controls:
+Fourth-pass controls:
 
 - Numerical-token set across Abstract, Introduction, Results, Discussion, and Conclusion: unchanged from the preceding production version.
 - Manuscript-wide citation-key set: unchanged.
-- Abstract: 212 LaTeX-stripped words.
+- Abstract: 201 LaTeX-stripped words.
 - Bibliography: 34 rendered references; all ten verified *Journal of Electrocardiology* additions cited and resolved.
-- Production PDF: 23 pages, vector Type 1 fonts only.
+- Production PDF: 22 pages, embedded vector Type 1 fonts only.
 - Build log: 0 undefined citations/references, 0 fatal errors, 0 overfull boxes, and 0 underfull boxes.
-- Visual review: 23/23 pages inspected; no clipping, overlap, unreadable figure, or unintended blank page.
+- Visual review: 22/22 pages inspected; no clipping, overlap, unreadable figure, or unintended blank page.
 
 ## Base-folder integrity
 
@@ -108,7 +108,7 @@ That ten-page file remains a historical review preview. The complete production 
 
 ## Final production-build QA
 
-The final production build completed locally with the Elsevier class and BibTeX. The output is a 23-page US Letter PDF containing the complete manuscript, declarations, 34-item bibliography, supplementary methods, and Supplementary Figures S1--S3.
+The final production build completed locally with the Elsevier class and BibTeX. The output is a 22-page US Letter PDF containing the complete manuscript, declarations, 34-item bibliography, supplementary methods, and Supplementary Figures S1--S3.
 
 Production checks:
 
@@ -117,7 +117,7 @@ Production checks:
 - 0 undefined citations or references.
 - 0 fatal LaTeX errors.
 - 0 overfull boxes and 0 underfull boxes.
-- 23/23 pages rendered and visually inspected.
+- 22/22 pages rendered and visually inspected.
 - Supplementary confusion matrix total: 15,573, matching the archived held-out cohort.
 - The regenerated S1--S3 images show no clipping, overlap, or unreadable labels.
 
