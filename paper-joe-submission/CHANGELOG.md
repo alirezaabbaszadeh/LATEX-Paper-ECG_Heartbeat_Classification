@@ -1,5 +1,23 @@
 # Changelog — Journal of Electrocardiology revision
 
+## 2026-08-11 — Evidence-led human editorial reconstruction
+
+### Narrative and argument
+- Rebuilt the Discussion around the tension between aggregate performance and near-zero SVEB/Fusion F1 instead of retaining the previous repeated claim--qualification--implication paragraph pattern.
+- Added an explicitly bounded interpretation of the dominant SVEB-to-Normal and Fusion-to-VEB error pathways; these mechanisms are identified as testable hypotheses rather than causal findings.
+- Replaced the generic future-work list with a ranked sequence: error-linked representation experiments, minority-class learning under development-only selection, and then external and clinician-in-the-loop validation.
+- Reworked the Introduction so the cited literature is compared by endpoint and validation boundary, including all ten verified *Journal of Electrocardiology* additions.
+- Applied a light Results edit for sentence rhythm and authorial reasoning while leaving Materials and Methods technically unchanged.
+- Rewrote the Abstract and Conclusion to preserve the aggregate gain/rare-rhythm boundary without repeating Discussion language.
+
+### Evidence and production QA
+- Confirmed that the set of numerical tokens across the revised narrative sections is unchanged from the preceding production version.
+- Confirmed that the manuscript-wide citation-key set is unchanged: 34 rendered references, including all ten journal-specific additions.
+- LaTeX-stripped Abstract count: 212 words.
+- Production build: 23 pages; 0 undefined citations/references, 0 fatal LaTeX errors, 0 overfull boxes, and 0 underfull boxes.
+- Embedded fonts are vector Type 1; no Type 3 fonts remain.
+- Rendered and visually inspected all 23 pages, including the main figures and Supplementary Figures S1--S3; no clipping, overlap, or blank-page defect was found.
+
 ## 2026-08-10 — Verified JOE references and production PDF
 
 ### Journal-specific literature
