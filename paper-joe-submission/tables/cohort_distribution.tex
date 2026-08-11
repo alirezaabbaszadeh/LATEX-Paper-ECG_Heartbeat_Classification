@@ -1,13 +1,18 @@
-\begin{table*}[t]
+\begin{table}[t]
   \centering
-  \caption{Evaluation cohorts and held-out class distribution. The 38-record development pool was used for tuning, five-fold cross-validation, and final fitting; the seven held-out records were reserved for final evaluation. Class counts are shown only where directly supported by the archived test artifacts.}
+  \caption{Distribution of prediction targets in the held-out test set.}
   \label{tab:cohort-distribution}
-  \begin{tabular}{lccccccc}
+  \begin{tabular}{lrr}
     \toprule
-    Cohort & Records & Total beats & N & S (SVEB) & V (VEB) & F & Q \\
+    AAMI class & Number & Percentage \\
     \midrule
-    Development & 38 & --- & --- & --- & --- & --- & --- \\
-    Held-out test & 7 & 15{,}573 & 12{,}061 & 214 & 2{,}913 & 383 & 2 \\
+    Normal (N) & 12{,}061 & 77.5 \\
+    SVEB (S) & 214 & 1.4 \\
+    VEB (V) & 2{,}913 & 18.7 \\
+    Fusion (F) & 383 & 2.5 \\
+    Unknown/paced (Q) & 2 & $<0.1$ \\
+    \midrule
+    Total & 15{,}573 & 100.0 \\
     \bottomrule
   \end{tabular}
-\end{table*}
+\end{table}

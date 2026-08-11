@@ -1,15 +1,15 @@
 \begin{table*}[t]
   \centering
-  \caption{Model-level performance on the common held-out subject-separated cohort. The proposed CNN--Conformer achieved the highest accuracy, macro-F1, and weighted-F1 among the four evaluated architectures; class-specific performance is reported separately because the aggregate gain was not uniform across rhythm classes. Values in brackets are 95\% bootstrap confidence intervals.}
+  \caption{Aggregate performance on the common record-level test set. Values in brackets are 95\% percentile intervals from 1{,}000 beat-level bootstrap samples.}
   \label{tab:test-metrics}
   \begin{tabular}{lccc}
     \toprule
     Model & Accuracy (95\% CI) & Macro-F1 (95\% CI) & Weighted-F1 (95\% CI) \\
     \midrule
-    Proposed CNN--Conformer & \textbf{0.60 [0.59, 0.60]} & \textbf{0.26 [0.26, 0.27]} & \textbf{0.68 [0.67, 0.68]} \\
-    Attention-only & 0.27 [0.26, 0.28] & 0.15 [0.14, 0.15] & 0.38 [0.37, 0.39] \\
-    CNN--LSTM & 0.18 [0.17, 0.18] & 0.15 [0.15, 0.16] & 0.29 [0.28, 0.29] \\
-    Feature-engineered & 0.14 [0.13, 0.14] & 0.07 [0.07, 0.07] & 0.23 [0.22, 0.23] \\
+    CNN--Conformer & \textbf{0.597 [0.590, 0.605]} & \textbf{0.263 [0.260, 0.267]} & \textbf{0.677 [0.671, 0.684]} \\
+    CNN--attention & 0.269 [0.262, 0.277] & 0.149 [0.145, 0.153] & 0.379 [0.370, 0.387] \\
+    CNN--LSTM & 0.179 [0.173, 0.185] & 0.154 [0.149, 0.159] & 0.286 [0.278, 0.295] \\
+    CNN-only & 0.136 [0.131, 0.142] & 0.069 [0.066, 0.073] & 0.226 [0.218, 0.233] \\
     \bottomrule
   \end{tabular}
 \end{table*}

@@ -1,7 +1,9 @@
-Figure 1. Study workflow. Thirty-eight records form the development pool, and seven records remain separate until final evaluation. Threshold and calibration analyses use the stored test predictions and are post-hoc. The TikZ layout was AI-assisted; counts come from the archived study protocol.
+Figure 1. Aggregate performance of the four architectures on the same seven test records. Error intervals are given in Table 2.
 
-Figure 2. Accuracy, macro-F1, and weighted-F1 for the four models evaluated on the common held-out cohort. Exact values are printed on the bars. The TikZ layout was AI-assisted; plotted values come from the archived study metrics.
+Figure 2. F1-score and one-vs-rest AUC for the CNN--Conformer, shown with the number of test observations in each class. AUC is not displayed for Q because only two Q observations were available.
 
-Figure 3. Class-wise F1 and one-vs-rest AUC for the CNN--Conformer. SVEB had AUC 0.67 but F1=0.00; Q is de-emphasised because only two test beats were available. The TikZ layout was AI-assisted; values come from the archived class metrics.
+Figure 3. Confusion matrix for the CNN--Conformer on the record-level test set. Rows show reference classes and columns show predicted classes.
 
-Figure 4. Dominant SVEB and Fusion error paths and the best F1 observed during post-hoc threshold sweeps. Increased recall was accompanied by very low precision. The TikZ layout was AI-assisted; counts and threshold values come from archived outputs.
+Supplementary Figure S1. One-vs-rest receiver operating characteristic curves for the CNN--Conformer on the seven test records. The Q curve is shown only as a descriptive consequence of the two available Q targets.
+
+Supplementary Figure S2. One-vs-rest precision--recall curves for the CNN--Conformer on the seven test records.

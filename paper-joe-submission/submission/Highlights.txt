@@ -1,5 +1,5 @@
-Seven held-out MIT-BIH records contributed 15,573 test beats.
-CNN--Conformer led four models on accuracy, macro-F1, and weighted-F1.
-F1 was 0.74 for Normal and 0.57 for VEB, but near zero for SVEB/Fusion.
-Most SVEB errors became Normal; most Fusion errors became VEB.
-Threshold sweeps increased rare-class recall at very low precision.
+All beats from seven records were kept outside model development.
+Aggregate gains were driven mainly by Normal and ventricular ectopic beats.
+SVEB and Fusion recognition remained near zero despite class weighting.
+Most SVEBs became Normal; most Fusion beats became ventricular ectopic.
+Threshold changes recovered recall only with a severe loss of precision.

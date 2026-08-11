@@ -1,16 +1,19 @@
 \begin{table*}[t]
   \centering
-  \caption{Class-specific performance of the proposed CNN--Conformer on the held-out cohort. The contrast between Normal/VEB and the rare SVEB/Fusion classes is the principal limitation hidden by aggregate metrics. The Q category contains only two beats and is included for completeness rather than substantive inference.}
+  \caption{Class-specific performance of the CNN--Conformer on the held-out test set.}
   \label{tab:class-metrics}
   \begin{tabular}{lrrrrr}
     \toprule
     AAMI class & Support & Precision & Recall & F1 & AUC (95\% CI) \\
     \midrule
-    Normal (N) & 12{,}061 & 0.95 & 0.60 & 0.74 & 0.90 [0.89, 0.91] \\
-    SVEB (S) & 214 & 0.00 & 0.00 & 0.00 & 0.67 [0.65, 0.68] \\
-    VEB (V) & 2{,}913 & 0.48 & 0.70 & 0.57 & 0.84 [0.84, 0.85] \\
-    Fusion (F) & 383 & 0.01 & 0.01 & 0.01 & 0.31 [0.29, 0.34] \\
-    Unknown (Q) & 2 & 0.00 & 0.00 & 0.00 & 0.59 [0.46, 0.71] \\
+    Normal (N) & 12{,}061 & 0.948 & 0.603 & 0.737 & 0.901 [0.89, 0.91] \\
+    SVEB (S) & 214 & 0.001 & 0.005 & 0.002 & 0.668 [0.65, 0.68] \\
+    VEB (V) & 2{,}913 & 0.483 & 0.696 & 0.570 & 0.843 [0.83, 0.85] \\
+    Fusion (F) & 383 & 0.006 & 0.010 & 0.007 & 0.314 [0.29, 0.34] \\
+    Unknown/paced (Q) & 2 & 0.000 & 0.000 & 0.000 & --- \\
     \bottomrule
   \end{tabular}
+  \begin{minipage}{0.94\textwidth}
+    \footnotesize AUC was not interpreted for Q because only two Q targets were present. Bootstrap intervals resampled beats and do not account for clustering within records.
+  \end{minipage}
 \end{table*}
