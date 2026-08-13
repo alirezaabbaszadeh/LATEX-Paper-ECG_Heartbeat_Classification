@@ -4,6 +4,7 @@ This directory contains submission-facing files kept separate from the main LaTe
 
 ## Included files
 
+- `ECG_JoE_Manuscript_Final.pdf` — built manuscript with the current author metadata.
 - `Highlights.txt` — five editable highlights; every bullet is below 85 characters.
 - `Figure_Captions.txt` — captions/disclosures for the four main figures in manuscript order.
 

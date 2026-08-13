@@ -36,7 +36,7 @@ Generated files under `src/` are ignored and should not be committed. The branch
 
 ## AI-assisted preparation disclosure
 
-OpenAI ChatGPT (GPT-5.6 Sol) assisted with language/editorial revision, identification and formatting of ten topical *Journal of Electrocardiology* references, and LaTeX/TikZ code for explanatory/data-summary figures. The research data, stored predictions, and experimental results were not generated or altered by the tool. Bibliographic metadata and DOIs for the added references were checked against publisher and DOI records. The manuscript includes a working AI declaration before the references and figure-specific disclosure for AI-assisted visualisations. The author must review and approve the final wording, visual content, and bibliographic additions before submission.
+OpenAI ChatGPT (GPT-5.6 Sol) assisted with language/editorial revision, identification and formatting of ten topical *Journal of Electrocardiology* references, and LaTeX/TikZ code for explanatory/data-summary figures. The research data, stored predictions, and experimental results were not generated or altered by the tool. Bibliographic metadata and DOIs for the added references were checked against publisher and DOI records. The manuscript includes a working AI declaration before the references and figure-specific disclosure for AI-assisted visualisations. The authors must review and approve the final wording, visual content, and bibliographic additions before submission.
 
 No graphical abstract made with a general-purpose generative-AI tool is included.
 
