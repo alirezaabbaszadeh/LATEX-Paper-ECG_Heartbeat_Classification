@@ -1,0 +1,36 @@
+% AI-assisted explanatory figure. Counts are direct transcriptions from the study protocol.
+\begin{tikzpicture}[
+  node distance=0.9cm and 1.15cm,
+  base/.style={rectangle,rounded corners=2.5pt,minimum height=1.25cm,minimum width=2.75cm,text width=2.5cm,align=center,font=\footnotesize,thick},
+  source/.style={base,draw=black!65,fill=black!3},
+  dev/.style={base,draw=blue!70!black,fill=blue!6},
+  test/.style={base,draw=green!55!black,fill=green!7},
+  diag/.style={base,draw=black!45,fill=black!2,dashed},
+  arrow/.style={-{Stealth[length=4pt]},thick,draw=black!72}
+]
+
+\node[source] (source) {\textbf{MIT-BIH}\\[2pt]{\Large 45} retained\\non-paced records};
+\node[source,right=of source] (split) {\textbf{Fixed record split}\\seed 42};
+
+\node[dev,right=1.4cm of split,yshift=1.35cm] (devpool) {\textbf{Development}\\[2pt]{\Large 38} records};
+\node[dev,right=of devpool] (repr) {\textbf{Representation}\\187-sample beats\\32-scale Morlet\\3-beat context};
+\node[dev,right=of repr] (fit) {\textbf{Model development}\\Hyperband\\5-fold CV\\final fitting};
+
+\node[test,right=1.4cm of split,yshift=-1.35cm] (holdout) {\textbf{Held-out test}\\[2pt]{\Large 7} records\\{\large 15{,}573} beats};
+\node[test,right=of holdout] (eval) {\textbf{One final evaluation}\\accuracy\\macro/weighted F1\\class AUC};
+\node[test,right=of eval] (finding) {\textbf{Primary result}\\baseline comparison\\+\\rare-rhythm failures};
+\node[diag,below=0.85cm of finding] (posthoc) {\textbf{Post-hoc diagnostics}\\threshold sweeps\\ECE / Brier};
+
+\draw[arrow] (source) -- (split);
+\draw[arrow] (split.east) -- ++(0.55,0) |- (devpool.west);
+\draw[arrow] (split.east) -- ++(0.55,0) |- (holdout.west);
+\draw[arrow] (devpool) -- (repr);
+\draw[arrow] (repr) -- (fit);
+\draw[arrow] (holdout) -- (eval);
+\draw[arrow] (fit.south) |- (eval.north);
+\draw[arrow] (eval) -- (finding);
+\draw[arrow,dashed] (finding) -- (posthoc);
+
+\node[anchor=east,font=\small\bfseries,text=blue!70!black] at ($(devpool.west)+(-0.22,0)$) {DEVELOPMENT};
+\node[anchor=east,font=\small\bfseries,text=green!45!black] at ($(holdout.west)+(-0.22,0)$) {HELD-OUT};
+\end{tikzpicture}

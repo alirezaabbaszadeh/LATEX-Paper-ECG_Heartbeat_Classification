@@ -1,0 +1,8 @@
+filename,type,placement,provenance
+pipeline_diagram.tex,editable TikZ,Main Figure 1,AI-assisted layout; study protocol values
+model_comparison.tex,editable TikZ,Main Figure 2,AI-assisted layout; archived model metrics
+class_performance.tex,editable TikZ,Main Figure 3,AI-assisted layout; archived class metrics
+error_structure.tex,editable TikZ,Main Figure 4,AI-assisted layout; archived error/threshold metrics
+confusion_matrix.png,PNG 2793x2365 300dpi,Supplementary Figure S1,Regenerated from archived held-out predictions
+roc_curves.png,PNG 2970x2365 300dpi,Supplementary Figure S2,Regenerated from archived held-out predictions
+precision_recall_curves.png,PNG 2970x2365 300dpi,Supplementary Figure S3,Regenerated from archived held-out predictions

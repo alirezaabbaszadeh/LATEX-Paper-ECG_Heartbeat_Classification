@@ -1,0 +1,5 @@
+All beats from seven records were kept outside model development.
+Aggregate gains were driven mainly by Normal and ventricular ectopic beats.
+SVEB and Fusion recognition remained near zero despite class weighting.
+Most SVEBs became Normal; most Fusion beats became ventricular ectopic.
+Threshold changes recovered recall only with a severe loss of precision.

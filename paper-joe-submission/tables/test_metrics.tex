@@ -1,0 +1,15 @@
+\begin{table*}[t]
+  \centering
+  \caption{Aggregate performance on the common record-level test set. Values in brackets are 95\% percentile intervals from 1{,}000 beat-level bootstrap samples.}
+  \label{tab:test-metrics}
+  \begin{tabular}{lccc}
+    \toprule
+    Model & Accuracy (95\% CI) & Macro-F1 (95\% CI) & Weighted-F1 (95\% CI) \\
+    \midrule
+    CNN--Conformer & \textbf{0.597 [0.590, 0.605]} & \textbf{0.263 [0.260, 0.267]} & \textbf{0.677 [0.671, 0.684]} \\
+    CNN--attention & 0.269 [0.262, 0.277] & 0.149 [0.145, 0.153] & 0.379 [0.370, 0.387] \\
+    CNN--LSTM & 0.179 [0.173, 0.185] & 0.154 [0.149, 0.159] & 0.286 [0.278, 0.295] \\
+    CNN-only & 0.136 [0.131, 0.142] & 0.069 [0.066, 0.073] & 0.226 [0.218, 0.233] \\
+    \bottomrule
+  \end{tabular}
+\end{table*}

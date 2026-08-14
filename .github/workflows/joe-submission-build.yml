@@ -1,0 +1,77 @@
+name: JoE submission build
+
+on:
+  push:
+    branches:
+      - joe-editorial-rewrite-2026-08-10
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branch with study artwork
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
+
+      - name: Verify base manuscript is unchanged
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git diff --exit-code origin/main -- paper-journal-A
+
+      - name: Check prohibited claim language
+        run: |
+          set -euo pipefail
+          if grep -RniE 'state[- ]of[- ]the[- ]art|clinically ready|cardiologist-level|autonomous diagnosis|generalizes to real-world|triage-ready|deployable arrhythmia' \
+             paper-joe-submission/src/sections paper-joe-submission/tables; then
+            echo 'Prohibited or over-broad claim language detected.'
+            exit 1
+          fi
+
+      - name: Verify required retained figures are materialized
+        run: |
+          set -euo pipefail
+          for figure in confusion_matrix.png roc_curves.png precision_recall_curves.png; do
+            path="paper-joe-submission/figures/$figure"
+            test -s "$path"
+            if grep -q 'git-lfs.github.com/spec' "$path" 2>/dev/null; then
+              echo "Git LFS pointer was not materialized: $path"
+              exit 1
+            fi
+          done
+
+      - name: Install LaTeX toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y latexmk texlive-latex-extra texlive-science texlive-pictures texlive-fonts-recommended poppler-utils
+
+      - name: Build manuscript
+        working-directory: paper-joe-submission/src
+        run: |
+          set -euo pipefail
+          latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+          if grep -E 'undefined references|Citation .* undefined|Reference .* undefined' main.log; then
+            echo 'Unresolved references or citations found.'
+            exit 1
+          fi
+          if grep -E 'Overfull \\hbox|Overfull \\vbox' main.log; then
+            echo 'Overfull LaTeX boxes found.'
+            exit 1
+          fi
+
+      - name: Record PDF metadata
+        run: |
+          pdfinfo paper-joe-submission/src/main.pdf | grep -E 'Pages|Page size'
+
+      - name: Upload manuscript preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: joe-submission-preview
+          path: paper-joe-submission/src/main.pdf
+          if-no-files-found: error

@@ -1,0 +1,22 @@
+% AI-assisted explanatory/data figure; values are direct transcriptions from qa/claim-ledger.md.
+\begin{tikzpicture}[
+  node distance=0.8cm and 1.55cm,
+  source/.style={rectangle,rounded corners=2.5pt,draw=blue!65!black,fill=blue!6,minimum width=2.75cm,minimum height=1.15cm,align=center,font=\small,thick},
+  target/.style={rectangle,rounded corners=2.5pt,draw=black!55,fill=black!3,minimum width=3.0cm,minimum height=1.0cm,align=center,font=\small},
+  callout/.style={rectangle,rounded corners=2.5pt,draw=orange!65!black,fill=orange!5,text width=4.6cm,minimum height=1.25cm,align=left,font=\footnotesize,inner sep=6pt},
+  arrow/.style={-{Stealth[length=4pt]},thick,draw=black!72}
+]
+
+\node[source] (s) {\textbf{True SVEB (S)}\\$n=214$};
+\node[target,right=2.2cm of s,yshift=0.70cm] (sn) {Predicted \textbf{Normal}\\151/214};
+\node[target,right=2.2cm of s,yshift=-0.70cm] (sv) {Predicted \textbf{VEB}\\51/214};
+\draw[arrow] (s.east) -- node[above,font=\small\bfseries]{71\%} (sn.west);
+\draw[arrow] (s.east) -- node[below,font=\small\bfseries]{24\%} (sv.west);
+
+\node[source,below=2.65cm of s] (f) {\textbf{True Fusion (F)}\\$n=383$};
+\node[target,right=2.2cm of f] (fv) {Predicted \textbf{VEB}\\343/383};
+\draw[arrow] (f.east) -- node[above,font=\small\bfseries]{90\%} (fv.west);
+
+\node[callout,below=1.05cm of f,anchor=north west] (scall) at (s.west |- f.south) {\textbf{SVEB threshold sweep}\\Max F1 0.06 at threshold 0.09\\Precision 0.03; recall 0.90};
+\node[callout,right=0.65cm of scall] (fcall) {\textbf{Fusion threshold sweep}\\Max F1 0.05 at threshold 0.00\\Precision 0.02; recall 1.00};
+\end{tikzpicture}

@@ -1,0 +1,9 @@
+Figure 1. Aggregate performance of the four architectures on the same seven test records. Error intervals are given in Table 2.
+
+Figure 2. F1-score and one-vs-rest AUC for the CNN--Conformer, shown with the number of test observations in each class. AUC is not displayed for Q because only two Q observations were available.
+
+Figure 3. Confusion matrix for the CNN--Conformer on the record-level test set. Rows show reference classes and columns show predicted classes.
+
+Supplementary Figure S1. One-vs-rest receiver operating characteristic curves for the CNN--Conformer on the seven test records. The Q curve is shown only as a descriptive consequence of the two available Q targets.
+
+Supplementary Figure S2. One-vs-rest precision--recall curves for the CNN--Conformer on the seven test records.

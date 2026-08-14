@@ -1,0 +1,46 @@
+\section{Results}
+
+\subsection{Test cohort}
+The seven test records yielded 15{,}573 three-beat sequences. Normal beats accounted for 12{,}061 targets (77.5\%) and ventricular ectopic beats (VEB) for 2{,}913 (18.7\%). Only 214 targets were SVEB (1.4\%) and 383 were Fusion beats (2.5\%); two belonged to Q (Table~\ref{tab:cohort-distribution}). Accuracy for the CNN--Conformer across the five development folds ranged from 0.21 to 0.64, with a mean of 0.44 and standard deviation of 0.16.
+
+\input{../tables/cohort_distribution}
+
+\subsection{Comparison of the four models}
+The CNN--Conformer produced the highest aggregate scores on the common test set (Table~\ref{tab:test-metrics}; Figure~\ref{fig:model-comparison}). Its accuracy was 0.60 (95\% CI 0.59--0.60), macro-F1 was 0.26 (0.26--0.27), and weighted-F1 was 0.68 (0.67--0.68). The corresponding values for the CNN--attention model were 0.27, 0.15, and 0.38. The CNN--LSTM reached an accuracy of 0.18 and the CNN-only model 0.14. Although the CNN--Conformer ranked first on all three aggregate measures, it did not have the highest AUC for every class; the CNN--LSTM VEB AUC, for example, was 0.86 compared with 0.84 for the CNN--Conformer.
+
+\input{../tables/test_metrics}
+
+\begin{figure*}[t]
+  \centering
+  \resizebox{0.94\textwidth}{!}{\input{../figures/model_comparison}}
+  \caption{Aggregate performance of the four architectures on the same seven test records. Error intervals are given in Table~\ref{tab:test-metrics}.}
+  \label{fig:model-comparison}
+\end{figure*}
+
+\subsection{Class-specific performance}
+The aggregate result was not shared evenly across the five classes. Normal beats had a precision of 0.95, a recall of 0.60, and an F1 of 0.74. For VEB, precision was 0.48, recall 0.70, and F1 0.57. In contrast, the model correctly identified one of 214 SVEB targets (F1 0.002 before rounding) and four of 383 Fusion targets (F1 0.007). AUC was 0.90 for Normal, 0.84 for VEB, 0.67 for SVEB, and 0.31 for Fusion (Table~\ref{tab:class-metrics}; Figure~\ref{fig:class-performance}). No inferential class-level result was assigned to Q because the test set contained only two observations.
+
+\input{../tables/class_metrics}
+
+\begin{figure*}[t]
+  \centering
+  \resizebox{0.94\textwidth}{!}{\input{../figures/class_performance}}
+  \caption{F1-score and one-vs-rest AUC for the CNN--Conformer, shown with the number of test observations in each class. AUC is not displayed for Q because only two Q observations were available.}
+  \label{fig:class-performance}
+\end{figure*}
+
+The confusion matrix showed two dominant minority-class errors. Of 214 SVEB targets, 151 were classified as Normal and 51 as VEB. Of 383 Fusion targets, 343 were classified as VEB (Figure~\ref{fig:confusion-matrix}).
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.94\linewidth]{../figures/confusion_matrix.png}
+  \caption{Confusion matrix for the CNN--Conformer on the record-level test set. Rows show reference classes and columns show predicted classes.}
+  \label{fig:confusion-matrix}
+\end{figure}
+
+\subsection{Exploratory analyses}
+Changing the decision threshold did not produce a balanced operating point for either rare class. The largest observed SVEB F1 was 0.06 at a threshold of 0.09 (precision 0.03, recall 0.90). For Fusion, the largest F1 was 0.05 at a threshold approaching zero (precision 0.02, recall 1.00). These values were calculated on the test set and are descriptive.
+
+Temperature scaling produced a similarly small change. The fitted temperature was 1.050, and mean negative log-likelihood changed from 1.047989 to 1.047731. Class-specific calibration results are provided in the Supplementary Material; because the temperature was fitted on the test probabilities, they are not estimates of calibration on new data.
+
+\clearpage

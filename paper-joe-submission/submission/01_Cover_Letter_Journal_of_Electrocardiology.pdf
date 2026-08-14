@@ -1,0 +1,154 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<<
+/Type /Catalog
+/PageMode /UseNone
+/Pages 2 0 R
+>>
+endobj
+2 0 obj
+<<
+/Type /Pages
+/Count 1
+/Kids [ 3 0 R ]
+>>
+endobj
+3 0 obj
+<<
+/Type /Page
+/Contents [ 4 0 R 5 0 R 6 0 R ]
+/MediaBox [ 0 0 612 792 ]
+/Parent 2 0 R
+/Resources <<
+/Font <<
+/F1 7 0 R
+/F2 8 0 R
+/F3 9 0 R
+/F4 10 0 R
+/F5 11 0 R
+>>
+>>
+/Rotate 0
+/Trans <<
+>>
+/Annots [ ]
+>>
+endobj
+4 0 obj
+<<
+/Length 4589
+>>
+stream
+q q .854902 .862745 .878431 RG .55 w 59.04 38.88 m 552.96 38.88 l S .372549 .388235 .407843 rg BT 9.6 TL/F1 8 Tf 1 0 0 1 59.04 25.92 Tm (Cover letter | Journal of Electrocardiology)Tj T* ET Q q 1 0 0 1 59.04 729.16 cm .545098 .117647 .176471 rg BT 11 TL/F2 8.7 Tf 1 0 0 1 0 2.3 Tm (COVER LETTER)Tj T* ET Q q 1 0 0 1 59.04 708.86 cm .372549 .388235 .407843 rg BT 12.3 TL/F1 9.2 Tf 1 0 0 1 0 3.1 Tm (August 14, 2026)Tj T* ET Q q 1 0 0 1 59.04 678.26 cm .12549 .129412 .141176 rg BT 13.6 TL/F3 10.3 Tf 1 0 0 1 0 3.3 Tm (Adrian Baranchuk, MD)Tj T* ET Q q 1 0 0 1 59.04 658.66 cm .12549 .129412 .141176 rg BT 13.6 TL/F3 10.3 Tf 1 0 0 1 0 3.3 Tm (Editor-in-Chief)Tj T* ET Q q 1 0 0 1 59.04 639.06 cm .12549 .129412 .141176 rg BT 13.6 TL/F4 10.3 Tf 1 0 0 1 0 3.3 Tm (Journal of Electrocardiology)Tj T* ET Q q 1 0 0 1 59.04 605.56 cm .12549 .129412 .141176 rg BT 14.5 TL/F3 10.7 Tf 1 0 0 1 0 3.8 Tm (Dear Dr. Baranchuk,)Tj T* ET Q q 1 0 0 1 59.04 568.56 cm .12549 .129412 .141176 rg BT 14.5 TL/F3 10.7 Tf 1 0 0 1 0 18.3 Tm (Please consider our manuscript, )Tj/F5 10.7 Tf ("Record-Level Evaluation of a Morlet CNN-Conformer for Five-Class ECG)Tj T* (Beat Classification,")Tj/F3 10.7 Tf ( for publication as a )Tj/F5 10.7 Tf (Research Paper)Tj/F3 10.7 Tf ( in the )Tj/F4 10.7 Tf (Journal of Electrocardiology)Tj/F3 10.7 Tf (.)Tj T* ET Q q 1 0 0 1 59.04 502.56 cm .12549 .129412 .141176 rg BT 14.5 TL/F3 10.7 Tf 1 0 0 1 0 47.3 Tm (This study evaluates a Morlet wavelet CNN-Conformer for five-class ECG beat classification using a record-level)Tj T* -.112146 Tw (holdout of seven MIT-BIH Arrhythmia Database recordings. We compare the proposed model with CNN-attention,)Tj T* 0 Tw (CNN-LSTM, and CNN-only architectures under the same split and report aggregate, class-specific, and error-level)Tj T* (results.)Tj T* ET Q q 1 0 0 1 59.04 422.06 cm .12549 .129412 .141176 rg BT 14.5 TL/F3 10.7 Tf 1 0 0 1 0 61.8 Tm (The CNN-Conformer produced the highest aggregate performance among the four evaluated models \(accuracy)Tj T* (0.60, macro-F1 0.26, and weighted-F1 0.68\). Importantly, our analysis shows that the gain was driven mainly by)Tj T* (Normal and ventricular ectopic beats, while supraventricular ectopic and Fusion recognition remained near zero.)Tj T* (This record-level, failure-aware evaluation is intended to provide a cautious and reproducible account of what the)Tj T* (current model supports before broader clinical claims are made.)Tj T* ET Q q 1 0 0 1 59.04 356.06 cm .12549 .129412 .141176 rg BT 14.5 TL/F3 10.7 Tf 1 0 0 1 0 47.3 Tm (The manuscript is well aligned with the journal's focus on computerized electrocardiology, arrhythmia analysis,)Tj T* (and clinically meaningful interpretation of ECG algorithms. The MIT-BIH data are publicly available, and the)Tj T* (source code, experiment configurations, trained models, and prediction arrays are provided in a fixed public)Tj T* (GitHub release linked in the manuscript.)Tj T* ET Q q 1 0 0 1 59.04 290.06 cm .12549 .129412 .141176 rg BT 14.5 TL/F3 10.7 Tf 1 0 0 1 0 47.3 Tm (This manuscript is original, has not been published, and is not under consideration by another journal. The authors)Tj T* (declare no competing interests and no specific external funding. The study used only publicly available, fully)Tj T* (de-identified data; no new human or animal data were collected. A generative-AI assistance disclosure is included)Tj T* (directly before the references.)Tj T* ET Q q 1 0 0 1 59.04 257.56 cm .12549 .129412 .141176 rg BT 14.5 TL/F3 10.7 Tf 1 0 0 1 0 3.8 Tm (Thank you for your consideration.)Tj T* ET Q q 1 0 0 1 59.04 226.96 cm .12549 .129412 .141176 rg BT 13.6 TL/F3 10.3 Tf 1 0 0 1 0 3.3 Tm (Sincerely,)Tj T* ET Q q 1 0 0 1 59.04 198.36 cm .12549 .129412 .141176 rg BT 13.6 TL/F5 10.3 Tf 1 0 0 1 0 3.3 Tm (Alireza Abbaszadeh)Tj T* ET Q q 1 0 0 1 59.04 180.06 cm .372549 .388235 .407843 rg BT 12.3 TL/F1 9.2 Tf 1 0 0 1 0 3.1 Tm (Corresponding author)Tj T* ET Q q 1 0 0 1 59.04 161.76 cm .372549 .388235 .407843 rg BT 12.3 TL/F1 9.2 Tf 1 0 0 1 0 3.1 Tm (Department of Computer Engineering, Islamic Azad University)Tj T* ET Q q 1 0 0 1 59.04 143.46 cm .372549 .388235 .407843 rg BT 12.3 TL/F1 9.2 Tf 1 0 0 1 0 3.1 Tm (Mashhad, Iran)Tj T* ET Q q 1 0 0 1 59.04 125.16 cm .372549 .388235 .407843 rg BT 12.3 TL/F1 9.2 Tf 1 0 0 1 0 3.1 Tm (Email: alireza.abbaszadeh8558@iau.ir)Tj T* ET Q q 1 0 0 1 59.04 106.86 cm .372549 .388235 .407843 rg BT 12.3 TL/F1 9.2 Tf 1 0 0 1 0 3.1 Tm (Telephone: +98 915 206 2041)Tj T* ET Q q 1 0 0 1 59.04 88.56 cm .372549 .388235 .407843 rg BT 12.3 TL/F1 9.2 Tf 1 0 0 1 0 3.1 Tm T* ET Q Q
+endstream
+endobj
+5 0 obj
+<<
+/Length 63
+>>
+stream
+
+q
+58.04 87.90918 227.4985 14.64081 re
+h
+1 1 1 RG 1 1 1 rg B
+Q
+
+endstream
+endobj
+6 0 obj
+<<
+/Filter /FlateDecode
+/Length 150
+>>
+stream
+x⁄}å=
+0Ö˜û"'®Mõº6 Ç
+nJ7qP±Nzˇ¡‘≈Mæ˜ì
+ÎòíãI-&!„5´‘üa±e≤ò©ä•fÛB,≠Â¢Ö¢§⁄§∞“q˜??Ë¥îÅ{N»P40nÄ”òW&Yı§^¿_Œ.Æe2d.ºÀ∏C<ïö≥R∏”`”S¡˝ı◊_ù˚>lz8ÑL˙0Ò
+endstream
+endobj
+7 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Name /F1
+>>
+endobj
+8 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica-Bold
+/Encoding /WinAnsiEncoding
+/Name /F2
+>>
+endobj
+9 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Times-Roman
+/Encoding /WinAnsiEncoding
+/Name /F3
+>>
+endobj
+10 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Times-Italic
+/Encoding /WinAnsiEncoding
+/Name /F4
+>>
+endobj
+11 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Times-Bold
+/Encoding /WinAnsiEncoding
+/Name /F5
+>>
+endobj
+12 0 obj
+<<
+/Author (Alireza Abbaszadeh\073 Dr\056 Vahid Torkzadeh)
+/CreationDate (D\07220260814091144\05302\04700\047)
+/Creator (\050unspecified\051)
+/Keywords ()
+/ModDate (D\07220260814091144\05302\04700\047)
+/Producer (ReportLab PDF Library \055 \050opensource\051)
+/Subject (Cover letter for Record\055Level Evaluation of a Morlet CNN\055Conformer for Five\055Class ECG Beat Classification)
+/Title (Cover Letter \055 Journal of Electrocardiology)
+/Trapped (\057False)
+>>
+endobj
+xref
+0 13
+0000000000 65535 f 
+0000000015 00000 n 
+0000000083 00000 n 
+0000000142 00000 n 
+0000000363 00000 n 
+0000005004 00000 n 
+0000005117 00000 n 
+0000005339 00000 n 
+0000005446 00000 n 
+0000005558 00000 n 
+0000005667 00000 n 
+0000005778 00000 n 
+0000005887 00000 n 
+trailer
+<<
+/Size 13
+/Root 1 0 R
+/Info 12 0 R
+/ID [ <d0ad495dbee10b0f828406cc3a3ff5b2> (\2561\256\242\054\240\135\303\207\332M\204S\245a\374) ]
+>>
+startxref
+6369
+%%EOF
