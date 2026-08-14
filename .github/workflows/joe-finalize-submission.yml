@@ -1,0 +1,54 @@
+name: Finalize JoE submission PDFs
+
+on:
+  push:
+    branches:
+      - joe-editorial-rewrite-2026-08-10
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    if: ${{ !contains(github.event.head_commit.message, '[skip joe finalize]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out JoE submission branch
+        uses: actions/checkout@v4
+        with:
+          ref: joe-editorial-rewrite-2026-08-10
+          fetch-depth: 0
+          lfs: true
+
+      - name: Install LaTeX toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y latexmk texlive-latex-extra texlive-science texlive-pictures texlive-fonts-recommended poppler-utils
+
+      - name: Build final manuscript PDF
+        working-directory: paper-joe-submission/src
+        run: |
+          set -euo pipefail
+          latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+          pdftotext main.pdf - | grep -F "Vahid Torkzadeh: Supervision, Writing" >/dev/null
+
+      - name: Materialize final submission manuscript
+        run: |
+          set -euo pipefail
+          cp paper-joe-submission/src/main.pdf paper-joe-submission/submission/02_Manuscript_Record_Level_ECG_Classification.pdf
+          cp paper-joe-submission/src/main.pdf paper-joe-submission/submission/ECG_JoE_Manuscript_Final.pdf
+          mkdir -p .git/info
+          printf '%s\n' 'paper-joe-submission/submission/*.pdf -filter -diff -merge -text' >> .git/info/attributes
+
+      - name: Commit final PDF
+        run: |
+          set -euo pipefail
+          git config user.name "ALIREZA ABBASZADEH"
+          git config user.email "abbaszadeh79@gmail.com"
+          git add -f paper-joe-submission/submission/02_Manuscript_Record_Level_ECG_Classification.pdf paper-joe-submission/submission/ECG_JoE_Manuscript_Final.pdf
+          if git diff --cached --quiet; then
+            echo "Final manuscript PDF already current."
+            exit 0
+          fi
+          git commit -m "Build final JoE manuscript PDF [skip joe finalize]"
+          git push origin HEAD:joe-editorial-rewrite-2026-08-10
