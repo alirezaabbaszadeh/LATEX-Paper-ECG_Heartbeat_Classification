@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   build-and-audit:
@@ -68,42 +68,6 @@ jobs:
       - name: Record PDF metadata
         run: |
           pdfinfo paper-joe-submission/src/main.pdf | grep -E 'Pages|Page size'
-
-      - name: Materialize final submission PDFs
-        run: |
-          set -euo pipefail
-          cd paper-joe-submission
-          mkdir -p submission
-          base64 --decode submission/.staging/01_Cover_Letter_Journal_of_Electrocardiology.pdf.b64 > submission/01_Cover_Letter_Journal_of_Electrocardiology.pdf
-          cp src/main.pdf submission/02_Manuscript_Record_Level_ECG_Classification.pdf
-          cp src/main.pdf submission/ECG_JoE_Manuscript_Final.pdf
-          base64 --decode submission/.staging/03_Title_Page_with_Author_Details.pdf.b64 > submission/03_Title_Page_with_Author_Details.pdf
-          for pdf in \
-            submission/01_Cover_Letter_Journal_of_Electrocardiology.pdf \
-            submission/02_Manuscript_Record_Level_ECG_Classification.pdf \
-            submission/03_Title_Page_with_Author_Details.pdf; do
-            test -s "$pdf"
-            pdfinfo "$pdf" | grep -E 'Pages|Page size'
-          done
-
-      - name: Commit final submission PDFs to branch
-        run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git lfs install --local
-          git add \
-            paper-joe-submission/submission/01_Cover_Letter_Journal_of_Electrocardiology.pdf \
-            paper-joe-submission/submission/02_Manuscript_Record_Level_ECG_Classification.pdf \
-            paper-joe-submission/submission/03_Title_Page_with_Author_Details.pdf \
-            paper-joe-submission/submission/ECG_JoE_Manuscript_Final.pdf
-          git rm -r paper-joe-submission/submission/.staging
-          if git diff --cached --quiet; then
-            echo 'Final submission PDFs are already current.'
-            exit 0
-          fi
-          git commit -m "Refresh final JoE submission PDFs"
-          git push origin HEAD:joe-editorial-rewrite-2026-08-10
 
       - name: Upload manuscript preview
         uses: actions/upload-artifact@v4
