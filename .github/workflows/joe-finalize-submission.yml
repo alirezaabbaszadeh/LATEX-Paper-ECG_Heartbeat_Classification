@@ -1,16 +1,15 @@
 name: Finalize JoE submission PDFs
 
 on:
-  pull_request:
-    branches:
-      - main
+  schedule:
+    - cron: '2/5 * * * *'
+  workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
   finalize:
-    if: ${{ github.event.pull_request.head.ref == 'joe-editorial-rewrite-2026-08-10' }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out JoE submission branch
