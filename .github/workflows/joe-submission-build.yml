@@ -1,21 +1,25 @@
 name: JoE submission build
 
 on:
+  pull_request:
+    branches:
+      - joe-editorial-rewrite-2026-08-10
   push:
     branches:
       - joe-editorial-rewrite-2026-08-10
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build-and-audit:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out branch with study artwork
+      - name: Check out source branch with study artwork
         uses: actions/checkout@v4
         with:
+          ref: ${{ github.head_ref || github.ref_name }}
           fetch-depth: 0
           lfs: true
 
@@ -67,7 +71,24 @@ jobs:
 
       - name: Record PDF metadata
         run: |
-          pdfinfo paper-joe-submission/src/main.pdf | grep -E 'Pages|Page size'
+          pdfinfo paper-joe-submission/src/main.pdf | grep -E 'Pages|Page size|File size'
+
+      - name: Materialize final manuscript PDFs in repository
+        if: github.event_name == 'pull_request'
+        run: |
+          set -euo pipefail
+          cp paper-joe-submission/src/main.pdf paper-joe-submission/submission/02_Manuscript_Record_Level_ECG_Classification.pdf
+          cp paper-joe-submission/src/main.pdf paper-joe-submission/submission/ECG_JoE_Manuscript_Final.pdf
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add paper-joe-submission/submission/02_Manuscript_Record_Level_ECG_Classification.pdf \
+                  paper-joe-submission/submission/ECG_JoE_Manuscript_Final.pdf
+          if git diff --cached --quiet; then
+            echo "Final manuscript PDFs are already current."
+          else
+            git commit -m "Build final JoE manuscript with approved CRediT"
+            git push origin HEAD:${{ github.head_ref }}
+          fi
 
       - name: Upload manuscript preview
         uses: actions/upload-artifact@v4
