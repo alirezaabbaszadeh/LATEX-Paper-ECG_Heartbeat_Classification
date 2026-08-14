@@ -1,16 +1,16 @@
 name: Finalize JoE submission PDFs
 
 on:
-  push:
+  pull_request:
     branches:
-      - joe-editorial-rewrite-2026-08-10
+      - main
 
 permissions:
   contents: write
 
 jobs:
   finalize:
-    if: ${{ !contains(github.event.head_commit.message, '[skip joe finalize]') }}
+    if: ${{ github.event.pull_request.head.ref == 'joe-editorial-rewrite-2026-08-10' }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out JoE submission branch
@@ -20,12 +20,23 @@ jobs:
           fetch-depth: 0
           lfs: true
 
+      - name: Check whether finalizer already ran
+        id: guard
+        run: |
+          if git log -1 --pretty=%B | grep -Fq '[skip joe finalize]'; then
+            echo 'skip=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'skip=false' >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Install LaTeX toolchain
+        if: steps.guard.outputs.skip != 'true'
         run: |
           sudo apt-get update
           sudo apt-get install -y latexmk texlive-latex-extra texlive-science texlive-pictures texlive-fonts-recommended poppler-utils
 
       - name: Build final manuscript PDF
+        if: steps.guard.outputs.skip != 'true'
         working-directory: paper-joe-submission/src
         run: |
           set -euo pipefail
@@ -33,6 +44,7 @@ jobs:
           pdftotext main.pdf - | grep -F "Vahid Torkzadeh: Supervision, Writing" >/dev/null
 
       - name: Materialize final submission manuscript
+        if: steps.guard.outputs.skip != 'true'
         run: |
           set -euo pipefail
           cp paper-joe-submission/src/main.pdf paper-joe-submission/submission/02_Manuscript_Record_Level_ECG_Classification.pdf
@@ -41,6 +53,7 @@ jobs:
           printf '%s\n' 'paper-joe-submission/submission/*.pdf -filter -diff -merge -text' >> .git/info/attributes
 
       - name: Commit final PDF
+        if: steps.guard.outputs.skip != 'true'
         run: |
           set -euo pipefail
           git config user.name "ALIREZA ABBASZADEH"
