@@ -1,0 +1,64 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{hyperref}
+\usepackage{parskip}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=blue
+}
+
+\begin{document}
+
+\textbf{\large COVER LETTER}
+
+\vspace{0.3cm}
+August 24, 2026
+
+\vspace{0.4cm}
+To:\\
+The Editor-in-Chief\\
+\textbf{\textit{Revista Portuguesa de Cardiologia}} (Portuguese Journal of Cardiology)\\
+Elsevier Editorial System
+
+\vspace{0.5cm}
+\textbf{Subject: Submission of Original Research Manuscript}
+
+\vspace{0.3cm}
+Dear Editor-in-Chief,
+
+Please consider our original research manuscript, \textbf{``Record-Level Evaluation of a Morlet CNN--Conformer for Five-Class ECG Beat Classification,''} for publication in \textit{Revista Portuguesa de Cardiologia}.
+
+Automatic electrocardiogram (ECG) beat classification and arrhythmia screening are cornerstone capabilities for modern cardiovascular telemonitoring, wearable cardiac devices, and hospital telemetry. However, common methodological pitfalls---notably random beat-level data splitting and opaque summary metrics---often mask severe model failures on critical minority arrhythmias (such as supraventricular ectopic beats and fusion beats).
+
+In this work, we present a patient-independent, record-level evaluation of a 32-scale Morlet continuous wavelet transform coupled with a Conformer sequence encoder on 45 MIT--BIH records. While the Conformer architecture achieved superior aggregate performance (accuracy 0.60, macro-F1 0.26, weighted-F1 0.68) compared to CNN-attention, CNN-LSTM, and baseline CNN models, our failure-aware analysis shows that performance gains were concentrated almost exclusively in dominant classes (Normal and ventricular ectopic beats), with near-zero recognition of rare arrhythmias. We provide a thorough error matrix, threshold sensitivity, and calibration diagnostic to establish realistic boundaries for deep learning translation in clinical cardiology.
+
+\textbf{Author Declarations and Confirmations:}
+\begin{enumerate}
+  \item \textbf{Originality:} This manuscript is original, has not been published elsewhere, and is not concurrently submitted to any other journal.
+  \item \textbf{Authorship Approval:} All co-authors have reviewed, contributed to, and approved the final manuscript.
+  \item \textbf{Competing Interests:} The authors declare no financial or personal conflicts of interest.
+  \item \textbf{Funding:} This research received no specific grant from public, commercial, or non-profit funding bodies.
+  \item \textbf{Ethics:} Ethical approval and informed consent were not required as this computational study utilized the open-access, fully de-identified MIT--BIH dataset via PhysioNet.
+  \item \textbf{Reproducibility:} Complete source code, model checkpoints, and prediction arrays are publicly available in our versioned GitHub release.
+\end{enumerate}
+
+Thank you very much for your consideration of our manuscript.
+
+\vspace{0.6cm}
+Sincerely yours,
+
+\textbf{Alireza Abbaszadeh} (Corresponding Author)\\
+Department of Computer Engineering, Islamic Azad University, Mashhad, Iran\\
+Email: \href{mailto:alireza.abbaszadeh8558@iau.ir}{alireza.abbaszadeh8558@iau.ir}\\
+Phone: +98 915 206 2041\\
+ORCID: \href{https://orcid.org/0009-0007-8253-6042}{0009-0007-8253-6042}
+
+\vspace{0.3cm}
+\textit{On behalf of:} Alireza Abbaszadeh and Vahid Torkzadeh
+
+\end{document}
