@@ -1,0 +1,62 @@
+\documentclass{article}
+\usepackage[paperwidth=13in,paperheight=5.5in,margin=0.2in]{geometry}
+\usepackage{tikz}
+\renewcommand{\familydefault}{\sfdefault}
+\usetikzlibrary{arrows.meta, positioning, calc}
+
+\definecolor{darknavy}{HTML}{1B263B}
+\definecolor{cardioblue}{HTML}{D6E4FF}
+\definecolor{cardiogreen}{HTML}{E8F5E9}
+\definecolor{cardioorange}{HTML}{FFF3E0}
+\definecolor{cardiopurple}{HTML}{F3E5F5}
+\definecolor{accentred}{HTML}{B71C1C}
+
+\pagestyle{empty}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily, >=latex, node distance=0.9cm]
+  \tikzstyle{stage} = [draw=darknavy, rounded corners=3mm, minimum width=4.4cm,
+    minimum height=3.6cm, align=center, line width=0.9pt]
+
+  % Stage 1: Cohort
+  \node[stage, fill=cardioblue, text width=4.1cm] (data)
+    {\textbf{\large MIT--BIH Cohort}\\[3pt]
+     45 Records $\cdot$ 110{,}919 Beats\\[5pt]
+     \textbf{Patient-Level Holdout:}\\
+     38 Dev Records (83\%)\\
+     7 Test Records (17\%)};
+
+  % Stage 2: Representation
+  \node[stage, fill=cardiogreen, right=2.8cm of data, text width=4.1cm] (prep)
+    {\textbf{\large Morlet Scalograms}\\[3pt]
+     32 Scales $\times$ 187 Samples\\[5pt]
+     \textbf{3-Beat Window Context:}\\
+     Captures transient morphology\\
+     \& local rhythm dynamics};
+
+  % Stage 3: Architecture
+  \node[stage, fill=cardioorange, right=2.8cm of prep, text width=4.1cm] (model)
+    {\textbf{\large CNN--Conformer}\\[3pt]
+     3-Layer Scalogram CNN Stem\\
+     $+$ Conformer Sequence Block\\[5pt]
+     Multi-Head Self-Attention\\
+     $+$ Depthwise Convolutions};
+
+  % Stage 4: Findings
+  \node[stage, fill=cardiopurple, right=2.8cm of model, text width=4.1cm] (output)
+    {\textbf{\large Diagnostic Findings}\\[3pt]
+     Accuracy 0.60 $\cdot$ Weighted-F1 0.68\\
+     Normal F1: 0.74 $\cdot$ VEB F1: 0.57\\[4pt]
+     {\color{accentred}\textbf{Critical Insight:}}\\
+     Rare classes (SVEB/Fusion)\\
+     fail under patient holdout};
+
+  % Connecting Arrows
+  \draw[->, line width=1.4pt, darknavy] (data) -- (prep);
+  \draw[->, line width=1.4pt, darknavy] (prep) -- (model);
+  \draw[->, line width=1.4pt, darknavy] (model) -- (output);
+
+  % Bottom Banner
+  \node[below=1.0cm of $(prep)!0.5!(model)$, text width=16cm, align=center, darknavy]
+    {\textbf{Conclusion for Clinical AI:} Record-level validation is essential to expose arrhythmia triage failures before wearable deployment.};
+\end{tikzpicture}
+\end{document}
