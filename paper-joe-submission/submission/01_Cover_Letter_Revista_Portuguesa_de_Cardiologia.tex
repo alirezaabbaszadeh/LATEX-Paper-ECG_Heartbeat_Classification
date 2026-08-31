@@ -1,66 +1,41 @@
 \documentclass[11pt,a4paper]{article}
-\usepackage[margin=1in]{geometry}
+\usepackage[margin=0.78in]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage{microtype}
 \usepackage{hyperref}
-
-\hypersetup{
-  colorlinks=true,
-  linkcolor=blue,
-  urlcolor=blue,
-  citecolor=blue
-}
-
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{0.7em}
-
+\setlength{\parskip}{0.55em}
+\hypersetup{colorlinks=true,urlcolor=blue}
 \begin{document}
-
 \textbf{\large COVER LETTER}
 
-\vspace{0.3cm}
-August 24, 2026
+August 31, 2026
 
-\vspace{0.4cm}
-To:\\
 The Editor-in-Chief\\
-\textbf{\textit{Revista Portuguesa de Cardiologia}} (Portuguese Journal of Cardiology)\\
-Elsevier Editorial System
+\textit{Revista Portuguesa de Cardiologia}
 
-\vspace{0.5cm}
 \textbf{Subject: Submission of an Original Investigation}
 
-\vspace{0.3cm}
 Dear Editor-in-Chief,
 
-Please consider our original research manuscript, \textbf{``Record-Level Evaluation of a Morlet CNN--Conformer for Five-Class ECG Beat Classification,''} for publication in \textit{Revista Portuguesa de Cardiologia}.
+Please consider our manuscript, \textbf{"Record-Level Evaluation of a Morlet CNN--Conformer for Five-Class ECG Beat Classification,"} as an Original Investigation in \textit{Revista Portuguesa de Cardiologia}.
 
-Automatic electrocardiogram (ECG) beat classification and arrhythmia screening are cornerstone capabilities for modern cardiovascular telemonitoring, wearable cardiac devices, and hospital telemetry. However, common methodological pitfalls---notably random beat-level data splitting and opaque summary metrics---often mask severe model failures on critical minority arrhythmias (such as supraventricular ectopic beats and fusion beats).
+Automated ECG classification is increasingly relevant to ambulatory monitoring and cardiovascular telehealth, yet random beat-level splitting and aggregate metrics can overstate performance when rare arrhythmias are unevenly distributed across patients. Our study addresses this methodological issue by evaluating a Morlet CNN--Conformer using a strict record-level holdout of complete MIT--BIH recordings.
 
-In this work, we present a patient-independent, record-level evaluation of a 32-scale Morlet continuous wavelet transform coupled with a Conformer sequence encoder on 45 MIT--BIH records. While the Conformer architecture achieved superior aggregate performance (accuracy 0.60, macro-F1 0.26, weighted-F1 0.68) compared to CNN-attention, CNN-LSTM, and baseline CNN models, our failure-aware analysis shows that performance gains were concentrated almost exclusively in dominant classes (Normal and ventricular ectopic beats), with near-zero recognition of rare arrhythmias. We provide a thorough error matrix, threshold sensitivity, and calibration diagnostic to establish realistic boundaries for deep learning translation in clinical cardiology.
+Across 15{,}573 held-out three-beat sequences, the CNN--Conformer ranked first among four evaluated architectures on aggregate metrics (accuracy 0.60, macro-F1 0.26, weighted-F1 0.68). Importantly, class-specific analysis showed that the apparent gain was concentrated in Normal and ventricular ectopic beats, whereas SVEB and Fusion recognition remained near zero. We believe this failure-aware result is relevant to readers interested in clinically responsible evaluation of AI-enabled ECG systems, because it demonstrates why record separation, class support, and class-specific metrics must accompany headline performance values.
 
-\textbf{Author Declarations and Confirmations:}
-\begin{enumerate}
-  \item \textbf{Originality:} This manuscript is original, has not been published elsewhere, and is not concurrently submitted to any other journal.
-  \item \textbf{Authorship Approval:} All co-authors have reviewed, contributed to, and approved the final manuscript.
-  \item \textbf{Competing Interests:} The authors declare no financial or personal conflicts of interest.
-  \item \textbf{Funding:} This research received no specific grant from public, commercial, or non-profit funding bodies.
-  \item \textbf{Ethics:} Ethical approval and informed consent were not required as this computational study utilized the open-access, fully de-identified MIT--BIH dataset via PhysioNet.
-  \item \textbf{Reproducibility:} Complete source code, model checkpoints, and prediction arrays are publicly available in our versioned GitHub release.
-\end{enumerate}
+The manuscript is original, has not been published previously, and is not under consideration by another journal. Both authors have read and approved the submitted version. This work received no specific external funding. \textbf{Declarations of interest: none.} Ethics committee approval and informed consent were not required because the study used only publicly available, fully de-identified MIT--BIH data; no participants were prospectively recruited or contacted and no new identifiable human data were collected. The code, experiment configurations, trained models, and prediction arrays underlying the reported analyses are publicly available through a versioned GitHub software release.
 
-Thank you very much for your consideration of our manuscript.
+Thank you for considering our work.
 
-\vspace{0.6cm}
-Sincerely yours,
+Sincerely,
 
-\textbf{Alireza Abbaszadeh} (Corresponding Author)\\
-Department of Computer Engineering, Mashhad Branch, Islamic Azad University, Ostad Yousefi St., Ghasem Abad, Mashhad 91871, Iran\\
+\textbf{Alireza Abbaszadeh}, Corresponding Author\\
+Department of Computer Engineering, Mashhad Branch, Islamic Azad University\\
+Ostad Yousefi St., Ghasem Abad, Mashhad 91871, Iran\\
 Email: \href{mailto:alireza.abbaszadeh8558@iau.ir}{alireza.abbaszadeh8558@iau.ir}\\
-Phone: +98 915 206 2041\\
+Telephone: +98 915 206 2041\\
 ORCID: \href{https://orcid.org/0009-0007-8253-6042}{0009-0007-8253-6042}
 
-\vspace{0.3cm}
-\textit{On behalf of:} Alireza Abbaszadeh and Vahid Torkzadeh
-
+On behalf of Alireza Abbaszadeh and Vahid Torkzadeh
 \end{document}

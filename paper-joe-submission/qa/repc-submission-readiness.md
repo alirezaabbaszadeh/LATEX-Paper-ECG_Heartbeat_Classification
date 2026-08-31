@@ -40,10 +40,10 @@ Status date: 2026-08-29
 
 ### Automated/preflight checks still required
 
-- [ ] Compile the manuscript and every ancillary TeX file without errors.
-- [ ] Verify the graphical abstract is horizontal and at least 1328 x 531 px (or proportional equivalent) and readable at the journal's stated display size.
-- [ ] Verify all references cited in text are present in the bibliography and vice versa.
-- [ ] Audit DOI/persistent identifiers and bibliographic completeness for the final reference list.
+- [x] Compile the manuscript and every ancillary TeX file without errors (local TinyTeX preflight).
+- [x] Draft graphical abstract is horizontal and 4200 x 1860 px at 300 dpi, exceeding the journal minimum; final policy-compliant human/non-generative recreation remains a separate provenance gate.
+- [x] All 24 active in-text citation keys are present in the bibliography; uncited library entries are not emitted by BibTeX.
+- [x] All 24 active references carry DOI/persistent identifiers and were resolver/bibliographic-audited.
 - [ ] Verify final PDF visually for figure/table placement, line breaks, hyperlinks and no clipping/overlap.
 
 ## Reproducibility link policy
