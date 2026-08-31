@@ -31,9 +31,9 @@ Status date: 2026-08-29
 
 ### Author-supplied blockers before final upload
 
-- [ ] Provide the full postal address for each affiliation; the journal requests full postal affiliation addresses.
+- [x] Publication-style postal affiliation added: Department of Computer Engineering, Mashhad Branch, Islamic Azad University, Mashhad 9187147578, Iran; final author confirmation remains recommended at portal entry.
 - [ ] Confirm the exact wording/name of affiliation 2 (`Ma.C., Islamic Azad University`) as it should appear in publication metadata.
-- [ ] Add the manuscript word count to the title page.
+- [ ] Add the final manuscript word count to the title page after the final texcount pass.
 - [ ] Author/professional check of the Portuguese (Portugal) title, abstract and keywords.
 - [ ] Confirm the AI-use statement accurately describes the authors' actual use and approve it.
 - [ ] Complete the journal's official detailed Declaration of Interest form; the local PDF is a summary/supporting document, not a substitute for the journal form.
