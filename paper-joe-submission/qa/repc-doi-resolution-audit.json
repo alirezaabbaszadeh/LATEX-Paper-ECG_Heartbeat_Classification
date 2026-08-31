@@ -1,0 +1,151 @@
+{
+  "date": "2026-08-31",
+  "count": 24,
+  "passed": 21,
+  "entries": [
+    {
+      "key": "addison2005wavelet",
+      "doi": "10.1088/0967-3334/26/5/R01",
+      "http": "200",
+      "effective": "https://iopscience.iop.org/article/10.1088/0967-3334/26/5/R01"
+    },
+    {
+      "key": "ba2016layer",
+      "doi": "10.48550/arXiv.1607.06450",
+      "http": "200",
+      "effective": "https://arxiv.org/abs/1607.06450"
+    },
+    {
+      "key": "dechazal2004automatic",
+      "doi": "10.1109/TBME.2004.827359",
+      "http": "202",
+      "effective": "https://ieeexplore.ieee.org/document/1306572/"
+    },
+    {
+      "key": "demolder2024certainty",
+      "doi": "10.1016/j.jelectrocard.2024.01.008",
+      "http": "200",
+      "effective": "https://linkinghub.elsevier.com/retrieve/pii/S0022073624000165"
+    },
+    {
+      "key": "demolder2025digitization",
+      "doi": "10.1016/j.jelectrocard.2025.153900",
+      "http": "200",
+      "effective": "https://linkinghub.elsevier.com/retrieve/pii/S0022073625000287"
+    },
+    {
+      "key": "doggart2025singlelead",
+      "doi": "10.1016/j.jelectrocard.2025.154082",
+      "http": "200",
+      "effective": "https://linkinghub.elsevier.com/retrieve/pii/S0022073625002109"
+    },
+    {
+      "key": "fawcett2006introduction",
+      "doi": "10.1016/j.patrec.2005.10.010",
+      "http": "200",
+      "effective": "https://linkinghub.elsevier.com/retrieve/pii/S016786550500303X"
+    },
+    {
+      "key": "goldberger2000physiobank",
+      "doi": "10.1161/01.CIR.101.23.e215",
+      "http": "403",
+      "effective": "https://www.ahajournals.org/doi/10.1161/01.CIR.101.23.e215"
+    },
+    {
+      "key": "gulati2020conformer",
+      "doi": "10.21437/Interspeech.2020-3015",
+      "http": "451",
+      "effective": "https://www.isca-archive.org/interspeech_2020/gulati20_interspeech.html"
+    },
+    {
+      "key": "he2009learning",
+      "doi": "10.1109/TKDE.2008.239",
+      "http": "202",
+      "effective": "https://ieeexplore.ieee.org/document/5128907/"
+    },
+    {
+      "key": "he2016deep",
+      "doi": "10.1109/CVPR.2016.90",
+      "http": "202",
+      "effective": "https://ieeexplore.ieee.org/document/7780459/"
+    },
+    {
+      "key": "herman2024validation",
+      "doi": "10.1016/j.jelectrocard.2023.12.009",
+      "http": "200",
+      "effective": "https://linkinghub.elsevier.com/retrieve/pii/S0022073623002698"
+    },
+    {
+      "key": "li2018hyperband",
+      "doi": "10.48550/arXiv.1603.06560",
+      "http": "200",
+      "effective": "https://arxiv.org/abs/1603.06560"
+    },
+    {
+      "key": "mallat1989wavelet",
+      "doi": "10.1109/34.192463",
+      "http": "202",
+      "effective": "https://ieeexplore.ieee.org/document/192463/"
+    },
+    {
+      "key": "mantravadi2024clinet",
+      "doi": "10.1016/j.jelectrocard.2024.01.004",
+      "http": "200",
+      "effective": "https://linkinghub.elsevier.com/retrieve/pii/S0022073624000141"
+    },
+    {
+      "key": "moody2001impact",
+      "doi": "10.1109/51.932724",
+      "http": "202",
+      "effective": "https://ieeexplore.ieee.org/document/932724/"
+    },
+    {
+      "key": "petmezas2026optimizing",
+      "doi": "10.1016/j.jelectrocard.2026.154199",
+      "http": "200",
+      "effective": "https://linkinghub.elsevier.com/retrieve/pii/S0022073626000166"
+    },
+    {
+      "key": "pukkila2026chronic",
+      "doi": "10.1016/j.jelectrocard.2026.154242",
+      "http": "200",
+      "effective": "https://linkinghub.elsevier.com/retrieve/pii/S0022073626000592"
+    },
+    {
+      "key": "saito2015precision",
+      "doi": "10.1371/journal.pone.0118432",
+      "http": "200",
+      "effective": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0118432"
+    },
+    {
+      "key": "torrence1998practical",
+      "doi": "10.1175/1520-0477(1998)079<0061:APGTWA>2.0.CO;2",
+      "http": "403",
+      "effective": "https://journals.ametsoc.org:443/view/journals/bams/79/1/1520-0477_1998_079_0061_apgtwa_2_0_co_2.xml"
+    },
+    {
+      "key": "tuboly2026malignant",
+      "doi": "10.1016/j.jelectrocard.2026.154194",
+      "http": "200",
+      "effective": "https://linkinghub.elsevier.com/retrieve/pii/S0022073626000117"
+    },
+    {
+      "key": "vainoryte2025diagnostic",
+      "doi": "10.1016/j.jelectrocard.2025.154020",
+      "http": "200",
+      "effective": "https://linkinghub.elsevier.com/retrieve/pii/S0022073625001487"
+    },
+    {
+      "key": "vaswani2017attention",
+      "doi": "10.48550/arXiv.1706.03762",
+      "http": "200",
+      "effective": "https://arxiv.org/abs/1706.03762"
+    },
+    {
+      "key": "wang2025mrsenet",
+      "doi": "10.1016/j.jelectrocard.2024.153858",
+      "http": "200",
+      "effective": "https://linkinghub.elsevier.com/retrieve/pii/S0022073624003285"
+    }
+  ]
+}

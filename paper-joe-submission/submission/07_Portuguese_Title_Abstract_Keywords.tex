@@ -1,0 +1,27 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.7em}
+
+\begin{document}
+\begin{center}
+  \textbf{\Large Título, Resumo e Palavras-chave em Português}
+\end{center}
+
+\textbf{Título:} Avaliação ao Nível do Registo de uma CNN--Conformer com Morlet para Classificação de Batimentos de ECG em Cinco Classes
+
+\textbf{Introdução e objetivos:} O desequilíbrio entre classes e a reutilização dos batimentos de um mesmo doente durante o desenvolvimento e o teste do modelo podem inflacionar o desempenho da classificação de ECG. Avaliámos uma CNN--Conformer com Morlet num conjunto de teste separado ao nível do registo e examinámos os erros subjacentes às métricas globais.
+
+\textbf{Métodos:} Quarenta e cinco registos da base MIT--BIH foram divididos num conjunto de desenvolvimento com 38 registos e num conjunto de teste com sete registos. As anotações de referência centraram segmentos de 187 amostras do primeiro canal de ECG. As magnitudes de uma transformada wavelet contínua de Morlet com 32 escalas foram agrupadas em sequências de três batimentos. Um codificador convolucional partilhado, seguido de um Conformer, foi comparado com modelos CNN--attention, CNN--LSTM e apenas CNN.
+
+\textbf{Resultados:} O conjunto de teste continha 15\,573 sequências. A CNN--Conformer alcançou uma exatidão de 0,60 (IC 95\% 0,59--0,60), macro-F1 de 0,26 (0,26--0,27) e F1 ponderado de 0,68 (0,67--0,68), os valores mais elevados entre os quatro modelos. O F1 foi de 0,74 para batimentos normais e 0,57 para batimentos ectópicos ventriculares, mas de 0,002 para batimentos ectópicos supraventriculares e 0,007 para batimentos de fusão. A maioria dos batimentos ectópicos supraventriculares foi classificada como normal, enquanto a maioria dos batimentos de fusão foi classificada como ectópica ventricular.
+
+\textbf{Conclusões:} O codificador sequencial baseado em Conformer melhorou o desempenho agregado nesta experiência, mas o ganho concentrou-se sobretudo nas duas classes mais frequentes. Antes de uma avaliação externa, deverão ser testados um contexto rítmico mais longo, o segundo canal e estratégias para classes minoritárias selecionadas apenas no conjunto de desenvolvimento.
+
+\textbf{Palavras-chave:} eletrocardiografia; classificação de batimentos cardíacos; validação ao nível do registo; Conformer; transformada wavelet contínua; desequilíbrio entre classes.
+
+\end{document}

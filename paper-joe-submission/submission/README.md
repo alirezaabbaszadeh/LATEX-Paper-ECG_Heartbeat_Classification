@@ -1,38 +1,24 @@
-# Journal of Electrocardiology submission package notes
+# Revista Portuguesa de Cardiologia submission package
 
-This directory contains submission-facing files kept separate from the main LaTeX source.
+This directory contains the submission-facing files for the Revista Portuguesa de Cardiologia (REPC) adaptation of the final scientific manuscript.
 
-## Included files
+Canonical files:
+- 01_Cover_Letter_Revista_Portuguesa_de_Cardiologia.pdf
+- 02_Manuscript_Record_Level_ECG_Classification.pdf
+- 03_Ethical_Statement.pdf
+- 04_Graphical_Abstract.pdf / 04_Graphical_Abstract.png
+- 05_Title_Page_with_Author_Details.pdf
+- 06_Declaration_of_Interest_Statement.pdf
+- 07_Portuguese_Title_Abstract_Keywords.pdf
+- 08_Supplementary_Material.pdf
 
-- `ECG_JoE_Manuscript_Final.pdf` — built manuscript with the current author metadata.
-- `Highlights.txt` — five editable highlights; every bullet is below 85 characters.
-- `Figure_Captions.txt` — captions/disclosures for the four main figures in manuscript order.
+The primary manuscript is built from ../src/main.tex. Supplementary material is built separately from ../supplementary/supplementary.tex.
 
-## Main manuscript
+Reproducibility:
+- public development repository: https://github.com/alirezaabbaszadeh/ECG_Heartbeat_Classification
+- immutable experimental snapshot: v1.0-joe-submission
 
-Build from `paper-joe-submission/src/`:
+Important graphical-abstract gate:
+The current 04_Graphical_Abstract TeX/PDF is an AI-assisted layout draft and data specification. Current Elsevier artwork policy does not permit a general-purpose generative-AI tool to create a submitted graphical abstract. Before portal upload, the same scientific content must be recreated or independently approved in a journal-permitted non-generative scientific/professional illustration workflow, and that compliant file must replace the draft at the canonical 04_Graphical_Abstract path.
 
-```bash
-latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
-```
-
-The manuscript is double-spaced and uses editable LaTeX tables and TikZ vector figures.
-
-## Figure policy and disclosure
-
-Current Elsevier policy permits AI-assisted explanatory images and reproducible data visualisations when their use is transparent and the underlying scientific content is not fabricated or altered. The four main TikZ figures therefore include explicit caption disclosure, and the Methods section identifies OpenAI ChatGPT (GPT-5.6 Sol), the purpose of its use, and the evidence source. The supplementary confusion matrix, ROC curves, and precision--recall curves were regenerated deterministically from the unchanged archived prediction arrays.
-
-A graphical abstract generated with a general-purpose generative-AI tool is not included. If one is added, it should use a journal-compatible dedicated scientific/professional illustration workflow and be checked against the current policy at submission time.
-
-## Editorial evidence boundary
-
-The source of truth for quantitative wording and figure labels is `qa/claim-ledger.md`. Do not strengthen a claim or change a plotted value beyond that ledger without adding and verifying new experimental evidence.
-
-## Required author-side checks before upload
-
-- Confirm full postal affiliation/contact details required by the submission system.
-- Review and approve every AI-assisted textual and visual revision.
-- Convert the working AI declaration to final author-approved wording before upload.
-- Create a versioned/immutable repository release and cite it in the Data Availability statement.
-- Confirm the regenerated diagnostic PNGs and final 23-page production PDF.
-- Re-check the journal's current AI/artwork instructions on the actual submission date.
+See ../qa/repc-submission-readiness.md for the final pass/fail gate.

@@ -30,7 +30,7 @@
     {{\textbf{\large 1. MIT--BIH Cohort}}\\[4pt]
      {\small $\bullet$ 45 Ambulatory Records}\\[2pt]
      {\small $\bullet$ 110{,}919 Reference Beats}\\[5pt]
-     \textbf{\footnotesize Patient-Level Holdout:}\\[2pt]
+     \textbf{\footnotesize Record-Level Holdout:}\\[2pt]
      {\footnotesize 38 Development Records (83\%)}\\[1pt]
      {\footnotesize 7 Strict Test Records (17\%)}\\[1pt]
      {\scriptsize (15{,}573 Evaluation Sequences)}};
@@ -43,7 +43,7 @@
      \textbf{\footnotesize 3-Beat Sequence Window:}\\[2pt]
      {\footnotesize Captures Transient Morphology}\\[1pt]
      {\footnotesize \& Short-Range Rhythm Dynamics}\\[1pt]
-     {\scriptsize (Normalized across beats \& scales)}};
+     {\scriptsize (Training-record normalization)}};
 
   % Stage 3: Architecture
   \node[stagebox, fill=cardioorange, draw=borderorange, text width=4.5cm, right=1.6cm of prep] (model)
@@ -57,12 +57,12 @@
 
   % Stage 4: Findings
   \node[stagebox, fill=cardiopurple, draw=borderpurple, text width=4.5cm, right=1.6cm of model] (output)
-    {{\textbf{\large 4. Clinical Findings}}\\[4pt]
+    {{\textbf{\large 4. Held-Out Findings}}\\[4pt]
      {\small $\bullet$ Accuracy: \textbf{0.60} $\mid$ Weighted-F1: \textbf{0.68}}\\[2pt]
      {\small $\bullet$ Normal: \textbf{0.74} $\mid$ VEB: \textbf{0.57}}\\[5pt]
      {\color{accentred}\textbf{\footnotesize Critical Failure Insight:}}\\[2pt]
      {\footnotesize SVEB (F1: 0.002) \& Fusion (0.007)}\\[1pt]
-     {\footnotesize fail under patient separation}\\[1pt]
+     {\footnotesize were rarely recognized}\\[1pt]
      {\scriptsize (High weighted-F1 hides minority gap)}};
 
   % Connecting Arrows with Colors
@@ -74,7 +74,7 @@
   \node[draw=bannerborder, fill=bannerbg, rounded corners=3mm, line width=1pt,
         text width=21cm, align=center, inner sep=9pt, anchor=north] (banner) at ($(prep.south)!0.5!(model.south) + (0, -0.7cm)$)
     {{\textbf{\normalsize Workflow Pipeline:}} PhysioNet MIT--BIH $\longrightarrow$ Morlet Wavelet Scalograms (32 Scales) $\longrightarrow$ CNN Beat Encoder $\longrightarrow$ Conformer Sequence Block $\longrightarrow$ Failure-Aware Diagnostic Readout\\[3pt]
-     {\footnotesize \textbf{Core Takeaway for AI Cardiology:} Strict record-level validation exposes critical arrhythmia triage failures that standard random splits conceal.}};
+     {\footnotesize \textbf{Core Takeaway for AI Cardiology:} Strict record-level validation reveals severe minority-class errors despite stronger aggregate scores.}};
 
 \end{tikzpicture}
 \end{center}
