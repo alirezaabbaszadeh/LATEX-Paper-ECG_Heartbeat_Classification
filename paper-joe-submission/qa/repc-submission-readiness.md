@@ -33,7 +33,7 @@ Status date: 2026-08-29
 
 - [x] Publication-style postal affiliation added: Department of Computer Engineering, Mashhad Branch, Islamic Azad University, Mashhad 9187147578, Iran; final author confirmation remains recommended at portal entry.
 - [ ] Confirm the exact wording/name of affiliation 2 (`Ma.C., Islamic Azad University`) as it should appear in publication metadata.
-- [ ] Add the final manuscript word count to the title page after the final texcount pass.
+- [ ] Add the final manuscript word count to the title page after the final automated count.
 - [ ] Author/professional check of the Portuguese (Portugal) title, abstract and keywords.
 - [ ] Confirm the AI-use statement accurately describes the authors' actual use and approve it.
 - [ ] Complete the journal's official detailed Declaration of Interest form; the local PDF is a summary/supporting document, not a substitute for the journal form.
@@ -49,3 +49,12 @@ Status date: 2026-08-29
 ## Reproducibility link policy
 
 The experimental outputs are unchanged from the verified software snapshot. Until a journal-neutral release alias is intentionally created, cite the existing immutable release rather than a moving branch. The public repository root is also linked for ongoing development.
+
+
+### Non-automatable author confirmations
+
+- [ ] Authors confirm the publication spelling and postal affiliation used in the submission metadata.
+- [ ] Authors confirm the Portuguese (Portugal) translation or obtain a human language review.
+- [ ] Authors confirm the AI-use statement accurately describes the writing assistance.
+- [ ] The mandatory graphical abstract is recreated or independently approved using a journal-permitted non-generative scientific/professional illustration workflow; the current AI-assisted TikZ draft is retained only as a layout/data specification and must not be uploaded as the final graphical abstract.
+- [ ] Complete the journal's official detailed Declaration of Interest form in the submission system.
