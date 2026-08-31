@@ -66,3 +66,5 @@ The experimental outputs are unchanged from the verified software snapshot. Unti
 - [x] Structured English abstract: 208 whitespace-delimited source words, below the current 250-word limit.
 - [x] Keywords: 6, within the current 3--10 keyword range.
 - [x] Active bibliography citations: 24 unique references, below the current limit of 75.
+
+- [x] Supplementary material separated from the primary manuscript into its own upload-ready PDF source.
