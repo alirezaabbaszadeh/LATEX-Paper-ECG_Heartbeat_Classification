@@ -58,3 +58,11 @@ The experimental outputs are unchanged from the verified software snapshot. Unti
 - [ ] Authors confirm the AI-use statement accurately describes the writing assistance.
 - [ ] The mandatory graphical abstract is recreated or independently approved using a journal-permitted non-generative scientific/professional illustration workflow; the current AI-assisted TikZ draft is retained only as a layout/data specification and must not be uploaded as the final graphical abstract.
 - [ ] Complete the journal's official detailed Declaration of Interest form in the submission system.
+
+
+### Automated manuscript-size audit
+
+- [x] Main text word count: 2,338 words (Introduction through Conclusions; excludes abstract, references, tables/figure content, declarations, and supplementary material), below the current 5,000-word Original Investigation limit.
+- [x] Structured English abstract: 208 whitespace-delimited source words, below the current 250-word limit.
+- [x] Keywords: 6, within the current 3--10 keyword range.
+- [x] Active bibliography citations: 24 unique references, below the current limit of 75.
