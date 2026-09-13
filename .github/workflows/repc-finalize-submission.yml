@@ -1,9 +1,10 @@
-name: Finalize RPC submission PDFs
+name: Finalize REPC submission PDFs
 
 on:
   push:
     branches:
       - repc-submission
+      - repc-finalization-2026-08-29
   workflow_dispatch:
 
 permissions:
@@ -13,17 +14,17 @@ jobs:
   finalize:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out RPC submission branch
+      - name: Check out current submission branch
         uses: actions/checkout@v4
         with:
-          ref: repc-submission
+          ref: ${{ github.ref_name }}
           fetch-depth: 0
           lfs: true
 
-      - name: Install LaTeX toolchain & tools
+      - name: Install LaTeX toolchain and PDF tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y latexmk texlive-latex-extra texlive-science texlive-pictures texlive-fonts-recommended poppler-utils ghostscript imagemagick
+          sudo apt-get install -y latexmk texlive-latex-extra texlive-science texlive-pictures texlive-fonts-recommended texlive-lang-portuguese poppler-utils ghostscript imagemagick
 
       - name: Build main manuscript PDF
         working-directory: paper-joe-submission/src
@@ -31,6 +32,8 @@ jobs:
           set -euo pipefail
           latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
           pdftotext main.pdf - | grep -F "Vahid Torkzadeh: Supervision, Writing" >/dev/null
+          pdftotext main.pdf - | grep -F "Declarations of interest: none." >/dev/null
+          pdftotext main.pdf - | grep -F "ECG Heartbeat Classification GitHub repository" >/dev/null
 
       - name: Build submission ancillary PDFs
         working-directory: paper-joe-submission/submission
@@ -40,12 +43,13 @@ jobs:
           latexmk -pdf -interaction=nonstopmode -halt-on-error 03_Ethical_Statement.tex
           latexmk -pdf -interaction=nonstopmode -halt-on-error 04_Graphical_Abstract.tex
           latexmk -pdf -interaction=nonstopmode -halt-on-error 05_Title_Page_with_Author_Details.tex
-          
-          # Convert graphical abstract to high-res PNG for Elsevier submission
-          pdftoppm -png -r 300 04_Graphical_Abstract.pdf 04_Graphical_Abstract
-          mv 04_Graphical_Abstract-1.png 04_Graphical_Abstract.png
+          latexmk -pdf -interaction=nonstopmode -halt-on-error 06_Declaration_of_Interest_Statement.tex
+          latexmk -pdf -interaction=nonstopmode -halt-on-error 07_Portuguese_Title_Abstract_Keywords.tex
 
-      - name: Materialize submission PDFs
+          pdftoppm -png -r 300 -singlefile 04_Graphical_Abstract.pdf 04_Graphical_Abstract
+          identify 04_Graphical_Abstract.png
+
+      - name: Materialize manuscript PDF
         run: |
           set -euo pipefail
           cp paper-joe-submission/src/main.pdf paper-joe-submission/submission/02_Manuscript_Record_Level_ECG_Classification.pdf
@@ -53,15 +57,32 @@ jobs:
           printf '%s\n' 'paper-joe-submission/submission/*.pdf -filter -diff -merge -text' >> .git/info/attributes
           printf '%s\n' 'paper-joe-submission/submission/*.png -filter -diff -merge -text' >> .git/info/attributes
 
-      - name: Commit final PDFs
+      - name: Submission preflight
+        run: |
+          set -euo pipefail
+          test -s paper-joe-submission/submission/02_Manuscript_Record_Level_ECG_Classification.pdf
+          test -s paper-joe-submission/submission/04_Graphical_Abstract.pdf
+          test -s paper-joe-submission/submission/04_Graphical_Abstract.png
+          test -s paper-joe-submission/submission/05_Title_Page_with_Author_Details.pdf
+          test -s paper-joe-submission/submission/06_Declaration_of_Interest_Statement.pdf
+          test -s paper-joe-submission/submission/07_Portuguese_Title_Abstract_Keywords.pdf
+
+          dims="$(identify -format '%w %h' paper-joe-submission/submission/04_Graphical_Abstract.png)"
+          width="${dims% *}"
+          height="${dims#* }"
+          echo "Graphical abstract PNG: ${width}x${height}"
+          test "${width}" -ge 1328
+          test "${height}" -ge 531
+
+      - name: Commit current submission artifacts
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -f paper-joe-submission/submission/
           if git diff --cached --quiet; then
-            echo "Submission PDFs already current."
+            echo "Submission artifacts already current."
             exit 0
           fi
-          git commit -m "Build and publish final RPC submission artifacts [skip ci]"
-          git push origin repc-submission
+          git commit -m "Build and publish current REPC submission artifacts [skip ci]"
+          git push origin HEAD:${GITHUB_REF_NAME}
