@@ -16,7 +16,7 @@ The primary manuscript is built from ../src/main.tex. Supplementary material is 
 
 Reproducibility:
 - public development repository: https://github.com/alirezaabbaszadeh/ECG_Heartbeat_Classification
-- immutable experimental snapshot: v1.0-joe-submission
+- immutable experimental snapshot: v1.0
 
 Important graphical-abstract gate:
 The current 04_Graphical_Abstract TeX/PDF is an AI-assisted layout draft and data specification. Current Elsevier artwork policy does not permit a general-purpose generative-AI tool to create a submitted graphical abstract. Before portal upload, the same scientific content must be recreated or independently approved in a journal-permitted non-generative scientific/professional illustration workflow, and that compliant file must replace the draft at the canonical 04_Graphical_Abstract path.

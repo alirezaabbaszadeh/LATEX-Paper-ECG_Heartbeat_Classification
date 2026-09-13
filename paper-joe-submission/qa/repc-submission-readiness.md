@@ -48,7 +48,7 @@ Status date: 2026-08-29
 
 ## Reproducibility link policy
 
-The experimental outputs are unchanged from the verified software snapshot. Until a journal-neutral release alias is intentionally created, cite the existing immutable release rather than a moving branch. The public repository root is also linked for ongoing development.
+The experimental outputs are unchanged from the verified software snapshot. The journal-neutral v1.0 release alias is created on GitHub and linked in Data Availability (https://github.com/alirezaabbaszadeh/ECG_Heartbeat_Classification/releases/tag/v1.0). The public repository root is also linked for ongoing development.
 
 
 ### Non-automatable author confirmations
